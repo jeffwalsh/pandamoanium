@@ -3,6 +3,7 @@
   import { wrap } from "svelte-spa-router/wrap";
   import Nomination from "./Nomination.svelte";
   import Connect from "./pages/Connect.svelte";
+  import SelectPanda from "./pages/SelectPanda.svelte";
 
   const routes = {
     "/": wrap({
@@ -10,6 +11,9 @@
     }),
     "/n": wrap({
       component: Nomination,
+    }),
+    "/selectPanda": wrap({
+      component: SelectPanda,
     }),
   };
 </script>

@@ -2,6 +2,7 @@ import svelte from "rollup-plugin-svelte";
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import livereload from "rollup-plugin-livereload";
+import json from "@rollup/plugin-json";
 import { terser } from "rollup-plugin-terser";
 import postcss from "rollup-plugin-postcss";
 import typescript from '@rollup/plugin-typescript';
@@ -41,6 +42,7 @@ export default {
     format: "iife",
     name: "app",
     file: "public/build/bundle.js",
+    strict: false
   },
   plugins: [
     svelte({
@@ -68,6 +70,7 @@ export default {
       dedupe: ["svelte"],
     }),
     commonjs(),
+    json(),
 typescript({
 	sourceMap: !production,
 	inlineSources: !production
