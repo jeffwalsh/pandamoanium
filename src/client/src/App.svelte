@@ -72,4 +72,38 @@
     height: 200px;
     width: 200px;
   }
+
+.mblack {
+  color:#000000 ;
+}
+
+.lblack {
+color: #211E1E;
+}
+
+.grey1 {
+color: #333333;
+}
+
+.grey2 {
+color: #4F4F4F;
+}
+
+.grey3 {
+color: #828282;
+}
+
+.grey4 {
+color: #BDBDBD;
+}
+
+.grey5 {
+color: #E0E0E0;
+}
+
+.grey6 {
+color: #F2F2F2;
+}
+
+
 </style>
