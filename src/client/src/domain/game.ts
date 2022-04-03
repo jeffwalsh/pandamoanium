@@ -7,6 +7,7 @@ type Player = {
 
 type Game = {
   players: Player[];
+  playerOrder: Player[];
   roomCode: string;
 };
 

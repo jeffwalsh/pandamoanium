@@ -1,8 +1,8 @@
 <script lang="ts">
   import Router from "svelte-spa-router";
   import { wrap } from "svelte-spa-router/wrap";
-  import Nomination from "./Nomination.svelte";
   import Connect from "./pages/Connect.svelte";
+  import Game from "./pages/Game.svelte";
   import GameMenu from "./pages/GameMenu.svelte";
   import Lobby from "./pages/Lobby.svelte";
   import SelectPanda from "./pages/SelectPanda.svelte";
@@ -10,9 +10,6 @@
   const routes = {
     "/": wrap({
       component: Connect,
-    }),
-    "/n": wrap({
-      component: Nomination,
     }),
     "/selectPanda": wrap({
       component: SelectPanda,
@@ -22,6 +19,9 @@
     }),
     "/lobby": wrap({
       component: Lobby,
+    }),
+    "/game": wrap({
+      component: Game,
     }),
   };
 </script>
