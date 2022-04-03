@@ -9,6 +9,8 @@ type Game = {
   players: Player[];
   playerOrder: Player[];
   roomCode: string;
+  finished: boolean;
+  correctPlayersThisRound: Player[];
 };
 
 export type { Player, Game };

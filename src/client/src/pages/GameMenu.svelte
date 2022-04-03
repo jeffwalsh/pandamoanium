@@ -24,6 +24,8 @@
       roomCode: makeid(5),
       players: players,
       playerOrder: [],
+      finished: false,
+      correctPlayersThisRound: [],
     };
 
     $socket.emit("createGame", game);

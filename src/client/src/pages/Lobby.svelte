@@ -8,7 +8,11 @@
   import { socket } from "../stores/socket";
 
   let isHost: boolean = false;
-  onMount(() => {
+  onMount(async () => {
+    if (!$currentPanda || !$currentGame) {
+      await push("/");
+    }
+
     if (
       $currentGame.players.find(
         (p) => p.pandaName === $currentPanda.name && p.isHost
@@ -58,7 +62,13 @@
   <button class="btn btn-primary" on:click={startGame}>Start Game</button>
 {/if}
 
-{#each $currentGame.players as player}
-  <img src={player.thumbnail} class="panda cursor-pointer" />
-  <p>{player.pandaName}</p>
-{/each}
+<div
+  class="grid grid-cols-4 auto-rows-max gap-x-5 gap-y-5 w-auto panda-container"
+>
+  {#each $currentGame.players as player}
+    <div class="panda-pp rounded-md">
+      <img src={player.thumbnail} class="panda" />
+      <p class="grey5">{player.pandaName}</p>
+    </div>
+  {/each}
+</div>

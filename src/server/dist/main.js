@@ -84,6 +84,27 @@ io.on("connection", (_socket) => {
             console.log("player already exists:", info.player);
         }
     });
+    socket.on("sendDraw", (info) => {
+        console.log("sendDraw", info);
+        const game = games.get(info.roomCode);
+        if (!game)
+            return;
+        console.log("emitting receiveDraw");
+        io.emit("receiveDraw", info);
+    });
+    socket.on("restartGame", (roomCode) => {
+        console.log("start game room code", roomCode);
+        const game = games.get(roomCode);
+        if (!game)
+            return;
+        if (game.started)
+            return;
+        game.started = true;
+        const shuffled = game.players.sort(() => 0.5 - Math.random());
+        game.playerOrder = shuffled;
+        games.set(game.roomCode, game);
+        io.emit("restartedGame", { roomCode, playerOrder: game.playerOrder });
+    });
     socket.on("chatMessage", (info) => {
         console.log("got chat message");
         const game = games.get(info.roomCode);
@@ -91,10 +112,11 @@ io.on("connection", (_socket) => {
             return;
         if (!game.started)
             return;
-        console.log("finding player");
         const player = game.players.find((p) => p.address === info.address);
         if (!player)
             return;
+        console.log("chatMesage found player", player.pandaName);
+        console.log("text", info.text, "currentWord", game.currentWord);
         const message = {
             player: player,
             text: info.text,
@@ -103,9 +125,28 @@ io.on("connection", (_socket) => {
         console.log("message", message);
         io.emit("message", { message: message, roomCode: info.roomCode });
         if (message.isCorrect) {
-            game.playerOrder.shift();
+            if (!game.correctPlayersThisRound.find((p) => p.pandaName === message.player.pandaName)) {
+                console.log("pushng player t correctPlayersInThisRound");
+                console.log(game.correctPlayersThisRound.length, game.players.length - 1);
+                game.correctPlayersThisRound.push(message.player);
+            }
+            if (game.correctPlayersThisRound.length === game.players.length - 1) {
+                console.log("round over!");
+                game.playerOrder.shift();
+                io.emit("clearCanvas", { roomCode: game.roomCode });
+                if (game.playerOrder.length === 0) {
+                    game.finished = true;
+                    game.started = false;
+                    io.emit("gameOver", { roomCode: game.roomCode });
+                }
+                else {
+                    io.emit("nextRound", {
+                        nextChooser: game.playerOrder[0],
+                        roomCode: game.roomCode,
+                    });
+                }
+            }
             games.set(game.roomCode, game);
-            io.emit("nextRound");
         }
     });
 });

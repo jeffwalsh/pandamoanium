@@ -36,7 +36,7 @@
   /* purgecss end ignore */
   @tailwind utilities;
 
-/* General page styles */
+  /* General page styles */
   html,
   body {
     position: relative;
@@ -45,10 +45,61 @@
     margin: 0px;
     padding: 0px;
     background-color: #000;
-    color: #E0E0E0;
+    color: #e0e0e0;
   }
 
+  .panda-pp img.panda {
+    max-width: 90%;
+    border-radius: 0.25rem;
+  }
 
+  .panda-pp p {
+    text-align: left;
+    font-size: 1rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin: 35px 0px;
+  }
+
+  .gap-y-5 {
+    row-gap: 1.25rem;
+  }
+  .gap-x-5 {
+    -moz-column-gap: 1.25rem;
+    column-gap: 1.25rem;
+  }
+  .grid-cols-4.panda-container {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 0 auto;
+  }
+
+  @media (max-width: 600px) {
+    .grid-cols-4.panda-container {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      margin: 0 auto;
+      padding: 40px;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    .container h2 {
+      width: 100%;
+      margin-bottom: 4px;
+    }
+
+    .panda-pp {
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    .panda-pp img.panda {
+      max-width: 100%;
+    }
+  }
 
   .container {
     max-width: 1000px;
@@ -67,7 +118,6 @@
   .flex-col {
     flex-direction: column;
   }
-  
 
   body {
     background-color: rgba(0, 0, 0, 0.534);
@@ -76,129 +126,133 @@
     background-size: cover;
     font-family: Rubik, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-      width: 100%;
-      min-height: 100vh;
-      height: auto;
-
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
   }
 
+  /* Colors */
 
+  .mblack {
+    color: #000000;
+  }
 
+  .lblack {
+    color: #211e1e;
+  }
 
-/* Colors */
+  .grey1 {
+    color: #333333;
+  }
 
-.mblack {
-  color:#000000 ;
-}
+  .grey2 {
+    color: #4f4f4f;
+  }
 
-.lblack {
-color: #211E1E;
-}
+  .grey3 {
+    color: #828282;
+  }
 
-.grey1 {
-color: #333333;
-}
+  .grey4 {
+    color: #bdbdbd;
+  }
 
-.grey2 {
-color: #4F4F4F;
-}
+  .grey5 {
+    color: #e0e0e0;
+  }
 
-.grey3 {
-color: #828282;
-}
+  .grey6 {
+    color: #f2f2f2;
+  }
 
-.grey4 {
-color: #BDBDBD;
-}
+  /* Fonts */
+  @font-face {
+    font-family: "Rubik";
+    src: url("/fonts/Rubik-Regular.ttf");
+    font-weight: 500;
+  }
 
-.grey5 {
-color: #E0E0E0;
-}
+  @font-face {
+    font-family: "Rubik";
+    src: url("/fonts/Rubik-Medium.ttf");
+    font-weight: 600;
+  }
 
-.grey6 {
-color: #F2F2F2;
-}
+  @font-face {
+    font-family: "Rubik";
+    src: url("/fonts/Rubik-SemiBold.ttf");
+    font-weight: 700;
+  }
 
+  @font-face {
+    font-family: "Rubik";
+    src: url("/fonts/Rubik-Bold.ttf");
+    font-weight: 800;
+  }
 
+  @font-face {
+    font-family: "Rubik";
+    src: url("/fonts/Rubik-Black.ttf");
+    font-weight: 900;
+  }
 
-/* Fonts */
-@font-face {
-        font-family: "Rubik";
-        src: url("/fonts/Rubik-Regular.ttf");
-        font-weight: 500;
+  h2 {
+    font-size: 4rem;
+    font-weight: 800;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    background-color: #f2f2f2;
+    color: #211e1e;
+    padding: 10px;
+    padding: 1rem 4rem;
+  }
+
+  .btn-primary:hover {
+    background-color: #f2f2f2;
+    color: #211e1e;
+    border: none;
+    animation: rotate 0.7s ease-in-out both;
+  }
+  button:hover span {
+    animation: storm 0.7s ease-in-out both;
+    animation-delay: 0.06s;
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg) translate3d(0, 0, 0);
     }
-
-    @font-face {
-        font-family: "Rubik";
-        src: url("/fonts/Rubik-Medium.ttf");
-        font-weight: 600;
+    25% {
+      transform: rotate(3deg) translate3d(0, 0, 0);
     }
-
-    @font-face {
-        font-family: "Rubik";
-        src: url("/fonts/Rubik-SemiBold.ttf");
-        font-weight: 700;
+    50% {
+      transform: rotate(-3deg) translate3d(0, 0, 0);
     }
-
-    @font-face {
-        font-family: "Rubik";
-        src: url("/fonts/Rubik-Bold.ttf");
-        font-weight: 800;
+    75% {
+      transform: rotate(1deg) translate3d(0, 0, 0);
     }
-
-    @font-face {
-        font-family: "Rubik";
-        src: url("/fonts/Rubik-Black.ttf");
-        font-weight: 900;
+    100% {
+      transform: rotate(0deg) translate3d(0, 0, 0);
     }
+  }
 
-
-    h2 {
-      font-size: 4rem;
-      font-weight: 800;
+  @keyframes storm {
+    0% {
+      transform: translate3d(0, 0, 0) translateZ(0);
     }
-
-/* Buttons */
-.btn-primary {
-  background-color: #F2F2F2;
-  color: #211E1E;
-  padding: 10px;
-  padding: 1rem 4rem;
-}
-
-
-.btn-primary:hover {
-  background-color: #F2F2F2;
-  color: #211E1E;
-  border: none;
-    animation: rotate 0.7s ease-in-out both; }
-    button:hover span {
-      animation: storm 0.7s ease-in-out both;
-      animation-delay: 0.06s; }
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg) translate3d(0, 0, 0); }
-  25% {
-    transform: rotate(3deg) translate3d(0, 0, 0); }
-  50% {
-    transform: rotate(-3deg) translate3d(0, 0, 0); }
-  75% {
-    transform: rotate(1deg) translate3d(0, 0, 0); }
-  100% {
-    transform: rotate(0deg) translate3d(0, 0, 0); } }
-
-@keyframes storm {
-  0% {
-    transform: translate3d(0, 0, 0) translateZ(0); }
-  25% {
-    transform: translate3d(4px, 0, 0) translateZ(0); }
-  50% {
-    transform: translate3d(-3px, 0, 0) translateZ(0); }
-  75% {
-    transform: translate3d(2px, 0, 0) translateZ(0); }
-  100% {
-    transform: translate3d(0, 0, 0) translateZ(0); } }
-
-
+    25% {
+      transform: translate3d(4px, 0, 0) translateZ(0);
+    }
+    50% {
+      transform: translate3d(-3px, 0, 0) translateZ(0);
+    }
+    75% {
+      transform: translate3d(2px, 0, 0) translateZ(0);
+    }
+    100% {
+      transform: translate3d(0, 0, 0) translateZ(0);
+    }
+  }
 </style>

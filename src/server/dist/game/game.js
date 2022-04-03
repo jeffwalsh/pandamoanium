@@ -7,12 +7,16 @@ class Game {
     started;
     currentWord;
     playerOrder;
+    finished;
+    correctPlayersThisRound;
     constructor(roomCode, host) {
         this.roomCode = roomCode;
         this.players = [host];
         this.started = false;
+        this.finished = false;
         this.currentWord = "";
         this.playerOrder = [];
+        this.correctPlayersThisRound = [];
     }
 }
 exports.Game = Game;

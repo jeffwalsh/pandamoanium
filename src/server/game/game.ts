@@ -18,13 +18,17 @@ export class Game {
   started: boolean;
   currentWord: string;
   playerOrder: Player[];
+  finished: boolean;
+  correctPlayersThisRound: Player[];
 
   constructor(roomCode: string, host: Player) {
     this.roomCode = roomCode;
     this.players = [host];
     this.started = false;
+    this.finished = false;
     this.currentWord = "";
     this.playerOrder = [];
+    this.correctPlayersThisRound = [];
   }
 }
 
