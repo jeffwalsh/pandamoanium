@@ -2,3 +2,5 @@
 /src/server/node_modules/
 /dist/
 /src/client/.env
+/src/client/build/dev/main/index.js
+/src/client/build/dev/main/index.js.map
