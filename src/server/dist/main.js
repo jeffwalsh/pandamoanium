@@ -1,6 +1,6 @@
 import express from "express";
-import "path";
 import http from "http";
+import { addPlayerToGame } from "./game/game.js";
 import { Server } from "socket.io";
 const app = express();
 const server = http.createServer(app);
@@ -20,26 +20,29 @@ io.on("connection", (_socket) => {
         const game = games.get(roomCode);
         if (!game)
             return;
-        if (game.isStarted())
+        if (game.started)
             return;
     });
-    socket.on("joinGame", (roomCode, player) => {
-        console.log("joinGame", roomCode, player);
-        const game = games.get(roomCode);
+    socket.on("joinGame", (info) => {
+        console.log("joinGame", info.roomCode, info.player);
+        const game = games.get(info.roomCode);
         console.log("game", game);
         console.log(games);
         if (!game)
             return;
-        if (game.isStarted())
+        if (game.started)
             return;
         console.log("found game", game);
-        if (game.addPlayer(player)) {
-            console.log("added player", player);
-            io.emit("updatePlayers", { player: player, roomCode: game.roomCode });
+        if (addPlayerToGame(game, info.player)) {
+            console.log("added player", info.player);
+            io.emit("updatePlayers", {
+                player: info.player,
+                roomCode: game.roomCode,
+            });
             io.emit("joinedGame", { game });
         }
         else {
-            console.log("player already exists:", player);
+            console.log("player already exists:", info.player);
         }
     });
 });

@@ -7,14 +7,14 @@ export class Game {
         this.players = [host];
         this.started = false;
     }
-    addPlayer = (player) => this.playerExists(player.address) ? false : this.createNewPlayer(player);
-    isStarted = () => this.started;
-    playerExists = (address) => 
-    // this.players.find((p) => (p.address = address));
-    false;
-    createNewPlayer(player) {
-        this.players.push(player);
-        return true;
-    }
 }
+export const createNewPlayer = (game, player) => {
+    game.players.push(player);
+    return true;
+};
+export const addPlayerToGame = (game, player) => {
+    if (game.players.find((p) => p.address === player.address))
+        return false;
+    return createNewPlayer(game, player);
+};
 //# sourceMappingURL=game.js.map
