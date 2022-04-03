@@ -14,7 +14,9 @@
 {#if $currentAddress}
   <span class="hidden"> Address: {$currentAddress}</span>
 {:else}
+  <div class="center-content">
   <button class="btn btn-primary" on:click={async () => await connect()}
     >Connect</button
   >
+  </div>
 {/if}

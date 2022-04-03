@@ -47,6 +47,16 @@
   }
 
   .center-screen {
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center; */
+    min-height: 100vh;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .center-content {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,23 +65,18 @@
   }
 
   body {
+    background-color: rgba(0, 0, 0, 0.534);
     background-image: url("images/doingeverything.png");
     background-repeat: no-repeat;
-    background-size: auto;
-    /* padding: 8px; */
-    box-sizing: border-box;
+    background-size: cover;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      width: 100%;
+      height: 100%;
 
-    box-sizing: border-box;
-    overflow-x: hidden;
-    overflow-y: hidden;
   }
 
-  .panda {
-    height: 200px;
-    width: 200px;
-  }
+
 
 .mblack {
   color:#000000 ;
