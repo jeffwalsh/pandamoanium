@@ -5,7 +5,7 @@
   "scripts": {
     "test": "jest",
     "setup": "npm install && cd src/client && npm install && cd ../..",
-    "dev-client": "cd src/client && npx rollup -c -w",
+    "dev-client": "cd src/client && npm run start",
     "dev-server": "concurrently npm:dev-server:*",
     "dev-server:compile": "tsc -w",
     "dev-server:run": "nodemon"
