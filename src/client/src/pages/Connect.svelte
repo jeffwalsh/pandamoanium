@@ -1,5 +1,6 @@
 <script lang="ts">
   import { push } from "svelte-spa-router";
+import Logo from "../components/Logo.svelte";
 
   import { currentAddress } from "../stores/currentAddress";
 
@@ -16,6 +17,7 @@
 {:else}
 <div class="container">
     <div class="center-content flex-col">
+     <span class="logo"> <Logo/> </span>
       <h1 class="text-animation"> pandaMOANium </h1>
       <p>Play the stupid ass game that the stupid ass devs made for the stupid ass community</p>
     <button class="btn btn-primary" on:click={async () => await connect()}
@@ -30,6 +32,7 @@
   h1 {
     font-size: 7vw;
     font-weight: 800;
+    line-height: 9.5vw;
   }
 
 
@@ -60,7 +63,8 @@ p {
 
   @media (max-width:600px) {
     p {
-    width: 100%;
+    max-width: 100%;
+    margin-top: 4px;
   }
   }
 </style>

@@ -165,11 +165,7 @@ color: #F2F2F2;
   padding: 10px;
   padding: 1rem 4rem;
 }
-/* .btn-primary:hover{
-  background-color: #211E1E;
-  color: #F2F2F2;
-  border: 1px solid #F2F2F2;
-} */
+
 
 .btn-primary:hover {
   background-color: #F2F2F2;
