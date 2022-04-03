@@ -29,38 +29,40 @@
   }
 </script>
 
+<div class="wrapper-blur">
 
-        <div class="flex"> 
+    <div class="flex"> 
           <h2 class="grey6"> Select a panda as avatar </h2>
-        </div>
+    </div>
 
+    <div class="grid grid-cols-4 auto-rows-max gap-x-5 gap-y-5 w-auto panda-container">
 
+        {#if pandas}
+        {#each pandas as panda}
 
-  <div class="grid grid-cols-4 auto-rows-max gap-x-5 gap-y-5 w-auto panda-container">
+        <div class ="panda-pp rounded-md">
+            <img
+              src={panda.image}
+              class="panda cursor-pointer"
+              on:click={async () => await selectPanda(panda)}
+            />
+              <p class="grey6"> {panda.name} </p>
 
-      {#if pandas}
-      {#each pandas as panda}
+          </div>
 
-       <div class ="panda-pp rounded-md">
-          <img
-            src={panda.image}
-            class="panda cursor-pointer"
-            on:click={async () => await selectPanda(panda)}
-          />
-            <p class="grey6"> {panda.name} </p>
+        {/each}
+      {:else}
+        <Loader />
+      {/if}
 
-        </div>
+    </div>
+    
+</div>
 
-      {/each}
-    {:else}
-      <Loader />
-    {/if}
-
-  </div>
 
 <style>
 .panda-pp img.panda {
-max-width: 13rem;
+max-width: 90%;
 border-radius: 0.25rem
 }
 
@@ -87,5 +89,23 @@ h2 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     margin: 0 auto;
 }
+
+
+ @media (max-width:600px) {
+  .grid-cols-4.panda-container {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    margin: 0 auto;
+    padding: 40px;
+}
+
+.panda-pp {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+    .panda-pp img.panda {
+    max-width: 100%;
+    }
+ }
 
 </style>

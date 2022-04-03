@@ -47,10 +47,6 @@
   }
 
   .center-screen {
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center; */
     min-height: 100vh;
     max-width: 1000px;
     margin: 0 auto;
@@ -66,7 +62,7 @@
 
   body {
     background-color: rgba(0, 0, 0, 0.534);
-    background-image: url("images/doingeverything.png");
+    background-image: url("images/doingeverything.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -76,7 +72,12 @@
 
   }
 
-
+  .wrapper-blur {
+    min-height: 100vh;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(15px);
+}
 
 .mblack {
   color:#000000 ;
