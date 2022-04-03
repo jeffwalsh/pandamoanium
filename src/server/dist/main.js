@@ -1,5 +1,4 @@
 import express from "express";
-import "path";
 import http from "http";
 import { addPlayerToGame } from "./game/game.js";
 import { Server } from "socket.io";
