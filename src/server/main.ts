@@ -4,7 +4,6 @@ import { addPlayerToGame, Game, Message } from "./game/game";
 import { Server } from "socket.io";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue } from "firebase/database";
-import { getAnalytics } from "firebase/analytics";
 import { choices } from "./choices/choices";
 
 const firebaseConfig = {
@@ -19,10 +18,12 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig);
 
-const analytics = getAnalytics(firebaseApp);
 const database = getDatabase(firebaseApp);
 
 const app = express();
+
+const server = http.createServer(app);
+const io = new Server(server);
 
 app.get("/choices", (req, res) => {
   const shuffled = choices.sort(() => 0.5 - Math.random());
@@ -39,11 +40,10 @@ app.get("/selectWord", (req, res) => {
 
   game.currentWord = word as string;
   games.set(roomCode as string, game);
+
+  io.emit("wordSelected");
   res.send(word);
 });
-
-const server = http.createServer(app);
-const io = new Server(server);
 
 const games: Map<string, Game> = new Map<string, Game>();
 
@@ -68,9 +68,11 @@ io.on("connection", (_socket) => {
     if (game.started) return;
 
     game.started = true;
+    const shuffled = game.players.sort(() => 0.5 - Math.random());
+    game.playerOrder = shuffled;
     games.set(game.roomCode, game);
 
-    io.emit("startedGame", { roomCode });
+    io.emit("startedGame", { roomCode, playerOrder: game.playerOrder });
   });
 
   socket.on(
@@ -107,19 +109,29 @@ io.on("connection", (_socket) => {
   socket.on(
     "chatMessage",
     (info: { address: string; text: string; roomCode: string }) => {
+      console.log("got chat message");
       const game = games.get(info.roomCode);
       if (!game) return;
 
       if (!game.started) return;
 
+      console.log("finding player");
       const player = game.players.find((p) => p.address === info.address);
       if (!player) return;
 
       const message: Message = {
         player: player,
         text: info.text,
+        isCorrect: info.text === game.currentWord,
       };
+      console.log("message", message);
       io.emit("message", { message: message, roomCode: info.roomCode });
+
+      if (message.isCorrect) {
+        game.playerOrder.shift();
+        games.set(game.roomCode, game);
+        io.emit("nextRound");
+      }
     }
   );
 });

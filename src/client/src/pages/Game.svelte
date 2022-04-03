@@ -12,6 +12,7 @@
   let currentMessage: string = "";
   let activePlayer: Player;
   let choices: string[] = [];
+  let active: boolean = false;
 
   onMount(async () => {
     $socket.on("message", (info: { roomCode: string; message: Message }) => {
@@ -20,9 +21,25 @@
       console.log("client received message", info.message);
       messages.push(info.message);
       messages = messages;
+
+      if (info.message.isCorrect) {
+        active = false;
+      }
+    });
+
+    $socket.on("wordSelected", () => {
+      active = true;
     });
 
     activePlayer = $currentGame.players[0] as Player;
+
+    if (activePlayer.pandaName === $currentPanda.name) {
+      await getChoices();
+    }
+  });
+
+  $socket.on("nextRound", async (info: { nextChooser: Player }) => {
+    activePlayer = info.nextChooser;
 
     if (activePlayer.pandaName === $currentPanda.name) {
       await getChoices();
@@ -47,17 +64,28 @@
       currentMessage = "";
     }
   };
+
+  const selectChoice = async (choice: string) => {
+    await axios.get(
+      `${process.env.SERVER_URL}/selectWord?word=${choice}&roomCode=${$currentGame.roomCode}`
+    );
+    choices = [];
+  };
 </script>
 
-{#if choices}
+{#if choices && !active}
   <h2>Choices</h2>
   {#each choices as choice}
-    <p>{choice}</p>
+    <p class="cursor-pointer" on:click={async () => await selectChoice(choice)}>
+      {choice}
+    </p>
   {/each}
 {/if}
 <!-- chat box -->
 {#each messages as message}
-  <p>{message.player.pandaName}: {message.text}</p>
+  <p class={message.isCorrect ? "green" : ""}>
+    {message.player.pandaName}: {message.text}
+  </p>
 {/each}
 
 <input
@@ -65,3 +93,9 @@
   bind:value={currentMessage}
   on:keyup|preventDefault={handleKeyup}
 />
+
+<style>
+  .green {
+    color: green;
+  }
+</style>
