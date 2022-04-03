@@ -1,4 +1,4 @@
-export type Player = {
+type Player = {
   address: string;
   pandaName: string;
   thumbnail: string;
@@ -17,13 +17,7 @@ export class Game {
   }
 }
 
-export const createNewPlayer = (game: Game, player: Player) => {
+export const addPlayerToGame = (game: Game, player: Player) => {
   game.players.push(player);
   return true;
-};
-
-export const addPlayerToGame = (game: Game, player: Player) => {
-  if (game.players.find((p) => p.address === player.address)) return false;
-
-  return createNewPlayer(game, player);
 };

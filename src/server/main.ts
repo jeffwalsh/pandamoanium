@@ -1,6 +1,6 @@
 import express from "express";
 import http from "http";
-import { addPlayerToGame, Game } from "./game/game.js";
+import { addPlayerToGame, Game } from "./game/game";
 import { Server } from "socket.io";
 
 const app = express();
@@ -40,16 +40,14 @@ io.on("connection", (_socket) => {
         isHost: false;
       };
     }) => {
-      console.log("joinGame", info.roomCode, info.player);
       const game = games.get(info.roomCode);
-      console.log("game", game);
-      console.log(games);
       if (!game) return;
 
       if (game.started) return;
 
       console.log("found game", game);
       if (addPlayerToGame(game, info.player)) {
+        games.set(game.roomCode, game);
         console.log("added player", info.player);
         io.emit("updatePlayers", {
           player: info.player,

@@ -1,20 +1,42 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import type { Player } from "../domain/game";
+  import { currentAddress } from "../stores/currentAddress";
   import { currentGame } from "../stores/currentGame";
   import { socket } from "../stores/socket";
 
-  onMount(async () => {});
+  let isHost: boolean = false;
+  onMount(() => {
+    console.log($currentGame);
+    if (
+      $currentGame.players.find(
+        (p) => p.address === $currentAddress?.toString() && p.isHost
+      )
+    ) {
+      isHost = true;
+    }
+  });
 
-  $socket.on("updatePlayers", (player: Player, roomCode: string) => {
-    if (roomCode !== $currentGame.roomCode) return;
-    $currentGame.players.push(player);
+  $socket.on("updatePlayers", (info: { player: Player; roomCode: string }) => {
+    console.log(
+      "update players",
+      info.player,
+      info.roomCode,
+      $currentGame.roomCode
+    );
+    if (info.roomCode !== $currentGame.roomCode) return;
+    const game = $currentGame;
+
+    game.players.push(info.player);
+    currentGame.set(game);
   });
 </script>
 
 <h2>Room Code {$currentGame?.roomCode}</h2>
 
-<button class="btn btn-primary">Start Game</button>
+{#if isHost}
+  <button class="btn btn-primary">Start Game</button>
+{/if}
 
 {#each $currentGame.players as player}
   <img src={player.thumbnail} class="panda cursor-pointer" />

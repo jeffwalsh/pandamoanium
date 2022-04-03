@@ -31,10 +31,10 @@
   }
 
   async function joinLobby() {
-    $socket.on("joinedGame", (game: Game) => {
-      console.log("joined game!");
-      currentGame.set(game);
-      push("/lobby?roomCode=" + roomCode);
+    $socket.on("joinedGame", async (info: { game: Game }) => {
+      console.log("joined game!", info.game);
+      currentGame.set(info.game);
+      await push("/lobby");
     });
 
     $socket.emit("joinGame", {

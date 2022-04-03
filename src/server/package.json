@@ -1,7 +1,6 @@
 {
   "name": "svelte_socket_starter",
   "version": "1.0.0",
-  "type": "module",
   "scripts": {
     "test": "jest",
     "start": "concurrently npm:dev-server:*",
@@ -40,7 +39,7 @@
     "@rollup/plugin-json": "^4.1.0",
     "@tsconfig/svelte": "^2.0.1",
     "@types/express": "^4.17.12",
-    "@types/node": "^15.12.2",
+    "@types/node": "^15.14.9",
     "@types/socket.io-client": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^4.26.1",
     "@typescript-eslint/parser": "^4.26.1",
