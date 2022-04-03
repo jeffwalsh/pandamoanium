@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
 import http from "http";
-import type { Game } from "./game/game";
+import { addPlayerToGame, Game } from "./game/game.js";
 import { Server } from "socket.io";
 
 const app = express();
@@ -27,35 +27,38 @@ io.on("connection", (_socket) => {
     const game = games.get(roomCode);
     if (!game) return;
 
-    if (game.isStarted()) return;
+    if (game.started) return;
   });
 
   socket.on(
     "joinGame",
-    (
-      roomCode: string,
+    (info: {
+      roomCode: string;
       player: {
         address: string;
         pandaName: string;
         thumbnail: string;
         isHost: false;
-      }
-    ) => {
-      console.log("joinGame", roomCode, player);
-      const game = games.get(roomCode);
+      };
+    }) => {
+      console.log("joinGame", info.roomCode, info.player);
+      const game = games.get(info.roomCode);
       console.log("game", game);
       console.log(games);
       if (!game) return;
 
-      if (game.isStarted()) return;
+      if (game.started) return;
 
       console.log("found game", game);
-      if (game.addPlayer(player)) {
-        console.log("added player", player);
-        io.emit("updatePlayers", { player: player, roomCode: game.roomCode });
+      if (addPlayerToGame(game, info.player)) {
+        console.log("added player", info.player);
+        io.emit("updatePlayers", {
+          player: info.player,
+          roomCode: game.roomCode,
+        });
         io.emit("joinedGame", { game });
       } else {
-        console.log("player already exists:", player);
+        console.log("player already exists:", info.player);
       }
     }
   );
