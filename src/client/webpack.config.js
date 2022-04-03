@@ -9,8 +9,6 @@ var dotenv = require("dotenv").config({ path: __dirname + "/.env" });
 const PACKAGE = require("./package.json");
 
 const TARGET_PATH = mode == "production" ? "build/production" : "build/dev";
-const VERSION = PACKAGE.version;
-
 const common = merge([
     {
         entry: {
@@ -21,8 +19,15 @@ const common = merge([
         plugins: [
             new webpack.DefinePlugin({
                 "process.env": JSON.stringify(dotenv.parsed),
-            }),
+            })
         ],
+    },
+    {
+        resolve: {
+            fallback: {
+                buffer: require.resolve('buffer/')
+            }
+        }
     },
     {
         output: {
@@ -56,15 +61,6 @@ const development = merge([
                 }),
             ],
         },
-    },
-    {
-        devServer: {
-            static: {
-              directory: path.join(__dirname, 'public'),
-            },
-            compress: true,
-            port: 9000,
-          },
     },
     parts.generateSourceMaps({ type: "cheap-module-source-map" }),
     parts.esbuild(),

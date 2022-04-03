@@ -7,7 +7,7 @@
 
 <div class="flex justify-center items-center">
   <LottiePlayer
-    src="/images/loader.json"
+    src="images/loader.json"
     autoplay={true}
     loop={true}
     controls={false}

@@ -3,6 +3,8 @@
   import { wrap } from "svelte-spa-router/wrap";
   import Nomination from "./Nomination.svelte";
   import Connect from "./pages/Connect.svelte";
+  import GameMenu from "./pages/GameMenu.svelte";
+  import Lobby from "./pages/Lobby.svelte";
   import SelectPanda from "./pages/SelectPanda.svelte";
 
   const routes = {
@@ -14,6 +16,12 @@
     }),
     "/selectPanda": wrap({
       component: SelectPanda,
+    }),
+    "/gameMenu": wrap({
+      component: GameMenu,
+    }),
+    "/lobby": wrap({
+      component: Lobby,
     }),
   };
 </script>
@@ -58,5 +66,10 @@
     box-sizing: border-box;
     overflow-x: hidden;
     overflow-y: hidden;
+  }
+
+  .panda {
+    height: 200px;
+    width: 200px;
   }
 </style>
