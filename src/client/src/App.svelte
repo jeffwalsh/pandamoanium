@@ -43,7 +43,7 @@
     height: 100%;
     margin: 0px;
     padding: 0px;
-    background-color: rgba(0, 0, 0, 0.534);
+    background-color: #000;
   }
 
   .center-screen {
@@ -72,12 +72,12 @@
 
   }
 
-  .wrapper-blur {
+  /* .wrapper-blur {
     min-height: 100vh;
     margin: 0 auto;
     background: rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(15px);
-}
+} */
 
 .mblack {
   color:#000000 ;
