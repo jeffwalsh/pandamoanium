@@ -45,6 +45,7 @@
     margin: 0px;
     padding: 0px;
     background-color: #000;
+    color: #E0E0E0;
   }
 
 
@@ -63,6 +64,9 @@
     min-height: 100vh;
   }
 
+  .flex-col {
+    flex-direction: column;
+  }
   
 
   body {
@@ -161,9 +165,44 @@ color: #F2F2F2;
   padding: 10px;
   padding: 1rem 4rem;
 }
-.btn-primary:hover{
+/* .btn-primary:hover{
   background-color: #211E1E;
   color: #F2F2F2;
   border: 1px solid #F2F2F2;
-}
+} */
+
+.btn-primary:hover {
+  background-color: #F2F2F2;
+  color: #211E1E;
+  border: none;
+    animation: rotate 0.7s ease-in-out both; }
+    button:hover span {
+      animation: storm 0.7s ease-in-out both;
+      animation-delay: 0.06s; }
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg) translate3d(0, 0, 0); }
+  25% {
+    transform: rotate(3deg) translate3d(0, 0, 0); }
+  50% {
+    transform: rotate(-3deg) translate3d(0, 0, 0); }
+  75% {
+    transform: rotate(1deg) translate3d(0, 0, 0); }
+  100% {
+    transform: rotate(0deg) translate3d(0, 0, 0); } }
+
+@keyframes storm {
+  0% {
+    transform: translate3d(0, 0, 0) translateZ(0); }
+  25% {
+    transform: translate3d(4px, 0, 0) translateZ(0); }
+  50% {
+    transform: translate3d(-3px, 0, 0) translateZ(0); }
+  75% {
+    transform: translate3d(2px, 0, 0) translateZ(0); }
+  100% {
+    transform: translate3d(0, 0, 0) translateZ(0); } }
+
+
 </style>

@@ -32,7 +32,7 @@
 <div class="container">
 
 
-    <div class="flex"> 
+    <div class="flex contr"> 
           <h2 class="grey6"> Select a panda as avatar </h2>
     </div>
 
