@@ -5,33 +5,48 @@
   import { currentGame } from "../stores/currentGame";
   import makeid from "../utils/makeRoomCode";
   import { currentPanda } from "../stores/currentPanda";
-  import io from "socket.io-client";
   import type { Game, Player } from "../domain/game";
-
-  const socket = io();
+  import { socket } from "../stores/socket";
 
   let roomCode: string;
 
   async function createLobby() {
-    const players: Record<string, Player> = {};
-    players[($currentAddress as PublicKey).toString()] = {
-      address: ($currentAddress as PublicKey).toString(),
-      thumbnail: $currentPanda.image,
-      pandaName: $currentPanda.name,
-      isHost: true,
-    };
+    const players: Player[] = [
+      {
+        address: ($currentAddress as PublicKey).toString(),
+        thumbnail: $currentPanda.image,
+        pandaName: $currentPanda.name,
+        isHost: true,
+      },
+    ];
 
     const game: Game = {
       roomCode: makeid(5),
       players: players,
     };
 
-    socket.emit("createGame", game);
+    $socket.emit("createGame", game);
     currentGame.set(game);
     await push("/lobby");
   }
 
-  async function joinLobby() {}
+  async function joinLobby() {
+    $socket.on("joinedGame", (game: Game) => {
+      console.log("joined game!");
+      currentGame.set(game);
+      push("/lobby?roomCode=" + roomCode);
+    });
+
+    $socket.emit("joinGame", {
+      roomCode: roomCode,
+      player: {
+        address: ($currentAddress as PublicKey).toString(),
+        thumbnail: $currentPanda.image,
+        pandaName: $currentPanda.name,
+        isHost: false,
+      },
+    });
+  }
 </script>
 
 <img

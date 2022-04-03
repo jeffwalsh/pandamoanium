@@ -19,7 +19,7 @@ io.on("connection", (_socket) => {
   console.log("a user connected");
 
   socket.on("createGame", (game: Game) => {
-    console.log("creating game");
+    console.log("creating game", game);
     games.set(game.roomCode, game);
   });
 
@@ -28,15 +28,10 @@ io.on("connection", (_socket) => {
     if (!game) return;
 
     if (game.isStarted()) return;
-
-    let host: string;
-
-    game.players;
   });
 
-  // Create a new player, maybe?
   socket.on(
-    "registerPlayer",
+    "joinGame",
     (
       roomCode: string,
       player: {
@@ -46,7 +41,10 @@ io.on("connection", (_socket) => {
         isHost: false;
       }
     ) => {
+      console.log("joinGame", roomCode, player);
       const game = games.get(roomCode);
+      console.log("game", game);
+      console.log(games);
       if (!game) return;
 
       if (game.isStarted()) return;
@@ -54,7 +52,8 @@ io.on("connection", (_socket) => {
       console.log("found game", game);
       if (game.addPlayer(player)) {
         console.log("added player", player);
-        io.emit("updatePlayers", game);
+        io.emit("updatePlayers", { player: player, roomCode: game.roomCode });
+        io.emit("joinedGame", { game });
       } else {
         console.log("player already exists:", player);
       }

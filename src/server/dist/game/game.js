@@ -1,18 +1,19 @@
-import "vm";
 export class Game {
-    players = {};
+    players;
     roomCode;
     started;
     constructor(roomCode, host) {
         this.roomCode = roomCode;
-        this.players[host.address] = host;
+        this.players = [host];
         this.started = false;
     }
     addPlayer = (player) => this.playerExists(player.address) ? false : this.createNewPlayer(player);
     isStarted = () => this.started;
-    playerExists = (address) => address in this.players;
+    playerExists = (address) => 
+    // this.players.find((p) => (p.address = address));
+    false;
     createNewPlayer(player) {
-        this.players[player.address] = player;
+        this.players.push(player);
         return true;
     }
 }

@@ -1,5 +1,3 @@
-import { runInNewContext } from "vm";
-
 type Player = {
   address: string;
   pandaName: string;
@@ -8,13 +6,13 @@ type Player = {
 };
 
 export class Game {
-  players: Record<string, Player> = {};
+  players: Player[];
   roomCode: string;
   private started: boolean;
 
   constructor(roomCode: string, host: Player) {
     this.roomCode = roomCode;
-    this.players[host.address] = host;
+    this.players = [host];
     this.started = false;
   }
 
@@ -23,9 +21,11 @@ export class Game {
 
   isStarted = () => this.started;
 
-  private playerExists = (address: string) => address in this.players;
+  private playerExists = (address: string) =>
+    // this.players.find((p) => (p.address = address));
+    false;
   private createNewPlayer(player: Player) {
-    this.players[player.address] = player;
+    this.players.push(player);
     return true;
   }
 }

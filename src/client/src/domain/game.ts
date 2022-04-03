@@ -6,7 +6,7 @@ type Player = {
 };
 
 type Game = {
-  players: Record<string, Player>;
+  players: Player[];
   roomCode: string;
 };
 
