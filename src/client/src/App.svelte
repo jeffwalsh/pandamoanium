@@ -36,6 +36,7 @@
   /* purgecss end ignore */
   @tailwind utilities;
 
+/* General page styles */
   html,
   body {
     position: relative;
@@ -46,10 +47,12 @@
     background-color: #000;
   }
 
-  .center-screen {
-    min-height: 100vh;
+
+
+  .container {
     max-width: 1000px;
     margin: 0 auto;
+    padding: 10px 10px;
   }
 
   .center-content {
@@ -60,24 +63,25 @@
     min-height: 100vh;
   }
 
+  
+
   body {
     background-color: rgba(0, 0, 0, 0.534);
     background-image: url("images/doingeverything.jpg");
-    background-repeat: no-repeat;
+    background-repeat: repeat-y;
     background-size: cover;
     font-family: Rubik, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
       width: 100%;
-      height: 100%;
+      min-height: 100vh;
+      height: auto;
 
   }
 
-  /* .wrapper-blur {
-    min-height: 100vh;
-    margin: 0 auto;
-    background: rgba(0, 0, 0, 0.45);
-    backdrop-filter: blur(15px);
-} */
+
+
+
+/* Colors */
 
 .mblack {
   color:#000000 ;
@@ -111,6 +115,9 @@ color: #E0E0E0;
 color: #F2F2F2;
 }
 
+
+
+/* Fonts */
 @font-face {
         font-family: "Rubik";
         src: url("/fonts/Rubik-Regular.ttf");
@@ -147,5 +154,16 @@ color: #F2F2F2;
       font-weight: 800;
     }
 
-
+/* Buttons */
+.btn-primary {
+  background-color: #F2F2F2;
+  color: #211E1E;
+  padding: 10px;
+  padding: 1rem 4rem;
+}
+.btn-primary:hover{
+  background-color: #211E1E;
+  color: #F2F2F2;
+  border: 1px solid #F2F2F2;
+}
 </style>
