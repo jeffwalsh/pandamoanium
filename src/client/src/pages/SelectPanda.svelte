@@ -29,9 +29,9 @@
   }
 </script>
 
-<div class="wrapper-blur">
 
-    <div class="flex"> 
+
+    <div class="flex container"> 
           <h2 class="grey6"> Select a panda as avatar </h2>
     </div>
 
@@ -57,7 +57,6 @@
 
     </div>
     
-</div>
 
 
 <style>
@@ -96,6 +95,15 @@ h2 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
     margin: 0 auto;
     padding: 40px;
+}
+
+.container {
+  text-align: center;
+}
+
+.container h2 {
+  width: 100%;
+  margin-bottom: 4px;
 }
 
 .panda-pp {
