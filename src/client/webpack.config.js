@@ -31,6 +31,7 @@ const common = merge([
             filename: "[name]/index.js",
         },
     },
+    
     parts.page(),
     parts.loadSvg(),
     parts.loadImages(),
@@ -56,6 +57,15 @@ const development = merge([
             ],
         },
     },
+    {
+        devServer: {
+            static: {
+              directory: path.join(__dirname, 'public'),
+            },
+            compress: true,
+            port: 9000,
+          },
+    },
     parts.generateSourceMaps({ type: "cheap-module-source-map" }),
     parts.esbuild(),
     parts.watch(),
@@ -74,6 +84,7 @@ const production = merge([
             ],
         }
     },
+    
     parts.generateSourceMaps({ type: "hidden-source-map" }),
     parts.esbuild(),
 ]);

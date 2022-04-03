@@ -7,10 +7,14 @@
   import { SOLANA_RPC_HOST } from "../utils/constants";
   import { getPandasForAddress } from "../utils/getPandasForAddress";
   import type { Panda } from "../utils/getPandasForAddress";
+  import { push } from "svelte-spa-router";
   const connection = new anchor.web3.Connection(SOLANA_RPC_HOST);
 
   let pandas: Panda[];
   onMount(async () => {
+    if (!$currentAddress) {
+      await push("/");
+    }
     pandas = await getPandasForAddress(
       connection,
       $currentAddress as PublicKey

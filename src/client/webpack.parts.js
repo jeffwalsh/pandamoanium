@@ -75,9 +75,6 @@ exports.page = () => ({
           <title>${title}</title>
           ${cssTags}
           <link rel='icon' type='image/png' href='/favicon.png'>
-          <link rel='stylesheet' href='global.css'>
-        
-          <script defer src='build/bundle.js'></script>
         </head>
         
         <body>
