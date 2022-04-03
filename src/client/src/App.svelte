@@ -65,7 +65,7 @@
     background-image: url("images/doingeverything.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    font-family: Rubik, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
       width: 100%;
       height: 100%;
@@ -110,6 +110,42 @@ color: #E0E0E0;
 .grey6 {
 color: #F2F2F2;
 }
+
+@font-face {
+        font-family: "Rubik";
+        src: url("/fonts/Rubik-Regular.ttf");
+        font-weight: 500;
+    }
+
+    @font-face {
+        font-family: "Rubik";
+        src: url("/fonts/Rubik-Medium.ttf");
+        font-weight: 600;
+    }
+
+    @font-face {
+        font-family: "Rubik";
+        src: url("/fonts/Rubik-SemiBold.ttf");
+        font-weight: 700;
+    }
+
+    @font-face {
+        font-family: "Rubik";
+        src: url("/fonts/Rubik-Bold.ttf");
+        font-weight: 800;
+    }
+
+    @font-face {
+        font-family: "Rubik";
+        src: url("/fonts/Rubik-Black.ttf");
+        font-weight: 900;
+    }
+
+
+    h2 {
+      font-size: 4rem;
+      font-weight: 800;
+    }
 
 
 </style>

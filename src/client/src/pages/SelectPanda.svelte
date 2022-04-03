@@ -46,7 +46,7 @@
               class="panda cursor-pointer"
               on:click={async () => await selectPanda(panda)}
             />
-              <p class="grey6"> {panda.name} </p>
+              <p class="grey5"> {panda.name} </p>
 
           </div>
 
