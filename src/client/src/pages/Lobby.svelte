@@ -4,14 +4,14 @@
   import type { Player } from "../domain/game";
   import { currentAddress } from "../stores/currentAddress";
   import { currentGame } from "../stores/currentGame";
+  import { currentPanda } from "../stores/currentPanda";
   import { socket } from "../stores/socket";
 
   let isHost: boolean = false;
   onMount(() => {
-    console.log($currentGame);
     if (
       $currentGame.players.find(
-        (p) => p.address === $currentAddress?.toString() && p.isHost
+        (p) => p.pandaName === $currentPanda.name && p.isHost
       )
     ) {
       isHost = true;
@@ -34,11 +34,17 @@
       }
     );
 
-    $socket.on("startedGame", (info: { roomCode: string }) => {
-      if (info.roomCode !== $currentGame.roomCode) return;
+    $socket.on(
+      "startedGame",
+      (info: { roomCode: string; playerOrder: Player[] }) => {
+        if (info.roomCode !== $currentGame.roomCode) return;
+        const game = $currentGame;
+        game.playerOrder = info.playerOrder;
+        currentGame.set(game);
 
-      push("/game");
-    });
+        push("/game");
+      }
+    );
   });
 
   function startGame() {

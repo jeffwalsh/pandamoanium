@@ -23,6 +23,7 @@
     const game: Game = {
       roomCode: makeid(5),
       players: players,
+      playerOrder: [],
     };
 
     $socket.emit("createGame", game);
