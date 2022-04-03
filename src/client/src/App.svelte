@@ -18,7 +18,9 @@
   };
 </script>
 
-<Router {routes} />
+<div class="center-screen">
+  <Router {routes} />
+</div>
 
 <style global lang="postcss">
   @tailwind base;
@@ -34,6 +36,14 @@
     margin: 0px;
     padding: 0px;
     background-color: rgba(0, 0, 0, 0.534);
+  }
+
+  .center-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
   }
 
   body {
