@@ -18,6 +18,8 @@
   let choices: string[] = [];
   let active: boolean = false;
   let isHost: boolean = false;
+  let timedOut: boolean = false;
+  let timer: number = 69;
 
   onMount(async () => {
     if (!$currentPanda || !$currentPanda.name) {
@@ -40,11 +42,23 @@
       messages = messages;
     });
 
-    $socket.on("wordSelected", () => {
+    $socket.on("wordSelected", (info: { roomCode: string }) => {
+      if ($currentGame.roomCode !== info.roomCode) return;
+      timer = 69;
       active = true;
     });
 
-    activePlayer = $currentGame.players[0] as Player;
+    $socket.on("countdown", (info: { t: number; roomCode: string }) => {
+      if ($currentGame.roomCode !== info.roomCode) return;
+      timer = info.t;
+    });
+
+    $socket.on("timeout", (info: { roomCode: string }) => {
+      active = false;
+      timedOut = true;
+    });
+
+    activePlayer = $currentGame.playerOrder[0] as Player;
 
     if (activePlayer.pandaName === $currentPanda.name) {
       await getChoices();
@@ -58,7 +72,14 @@
     async (info: { nextChooser: Player; roomCode: string }) => {
       if (info.roomCode !== $currentGame.roomCode) return;
 
+      timedOut = false;
       activePlayer = info.nextChooser;
+      messages.push({
+        player: { pandaName: "Lawyer Crow" } as any as Player,
+        text: info.nextChooser.pandaName + " Is drawing this round!",
+        isCorrect: false,
+      });
+      messages = messages;
 
       if (activePlayer.pandaName === $currentPanda.name) {
         await getChoices();
@@ -68,8 +89,16 @@
 
   $socket.on("gameOver", (info: { roomCode: string }) => {
     if (info.roomCode !== $currentGame.roomCode) return;
+    console.log("game over!");
     const game = $currentGame;
     game.finished = true;
+    active = false;
+    messages.push({
+      player: { pandaName: "Lawyer Crow" } as any as Player,
+      text: "Is drawing this round!",
+      isCorrect: false,
+    });
+    messages = messages;
     currentGame.set(game);
   });
 
@@ -98,11 +127,22 @@
 
   $socket.on(
     "restartedGame",
-    (info: { roomCode: string; playerOrder: Player[] }) => {
+    async (info: { roomCode: string; playerOrder: Player[] }) => {
       if (info.roomCode !== $currentGame.roomCode) return;
+      console.log("restartedGame!", info);
       const game = $currentGame;
       game.playerOrder = info.playerOrder;
+      game.finished = false;
+
+      activePlayer = game.playerOrder[0] as Player;
+
+      if (activePlayer.pandaName === $currentPanda.name) {
+        await getChoices();
+      }
       currentGame.set(game);
+      timedOut = false;
+      active = false;
+      timer = 69;
     }
   );
 
@@ -221,6 +261,9 @@
   }
 </script>
 
+{#if active}
+  Timer: {timer}
+{/if}
 {#if activePlayer && activePlayer.pandaName === $currentPanda.name && choices && !active}
   <h2>Choices</h2>
   {#each choices as choice}
@@ -235,7 +278,13 @@
 <!-- chat box -->
 <div id="chat-box">
   {#each messages as message}
-    <p class={message.isCorrect ? "green" : ""}>
+    <p
+      class={message.isCorrect
+        ? "green"
+        : message.player.pandaName === "Lawyer Crow"
+        ? "red"
+        : ""}
+    >
       {#if message.isCorrect}
         {message.player.pandaName} got the answer!
       {:else}
@@ -260,9 +309,30 @@
   {/if}
 {/if}
 
+{#if timedOut}
+  Timed out!
+{/if}
+
+<div
+  class="grid grid-cols-4 auto-rows-max gap-x-5 gap-y-5 w-auto panda-container"
+>
+  {#if $currentGame.players}
+    {#each $currentGame.players as player}
+      <div class="panda-pp rounded-md">
+        <img src={player.thumbnail} class="panda" />
+        <p class="grey5">{player.pandaName}</p>
+      </div>
+    {/each}
+  {/if}
+</div>
+
 <style>
   .green {
     color: green;
+  }
+
+  .red {
+    color: red;
   }
   #chat-box {
     background: white;

@@ -24,6 +24,8 @@ const database = database_1.getDatabase(firebaseApp);
 const app = express_1.default();
 const server = http_1.default.createServer(app);
 const io = new socket_io_1.Server(server);
+const games = new Map();
+const timers = new Map();
 app.get("/choices", (req, res) => {
     const shuffled = choices_1.choices.sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, 3);
@@ -37,10 +39,43 @@ app.get("/selectWord", (req, res) => {
         return;
     game.currentWord = word;
     games.set(roomCode, game);
-    io.emit("wordSelected");
+    io.emit("wordSelected", { roomCode: roomCode });
+    const myTimer = setInterval(() => {
+        const timer = timers.get(roomCode);
+        const v = (timer.n -
+            1);
+        timers.set(roomCode, {
+            n: v,
+            interval: myTimer,
+        });
+        io.emit("countdown", {
+            roomCode: roomCode,
+            t: v,
+        });
+        if (v === 0) {
+            clearInterval(myTimer);
+            timers.delete(roomCode);
+            io.emit("timeout", { roomCode: roomCode });
+            game.playerOrder.shift();
+            game.correctPlayersThisRound = [];
+            io.emit("clearCanvas", { roomCode: game.roomCode });
+            if (game.playerOrder.length === 0) {
+                game.finished = true;
+                game.started = false;
+                io.emit("gameOver", { roomCode: game.roomCode });
+            }
+            else {
+                io.emit("nextRound", {
+                    nextChooser: game.playerOrder[0],
+                    roomCode: game.roomCode,
+                });
+            }
+            games.set(game.roomCode, game);
+        }
+    }, 1000);
+    timers.set(roomCode, { n: 69, interval: myTimer });
     res.send(word);
 });
-const games = new Map();
 io.on("connection", (_socket) => {
     _socket.on("disconnect", () => {
         console.log("a user disconnected");
@@ -93,15 +128,16 @@ io.on("connection", (_socket) => {
         io.emit("receiveDraw", info);
     });
     socket.on("restartGame", (roomCode) => {
-        console.log("start game room code", roomCode);
+        console.log("restart game room code", roomCode);
         const game = games.get(roomCode);
         if (!game)
-            return;
-        if (game.started)
             return;
         game.started = true;
         const shuffled = game.players.sort(() => 0.5 - Math.random());
         game.playerOrder = shuffled;
+        console.log("set new playeOrder to be", shuffled);
+        game.correctPlayersThisRound = [];
+        game.finished = false;
         games.set(game.roomCode, game);
         io.emit("restartedGame", { roomCode, playerOrder: game.playerOrder });
     });
@@ -126,20 +162,27 @@ io.on("connection", (_socket) => {
         io.emit("message", { message: message, roomCode: info.roomCode });
         if (message.isCorrect) {
             if (!game.correctPlayersThisRound.find((p) => p.pandaName === message.player.pandaName)) {
-                console.log("pushng player t correctPlayersInThisRound");
-                console.log(game.correctPlayersThisRound.length, game.players.length - 1);
                 game.correctPlayersThisRound.push(message.player);
             }
+            console.log("correct players", game.correctPlayersThisRound.length);
+            console.log("current players", game.players);
             if (game.correctPlayersThisRound.length === game.players.length - 1) {
+                const timer = timers.get(game.roomCode);
+                clearInterval(timer.interval);
+                timers.delete(game.roomCode);
                 console.log("round over!");
                 game.playerOrder.shift();
+                game.correctPlayersThisRound = [];
+                console.log("game player order", game.playerOrder);
                 io.emit("clearCanvas", { roomCode: game.roomCode });
                 if (game.playerOrder.length === 0) {
+                    console.log("game is finished!");
                     game.finished = true;
                     game.started = false;
                     io.emit("gameOver", { roomCode: game.roomCode });
                 }
                 else {
+                    console.log("next round, player is", game.playerOrder[0]);
                     io.emit("nextRound", {
                         nextChooser: game.playerOrder[0],
                         roomCode: game.roomCode,

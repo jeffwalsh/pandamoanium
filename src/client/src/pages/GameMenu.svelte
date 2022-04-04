@@ -47,6 +47,7 @@
         thumbnail: $currentPanda.image,
         pandaName: $currentPanda.name,
         isHost: false,
+        score: 0,
       },
     });
   }
