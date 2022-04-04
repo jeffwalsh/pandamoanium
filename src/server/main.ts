@@ -239,8 +239,11 @@ io.on("connection", (_socket) => {
   );
 });
 
-server.listen(process.env.PORT || 3000, () =>
-  console.log("SERVER IS LISTENING!")
+const host = "0.0.0.0";
+const port = process.env.PORT || 3000;
+
+server.listen(Number(port), host, () =>
+  console.log("SERVER LISTENING ON", host, port)
 );
 
 export {};
