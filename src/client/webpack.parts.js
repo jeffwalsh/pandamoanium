@@ -26,6 +26,17 @@ exports.copyImages = ({ limit } = {}) => ({
   ]
 })
 
+
+exports.copyFonts = ({ limit } = {}) => ({
+  plugins: [
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'public/fonts', to: "fonts" },
+      ],
+    }),
+  ]
+})
+
 exports.watch = () => ({
   watch: true,
   watchOptions: {

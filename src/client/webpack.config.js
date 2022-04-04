@@ -41,6 +41,7 @@ const common = merge([
     parts.loadSvg(),
     parts.loadImages(),
     parts.copyImages(),
+    parts.copyFonts(),
     parts.svelte(mode),
     parts.extractCSS({ loaders: [parts.postcss()] }),
     parts.cleanDist(),
