@@ -30,7 +30,7 @@
 </script>
 
 <div class="container">
-  <div class="flex contr">
+  <div class="flex">
     <h2 class="grey6">Select a panda as avatar</h2>
   </div>
 
