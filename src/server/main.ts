@@ -242,6 +242,7 @@ io.on("connection", (_socket) => {
 const host = "0.0.0.0";
 const port = process.env.PORT || 3000;
 
+console.log("PORT", port, "HOST", host);
 server.listen(Number(port), host, () =>
   console.log("SERVER LISTENING ON", host, port)
 );
