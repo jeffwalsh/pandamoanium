@@ -48,7 +48,7 @@
     color: #e0e0e0;
   }
 
-  .panda-pp img.panda {
+    img.panda {
     max-width: 90%;
     border-radius: 0.25rem;
   }
@@ -197,7 +197,7 @@
   }
 
   h2 {
-    font-size: 4rem;
+    font-size: 2rem;
     font-weight: 800;
   }
 
