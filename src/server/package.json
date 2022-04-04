@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "test": "jest",
-    "prod": "nodemon",
+    "prod": "node dist/main.js",
     "start": "concurrently npm:dev-server:*",
     "dev-server:compile": "tsc -w",
     "dev-server:run": "nodemon"
