@@ -239,6 +239,8 @@ io.on("connection", (_socket) => {
   );
 });
 
-server.listen(3000, () => console.log("SERVER IS LISTENING!"));
+server.listen(process.env.PORT || 3000, () =>
+  console.log("SERVER IS LISTENING!")
+);
 
 export {};
