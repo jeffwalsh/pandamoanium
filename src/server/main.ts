@@ -219,8 +219,8 @@ io.on("connection", (_socket) => {
             (p) => p.pandaName === message.player.pandaName
           );
 
-          const points = 100;
-          const score = (p as Player).score + points;
+          const points = timers.get(info.roomCode)?.n;
+          const score = (p as Player).score + (points as number);
           (p as Player).score = score;
 
           const panda = p as Player;
