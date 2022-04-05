@@ -4,6 +4,7 @@ import { addPlayerToGame, Game, Message, Player } from "./game/game";
 import { Server } from "socket.io";
 import { initializeApp } from "firebase/app";
 import { choices } from "./choices/choices";
+import cors from "cors";
 import {
   collection,
   addDoc,
@@ -29,6 +30,7 @@ const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
 
 const app = express();
+app.use(cors());
 
 const server = http.createServer(app);
 const io = new Server(server);

@@ -9,6 +9,7 @@ const game_1 = require("./game/game");
 const socket_io_1 = require("socket.io");
 const app_1 = require("firebase/app");
 const choices_1 = require("./choices/choices");
+const cors_1 = __importDefault(require("cors"));
 const firestore_1 = require("firebase/firestore");
 const firebaseConfig = {
     apiKey: "AIzaSyBLqrdtCQlUGVi7H714_W_RCS2VXNYa1lE",
@@ -22,6 +23,7 @@ const firebaseConfig = {
 const firebaseApp = app_1.initializeApp(firebaseConfig);
 const db = firestore_1.getFirestore(firebaseApp);
 const app = express_1.default();
+app.use(cors_1.default());
 const server = http_1.default.createServer(app);
 const io = new socket_io_1.Server(server);
 const games = new Map();
