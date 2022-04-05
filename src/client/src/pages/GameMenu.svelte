@@ -58,7 +58,9 @@
   <div class="flex flex-col">
     <h2 class="grey6"> Game Menu </h2>
   </div>
-
+  <div
+  class="grid grid-cols-4 auto-rows-max gap-x-5 gap-y-5 w-auto panda-container"
+>
   <div class="panda-pp rounded-md"> 
       <img
         src={$currentPanda.image}
@@ -67,6 +69,8 @@
       />
 
       <p>{$currentPanda.name}</p>
+
+  </div>
 
   </div>
 
@@ -93,10 +97,10 @@
 </div>
 
 <style>
-  .panda {
-    height: 200px;
-    width: 200px;
-  }
+
+/* img.panda {
+  max-width: 50%;
+} */
 
   input[type="text"] {
     padding: 12px 22px;

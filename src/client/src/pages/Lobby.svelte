@@ -56,19 +56,43 @@
   }
 </script>
 
-<h2>Room Code {$currentGame?.roomCode}</h2>
+<div class="container">
+  <div class="flex flex-col game-lobby-head">
+    <h2 class="grey6">Game Lobby</h2>
+    <h3> Room Code: <span class="text-animation"> {$currentGame?.roomCode}</span> </h3>
+   
+  </div>
 
-{#if isHost}
-  <button class="btn btn-primary" on:click={startGame}>Start Game</button>
-{/if}
+
+  <div class="flex start-game">
+    {#if isHost}
+      <button class="btn btn-primary" on:click={startGame}>Start Game</button>
+    {/if}
+  </div>
 
 <div
   class="grid grid-cols-4 auto-rows-max gap-x-5 gap-y-5 w-auto panda-container"
 >
   {#each $currentGame.players as player}
     <div class="panda-pp rounded-md">
-      <img src={player.thumbnail} class="panda" />
+      <img alt="Panda Profile" src={player.thumbnail} class="panda" />
       <p class="grey5">{player.pandaName}</p>
     </div>
   {/each}
 </div>
+
+</div>
+
+<style>
+
+h3 {
+  color: #9DA2AD;
+}
+
+.start-game {
+    margin: 10px 0px 29px 0px;
+}
+
+
+
+</style>
