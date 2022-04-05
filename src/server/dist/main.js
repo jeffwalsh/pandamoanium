@@ -164,7 +164,7 @@ io.on("connection", (_socket) => {
         if (message.isCorrect) {
             if (!game.correctPlayersThisRound.find((p) => p.pandaName === message.player.pandaName)) {
                 const p = game.players.find((p) => p.pandaName === message.player.pandaName);
-                const points = 100;
+                const points = timers.get(info.roomCode)?.n;
                 const score = p.score + points;
                 p.score = score;
                 const panda = p;

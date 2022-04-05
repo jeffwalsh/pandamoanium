@@ -235,7 +235,7 @@ io.on("connection", (_socket) => {
             address: panda.address,
             pandaName: panda.pandaName,
             thumbnail: panda.thumbnail,
-            score: existingScore + points,
+            score: existingScore + (points as number),
           });
 
           game.players = game.players.map((player) => {
