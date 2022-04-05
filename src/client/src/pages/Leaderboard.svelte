@@ -14,6 +14,9 @@
   });
 </script>
 
+<button class="btn btn-primary" on:click={async () => await push("/")}
+  >Back</button
+>
 {#if sorted}
   <div class="grid grid-rows-1 max-w-md bg-gray-200 p-2">
     {#each sorted as panda, i}
