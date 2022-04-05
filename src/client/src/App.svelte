@@ -203,7 +203,32 @@
   h2 {
     font-size: 2rem;
     font-weight: 800;
+    margin: 35px 0px 0px 0px;
   }
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: E5E6EA;
+}
+
+.text-animation {
+	 background: linear-gradient(to right,#FFF 20%,#FF0 40%,#FF0 60%,#FFF 80%);
+	 background-size: 200% auto;
+	 color: #000;
+	 background-clip: text;
+	 text-fill-color: transparent;
+	 -webkit-background-clip: text;
+	 -webkit-text-fill-color: transparent;
+	 animation: shine 1s linear infinite;
+}
+ @keyframes shine {
+	 to {
+		 background-position: 200% center;
+	}
+}
+ 
+
 
   /* Buttons */
   .btn-primary {
