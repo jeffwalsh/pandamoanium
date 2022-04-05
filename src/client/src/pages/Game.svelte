@@ -237,6 +237,7 @@
       if (info.roomCode !== $currentGame.roomCode) return;
       context.clearRect(0, 0, canvas.width, canvas.height);
       active = false;
+      timer = 0;
     });
   }
 

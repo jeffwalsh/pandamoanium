@@ -109,7 +109,7 @@ io.on("connection", (_socket) => {
     if (game.started) return;
 
     game.started = true;
-    const shuffled = game.players.sort(() => 0.5 - Math.random());
+    const shuffled = [...game.players].sort(() => 0.5 - Math.random());
     game.playerOrder = shuffled;
     games.set(game.roomCode, game);
 
@@ -165,7 +165,7 @@ io.on("connection", (_socket) => {
     if (!game) return;
 
     game.started = true;
-    const shuffled = game.players.sort(() => 0.5 - Math.random());
+    const shuffled = [...game.players].sort(() => 0.5 - Math.random());
     game.playerOrder = shuffled;
     console.log("set new playeOrder to be", shuffled);
     game.correctPlayersThisRound = [];
@@ -181,12 +181,12 @@ io.on("connection", (_socket) => {
       console.log("got chat message");
       const game = games.get(info.roomCode);
       if (!game) return;
+      console.log("game players on chat message", game.players);
 
       if (!game.started) return;
 
       const player = game.players.find((p) => p.address === info.address);
       if (!player) return;
-      console.log("chatMesage found player", player.pandaName);
 
       console.log("text", info.text, "currentWord", game.currentWord);
       const message: Message = {
@@ -219,6 +219,7 @@ io.on("connection", (_socket) => {
           game.playerOrder.shift();
           game.correctPlayersThisRound = [];
           console.log("game player order", game.playerOrder);
+          console.log("game players after playerOrder shift", game.players);
           io.emit("clearCanvas", { roomCode: game.roomCode });
           if (game.playerOrder.length === 0) {
             console.log("game is finished!");
