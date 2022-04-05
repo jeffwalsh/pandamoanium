@@ -56167,8 +56167,8 @@ exports.deprecate = function(fn, msg) {
 };
 var debugs = {};
 var debugEnvRegex = /^$/;
-if ({"SOLANA_RPC_HOST":"https://silent-thrumming-wind.solana-mainnet.quiknode.pro/c17a6e8ccc35a9f80a47c45f16263f2620d9ecb5/","SERVER_URL":"http://pandamoanium.herokuapp.com","PROD_SERVER_URL":"http://pandamoanium.herokuapp.com","DEV_SERVER_URL":"http://localhost:3000"}.NODE_DEBUG) {
-  var debugEnv = {"SOLANA_RPC_HOST":"https://silent-thrumming-wind.solana-mainnet.quiknode.pro/c17a6e8ccc35a9f80a47c45f16263f2620d9ecb5/","SERVER_URL":"http://pandamoanium.herokuapp.com","PROD_SERVER_URL":"http://pandamoanium.herokuapp.com","DEV_SERVER_URL":"http://localhost:3000"}.NODE_DEBUG;
+if ({"SOLANA_RPC_HOST":"https://silent-thrumming-wind.solana-mainnet.quiknode.pro/c17a6e8ccc35a9f80a47c45f16263f2620d9ecb5/","SERVER_URL":"https://pandamoanium.herokuapp.com","PROD_SERVER_URL":"https://pandamoanium.herokuapp.com","DEV_SERVER_URL":"http://localhost:3000"}.NODE_DEBUG) {
+  var debugEnv = {"SOLANA_RPC_HOST":"https://silent-thrumming-wind.solana-mainnet.quiknode.pro/c17a6e8ccc35a9f80a47c45f16263f2620d9ecb5/","SERVER_URL":"https://pandamoanium.herokuapp.com","PROD_SERVER_URL":"https://pandamoanium.herokuapp.com","DEV_SERVER_URL":"http://localhost:3000"}.NODE_DEBUG;
   debugEnv = debugEnv.replace(/[|\\{}()[\]^$+?.]/g, "\\$&").replace(/\*/g, ".*").replace(/,/g, "$|^").toUpperCase();
   debugEnvRegex = new RegExp("^" + debugEnv + "$", "i");
 }
@@ -57480,7 +57480,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/build/esm/index.js");
 
 
-const socket = (0,svelte_store__WEBPACK_IMPORTED_MODULE_0__.writable)((0,socket_io_client__WEBPACK_IMPORTED_MODULE_1__.io)({"SOLANA_RPC_HOST":"https://silent-thrumming-wind.solana-mainnet.quiknode.pro/c17a6e8ccc35a9f80a47c45f16263f2620d9ecb5/","SERVER_URL":"http://pandamoanium.herokuapp.com","PROD_SERVER_URL":"http://pandamoanium.herokuapp.com","DEV_SERVER_URL":"http://localhost:3000"}.SERVER_URL));
+const socket = (0,svelte_store__WEBPACK_IMPORTED_MODULE_0__.writable)((0,socket_io_client__WEBPACK_IMPORTED_MODULE_1__.io)({"SOLANA_RPC_HOST":"https://silent-thrumming-wind.solana-mainnet.quiknode.pro/c17a6e8ccc35a9f80a47c45f16263f2620d9ecb5/","SERVER_URL":"https://pandamoanium.herokuapp.com","PROD_SERVER_URL":"https://pandamoanium.herokuapp.com","DEV_SERVER_URL":"http://localhost:3000"}.SERVER_URL));
 
 
 
@@ -65973,7 +65973,7 @@ function instance($$self, $$props, $$invalidate) {
 	});
 
 	const getChoices = () => __awaiter(void 0, void 0, void 0, function* () {
-		const resp = yield axios__WEBPACK_IMPORTED_MODULE_5___default().get(`${{"SOLANA_RPC_HOST":"https://silent-thrumming-wind.solana-mainnet.quiknode.pro/c17a6e8ccc35a9f80a47c45f16263f2620d9ecb5/","SERVER_URL":"http://pandamoanium.herokuapp.com","PROD_SERVER_URL":"http://pandamoanium.herokuapp.com","DEV_SERVER_URL":"http://localhost:3000"}.SERVER_URL}/choices`);
+		const resp = yield axios__WEBPACK_IMPORTED_MODULE_5___default().get(`${{"SOLANA_RPC_HOST":"https://silent-thrumming-wind.solana-mainnet.quiknode.pro/c17a6e8ccc35a9f80a47c45f16263f2620d9ecb5/","SERVER_URL":"https://pandamoanium.herokuapp.com","PROD_SERVER_URL":"https://pandamoanium.herokuapp.com","DEV_SERVER_URL":"http://localhost:3000"}.SERVER_URL}/choices`);
 		$$invalidate(3, choices = resp.data.choices);
 	});
 
@@ -66021,7 +66021,7 @@ function instance($$self, $$props, $$invalidate) {
 	}
 
 	const selectChoice = choice => __awaiter(void 0, void 0, void 0, function* () {
-		yield axios__WEBPACK_IMPORTED_MODULE_5___default().get(`${{"SOLANA_RPC_HOST":"https://silent-thrumming-wind.solana-mainnet.quiknode.pro/c17a6e8ccc35a9f80a47c45f16263f2620d9ecb5/","SERVER_URL":"http://pandamoanium.herokuapp.com","PROD_SERVER_URL":"http://pandamoanium.herokuapp.com","DEV_SERVER_URL":"http://localhost:3000"}.SERVER_URL}/selectWord?word=${choice}&roomCode=${$currentGame.roomCode}`);
+		yield axios__WEBPACK_IMPORTED_MODULE_5___default().get(`${{"SOLANA_RPC_HOST":"https://silent-thrumming-wind.solana-mainnet.quiknode.pro/c17a6e8ccc35a9f80a47c45f16263f2620d9ecb5/","SERVER_URL":"https://pandamoanium.herokuapp.com","PROD_SERVER_URL":"https://pandamoanium.herokuapp.com","DEV_SERVER_URL":"http://localhost:3000"}.SERVER_URL}/selectWord?word=${choice}&roomCode=${$currentGame.roomCode}`);
 		$$invalidate(3, choices = []);
 	});
 
@@ -66928,7 +66928,7 @@ function instance($$self, $$props, $$invalidate) {
 	let sorted;
 
 	(0,svelte__WEBPACK_IMPORTED_MODULE_2__.onMount)(() => __awaiter(void 0, void 0, void 0, function* () {
-		const resp = yield axios__WEBPACK_IMPORTED_MODULE_1___default().get({"SOLANA_RPC_HOST":"https://silent-thrumming-wind.solana-mainnet.quiknode.pro/c17a6e8ccc35a9f80a47c45f16263f2620d9ecb5/","SERVER_URL":"http://pandamoanium.herokuapp.com","PROD_SERVER_URL":"http://pandamoanium.herokuapp.com","DEV_SERVER_URL":"http://localhost:3000"}.SERVER_URL + "/leaderboard");
+		const resp = yield axios__WEBPACK_IMPORTED_MODULE_1___default().get({"SOLANA_RPC_HOST":"https://silent-thrumming-wind.solana-mainnet.quiknode.pro/c17a6e8ccc35a9f80a47c45f16263f2620d9ecb5/","SERVER_URL":"https://pandamoanium.herokuapp.com","PROD_SERVER_URL":"https://pandamoanium.herokuapp.com","DEV_SERVER_URL":"http://localhost:3000"}.SERVER_URL + "/leaderboard");
 		const players = resp.data;
 		$$invalidate(0, sorted = players.data.sort((a, b) => b.score - a.score));
 	}));
@@ -67772,7 +67772,7 @@ function instance($$self, $$props, $$invalidate) {
 
 	
 	
-	const connection = new _project_serum_anchor__WEBPACK_IMPORTED_MODULE_1__.web3.Connection({"SOLANA_RPC_HOST":"https://silent-thrumming-wind.solana-mainnet.quiknode.pro/c17a6e8ccc35a9f80a47c45f16263f2620d9ecb5/","SERVER_URL":"http://pandamoanium.herokuapp.com","PROD_SERVER_URL":"http://pandamoanium.herokuapp.com","DEV_SERVER_URL":"http://localhost:3000"}.SOLANA_RPC_HOST);
+	const connection = new _project_serum_anchor__WEBPACK_IMPORTED_MODULE_1__.web3.Connection({"SOLANA_RPC_HOST":"https://silent-thrumming-wind.solana-mainnet.quiknode.pro/c17a6e8ccc35a9f80a47c45f16263f2620d9ecb5/","SERVER_URL":"https://pandamoanium.herokuapp.com","PROD_SERVER_URL":"https://pandamoanium.herokuapp.com","DEV_SERVER_URL":"http://localhost:3000"}.SOLANA_RPC_HOST);
 	let pandas;
 
 	(0,svelte__WEBPACK_IMPORTED_MODULE_2__.onMount)(() => __awaiter(void 0, void 0, void 0, function* () {
