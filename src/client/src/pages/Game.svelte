@@ -287,19 +287,22 @@
   <!-- Canvas Left Section -->
   <div class="game-canvas-left col-span-2">
 
-    {#if active}
-      Timer: {timer}
-    {/if}
-    {#if activePlayer && activePlayer.pandaName === $currentPanda.name && choices && !active}
-      <h2>Choices</h2>
-      {#each choices as choice}
-        <p class="cursor-pointer" on:click={async () => await selectChoice(choice)}>
-          {choice}
-        </p>
-      {/each}
-    {/if}
+    <div class="choices">
+      {#if active}
+        Timer: {timer}
+      {/if}
+      {#if activePlayer && activePlayer.pandaName === $currentPanda.name && choices && !active}
+        <h2>Choices</h2>
+        <p> Choose an option that you want to draw. Others will try to guess it. </p>
+        {#each choices as choice}
+          <p class="cursor-pointer choice" on:click={async () => await selectChoice(choice)}>
+            {choice}
+          </p>
+        {/each}
+      {/if}
+    </div>
 
-    <canvas style="background:white;" id="imageView" width="400" height="300" />
+    <canvas style="background:#333333;" id="imageView" width="600" height="400" />
 
   </div>
 
@@ -323,7 +326,7 @@
       {/each}
     </div>
 
-  <input
+  <input placeholder="Type Here Noob" class="chat-input"
     type="text"
     disabled={(activePlayer && activePlayer.pandaName === $currentPanda.name) ||
       !active}
@@ -375,9 +378,60 @@
   .red {
     color: red;
   }
+
+  .container.game-container {
+  padding: 0;
+  background: rgba(33, 30, 30, 0.59);
+  box-sizing: border-box;
+  backdrop-filter: blur(15px);
+  min-height: 480px;
+}
+
+
+  .game-canvas-left {
+    padding: 10px 19px;
+    position: relative;
+  }
+
+  .choices {
+    position: absolute;
+    padding: 0px 14px;
+  }
+
+  .choices h2 {
+    margin: 6px 0px 0px 0px;
+}
+
+  p.cursor-pointer.choice {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #F8F83B;
+}
+
+  .chat-right-section {
+    background: #000;
+    padding: 10px 19px;
+}
+
+
   #chat-box {
-    background: white;
-    color: black;
+    background: black;
+    color: white;
+    border-radius: 7px;
+    padding: 20px;
+    position: relative;
+    max-height: 400px;
+    overflow-y: scroll;
+    height: 400px;
+  }
+
+
+.chat-input {
+   padding: 12px 22px;
+    border-radius: 0.5rem;
+    background: #211e1ebf;
+    width: 100%;
+    margin: 29px 0px 0px 0px;
   }
 
 
@@ -395,12 +449,6 @@
     grid-column: span 2/span 2;
 }
 
-.container.game-container {
-  background: rgba(33, 30, 30, 0.59);
-box-sizing: border-box;
-backdrop-filter: blur(15px);
-
-}
 
 
 
