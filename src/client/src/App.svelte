@@ -203,7 +203,7 @@
   h2 {
     font-size: 2rem;
     font-weight: 800;
-    margin: 35px 0px 0px 0px;
+    margin: 35px 0px 20px 0px;
   }
 
   h3 {

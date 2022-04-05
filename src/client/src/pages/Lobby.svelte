@@ -59,7 +59,7 @@
 <div class="container">
   <div class="flex flex-col game-lobby-head">
     <h2 class="grey6">Game Lobby</h2>
-    <h3> Room Code: <span class="text-animation"> {$currentGame?.roomCode}</span> </h3>
+    <h3> Room Code: <span class="text-animation"> {$currentGame?.roomCode} </span> </h3>
    
   </div>
 
@@ -87,12 +87,18 @@
 
 h3 {
   color: #9DA2AD;
+  margin: -28px 0px 8px 0px;
 }
 
 .start-game {
     margin: 10px 0px 29px 0px;
 }
 
-
+@media (max-width:600px) {
+  h3 {
+  color: #9DA2AD;
+  margin: 0px;
+}
+  }
 
 </style>
