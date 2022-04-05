@@ -2,6 +2,7 @@
   import axios from "axios";
 
   import { onMount } from "svelte";
+  import { push } from "svelte-spa-router";
   import type { Player } from "../domain/game";
   let sorted: Player[];
 
