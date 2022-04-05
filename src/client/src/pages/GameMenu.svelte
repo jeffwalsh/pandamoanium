@@ -11,6 +11,11 @@
   let roomCode: string;
 
   async function createLobby() {
+    if (!$currentPanda || !$currentPanda.name) {
+      await push("/");
+      return;
+    }
+
     const players: Player[] = [
       {
         address: ($currentAddress as PublicKey).toString(),
@@ -67,8 +72,6 @@
         class="panda cursor-pointer"
         on:click={async () => await createLobby()}
       />
-
-      <p>{$currentPanda.name}</p>
 
       <p>{$currentPanda.name}</p>
     </div>
