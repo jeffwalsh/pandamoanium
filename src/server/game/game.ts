@@ -3,7 +3,7 @@ export type Player = {
   pandaName: string;
   thumbnail: string;
   isHost?: boolean;
-  score?: number;
+  score: number;
 };
 
 export type Message = {

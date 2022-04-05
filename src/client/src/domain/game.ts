@@ -3,6 +3,7 @@ type Player = {
   pandaName: string;
   thumbnail: string;
   isHost?: boolean;
+  score: number;
 };
 
 type Game = {

@@ -1,10 +1,18 @@
 import express from "express";
 import http from "http";
-import { addPlayerToGame, Game, Message } from "./game/game";
+import { addPlayerToGame, Game, Message, Player } from "./game/game";
 import { Server } from "socket.io";
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, onValue } from "firebase/database";
 import { choices } from "./choices/choices";
+import {
+  collection,
+  addDoc,
+  doc,
+  setDoc,
+  getFirestore,
+  getDocs,
+  getDoc,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBLqrdtCQlUGVi7H714_W_RCS2VXNYa1lE",
@@ -18,7 +26,7 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig);
 
-const database = getDatabase(firebaseApp);
+const db = getFirestore(firebaseApp);
 
 const app = express();
 
@@ -36,6 +44,17 @@ app.get("/choices", (req, res) => {
   const shuffled = choices.sort(() => 0.5 - Math.random());
   const selected = shuffled.slice(0, 3);
   res.send({ choices: selected });
+});
+
+app.get("/leaderboard", async (req, res) => {
+  const querySnapshot = await getDocs(collection(db, "scores"));
+  const resp: unknown[] = [];
+  querySnapshot.forEach((doc) => {
+    console.log(`${doc.id} => ${doc.data()}`);
+    resp.push(doc.data());
+  });
+
+  res.send({ data: resp });
 });
 
 app.get("/selectWord", (req, res) => {
@@ -67,7 +86,10 @@ app.get("/selectWord", (req, res) => {
       io.emit("timeout", { roomCode: roomCode as string });
       game.playerOrder.shift();
       game.correctPlayersThisRound = [];
-      io.emit("clearCanvas", { roomCode: game.roomCode });
+      io.emit("clearCanvas", {
+        roomCode: game.roomCode,
+        players: game.players,
+      });
       if (game.playerOrder.length === 0) {
         game.finished = true;
         game.started = false;
@@ -94,15 +116,12 @@ io.on("connection", (_socket) => {
   });
 
   const socket = _socket;
-  console.log("a user connected");
 
   socket.on("createGame", (game: Game) => {
-    console.log("creating game", game);
     games.set(game.roomCode, game);
   });
 
   socket.on("startGame", (roomCode: string) => {
-    console.log("start game room code", roomCode);
     const game = games.get(roomCode);
     if (!game) return;
 
@@ -125,6 +144,7 @@ io.on("connection", (_socket) => {
         pandaName: string;
         thumbnail: string;
         isHost: false;
+        score: number;
       };
     }) => {
       const game = games.get(info.roomCode);
@@ -132,10 +152,8 @@ io.on("connection", (_socket) => {
 
       if (game.started) return;
 
-      console.log("found game", game);
       if (addPlayerToGame(game, info.player)) {
         games.set(game.roomCode, game);
-        console.log("added player", info.player);
         io.emit("updatePlayers", {
           player: info.player,
           roomCode: game.roomCode,
@@ -150,11 +168,9 @@ io.on("connection", (_socket) => {
   socket.on(
     "sendDraw",
     (info: { x: string | number; y: string | number; roomCode: string }) => {
-      console.log("sendDraw", info);
       const game = games.get(info.roomCode);
       if (!game) return;
 
-      console.log("emitting receiveDraw");
       io.emit("receiveDraw", info);
     }
   );
@@ -177,24 +193,20 @@ io.on("connection", (_socket) => {
 
   socket.on(
     "chatMessage",
-    (info: { address: string; text: string; roomCode: string }) => {
-      console.log("got chat message");
+    async (info: { address: string; text: string; roomCode: string }) => {
       const game = games.get(info.roomCode);
       if (!game) return;
-      console.log("game players on chat message", game.players);
 
       if (!game.started) return;
 
       const player = game.players.find((p) => p.address === info.address);
       if (!player) return;
 
-      console.log("text", info.text, "currentWord", game.currentWord);
       const message: Message = {
         player: player,
         text: info.text,
         isCorrect: info.text === game.currentWord,
       };
-      console.log("message", message);
       io.emit("message", { message: message, roomCode: info.roomCode });
 
       if (message.isCorrect) {
@@ -203,38 +215,69 @@ io.on("connection", (_socket) => {
             (p) => p.pandaName === message.player.pandaName
           )
         ) {
-          game.correctPlayersThisRound.push(message.player);
-        }
-
-        console.log("correct players", game.correctPlayersThisRound.length);
-        console.log("current players", game.players);
-
-        if (game.correctPlayersThisRound.length === game.players.length - 1) {
-          const timer = timers.get(game.roomCode);
-          clearInterval(
-            (timer as { n: number; interval: NodeJS.Timeout }).interval
+          const p = game.players.find(
+            (p) => p.pandaName === message.player.pandaName
           );
-          timers.delete(game.roomCode);
-          console.log("round over!");
-          game.playerOrder.shift();
-          game.correctPlayersThisRound = [];
-          console.log("game player order", game.playerOrder);
-          console.log("game players after playerOrder shift", game.players);
-          io.emit("clearCanvas", { roomCode: game.roomCode });
-          if (game.playerOrder.length === 0) {
-            console.log("game is finished!");
-            game.finished = true;
-            game.started = false;
-            io.emit("gameOver", { roomCode: game.roomCode });
-          } else {
-            console.log("next round, player is", game.playerOrder[0]);
-            io.emit("nextRound", {
-              nextChooser: game.playerOrder[0],
-              roomCode: game.roomCode,
-            });
+
+          const points = 100;
+          const score = (p as Player).score + points;
+          (p as Player).score = score;
+
+          const panda = p as Player;
+
+          const docSnap = await getDoc(doc(db, "scores", panda.pandaName));
+          let existingScore = 0;
+          if (docSnap.exists()) {
+            console.log("Exists!", docSnap.data());
+            existingScore = docSnap.data().score;
           }
+          await setDoc(doc(collection(db, "scores"), panda.pandaName), {
+            address: panda.address,
+            pandaName: panda.pandaName,
+            thumbnail: panda.thumbnail,
+            score: existingScore + points,
+          });
+
+          game.players = game.players.map((player) => {
+            if (player.pandaName === message.player.pandaName) {
+              return {
+                address: player.address,
+                thumbnail: player.thumbnail,
+                score: score,
+                isHost: player.isHost,
+                pandaName: player.pandaName,
+              } as Player;
+            } else {
+              return player;
+            }
+          });
+          game.correctPlayersThisRound.push(p as Player);
+
+          if (game.correctPlayersThisRound.length === game.players.length - 1) {
+            const timer = timers.get(game.roomCode);
+            clearInterval(
+              (timer as { n: number; interval: NodeJS.Timeout }).interval
+            );
+            timers.delete(game.roomCode);
+            game.playerOrder.shift();
+            game.correctPlayersThisRound = [];
+            io.emit("clearCanvas", {
+              roomCode: game.roomCode,
+              players: game.players,
+            });
+            if (game.playerOrder.length === 0) {
+              game.finished = true;
+              game.started = false;
+              io.emit("gameOver", { roomCode: game.roomCode });
+            } else {
+              io.emit("nextRound", {
+                nextChooser: game.playerOrder[0],
+                roomCode: game.roomCode,
+              });
+            }
+          }
+          games.set(game.roomCode, game);
         }
-        games.set(game.roomCode, game);
       }
     }
   );
@@ -243,9 +286,6 @@ io.on("connection", (_socket) => {
 const host = "0.0.0.0";
 const port = process.env.PORT || 3000;
 
-console.log("PORT", port, "HOST", host);
 server.listen(Number(port), host, () =>
   console.log("SERVER LISTENING ON", host, port)
 );
-
-export {};
