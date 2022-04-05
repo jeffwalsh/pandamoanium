@@ -4,6 +4,7 @@
   import Connect from "./pages/Connect.svelte";
   import Game from "./pages/Game.svelte";
   import GameMenu from "./pages/GameMenu.svelte";
+  import Leaderboard from "./pages/Leaderboard.svelte";
   import Lobby from "./pages/Lobby.svelte";
   import SelectPanda from "./pages/SelectPanda.svelte";
 
@@ -22,6 +23,9 @@
     }),
     "/game": wrap({
       component: Game,
+    }),
+    "/leaderboard": wrap({
+      component: Leaderboard,
     }),
   };
 </script>
@@ -48,7 +52,7 @@
     color: #e0e0e0;
   }
 
-    img.panda {
+  img.panda {
     max-width: 90%;
     border-radius: 0.25rem;
   }

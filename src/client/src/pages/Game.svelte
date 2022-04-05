@@ -233,12 +233,18 @@
       }
     );
 
-    $socket.on("clearCanvas", (info: { roomCode: string }) => {
-      if (info.roomCode !== $currentGame.roomCode) return;
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      active = false;
-      timer = 0;
-    });
+    $socket.on(
+      "clearCanvas",
+      (info: { roomCode: string; players: Player[] }) => {
+        if (info.roomCode !== $currentGame.roomCode) return;
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        active = false;
+        timer = 0;
+        const game = $currentGame;
+        game.players = info.players;
+        currentGame.set(game);
+      }
+    );
   }
 
   // The general-purpose event handler. This function just determines the mouse
@@ -353,6 +359,7 @@
       <div class="panda-pp rounded-md">
         <img src={player.thumbnail} class="panda" />
         <p class="grey5">{player.pandaName}</p>
+        Score:<span>{player.score}</span>
       </div>
     {/each}
   {/if}

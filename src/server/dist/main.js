@@ -8,8 +8,8 @@ const http_1 = __importDefault(require("http"));
 const game_1 = require("./game/game");
 const socket_io_1 = require("socket.io");
 const app_1 = require("firebase/app");
-const database_1 = require("firebase/database");
 const choices_1 = require("./choices/choices");
+const firestore_1 = require("firebase/firestore");
 const firebaseConfig = {
     apiKey: "AIzaSyBLqrdtCQlUGVi7H714_W_RCS2VXNYa1lE",
     authDomain: "pandamoanium-c2593.firebaseapp.com",
@@ -20,7 +20,7 @@ const firebaseConfig = {
     measurementId: "G-N2BQPK9QQW",
 };
 const firebaseApp = app_1.initializeApp(firebaseConfig);
-const database = database_1.getDatabase(firebaseApp);
+const db = firestore_1.getFirestore(firebaseApp);
 const app = express_1.default();
 const server = http_1.default.createServer(app);
 const io = new socket_io_1.Server(server);
@@ -30,6 +30,15 @@ app.get("/choices", (req, res) => {
     const shuffled = choices_1.choices.sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, 3);
     res.send({ choices: selected });
+});
+app.get("/leaderboard", async (req, res) => {
+    const querySnapshot = await firestore_1.getDocs(firestore_1.collection(db, "scores"));
+    const resp = [];
+    querySnapshot.forEach((doc) => {
+        console.log(`${doc.id} => ${doc.data()}`);
+        resp.push(doc.data());
+    });
+    res.send({ data: resp });
 });
 app.get("/selectWord", (req, res) => {
     const word = req.query.word;
@@ -58,7 +67,10 @@ app.get("/selectWord", (req, res) => {
             io.emit("timeout", { roomCode: roomCode });
             game.playerOrder.shift();
             game.correctPlayersThisRound = [];
-            io.emit("clearCanvas", { roomCode: game.roomCode });
+            io.emit("clearCanvas", {
+                roomCode: game.roomCode,
+                players: game.players,
+            });
             if (game.playerOrder.length === 0) {
                 game.finished = true;
                 game.started = false;
@@ -81,13 +93,10 @@ io.on("connection", (_socket) => {
         console.log("a user disconnected");
     });
     const socket = _socket;
-    console.log("a user connected");
     socket.on("createGame", (game) => {
-        console.log("creating game", game);
         games.set(game.roomCode, game);
     });
     socket.on("startGame", (roomCode) => {
-        console.log("start game room code", roomCode);
         const game = games.get(roomCode);
         if (!game)
             return;
@@ -105,10 +114,8 @@ io.on("connection", (_socket) => {
             return;
         if (game.started)
             return;
-        console.log("found game", game);
         if (game_1.addPlayerToGame(game, info.player)) {
             games.set(game.roomCode, game);
-            console.log("added player", info.player);
             io.emit("updatePlayers", {
                 player: info.player,
                 roomCode: game.roomCode,
@@ -120,11 +127,9 @@ io.on("connection", (_socket) => {
         }
     });
     socket.on("sendDraw", (info) => {
-        console.log("sendDraw", info);
         const game = games.get(info.roomCode);
         if (!game)
             return;
-        console.log("emitting receiveDraw");
         io.emit("receiveDraw", info);
     });
     socket.on("restartGame", (roomCode) => {
@@ -141,61 +146,83 @@ io.on("connection", (_socket) => {
         games.set(game.roomCode, game);
         io.emit("restartedGame", { roomCode, playerOrder: game.playerOrder });
     });
-    socket.on("chatMessage", (info) => {
-        console.log("got chat message");
+    socket.on("chatMessage", async (info) => {
         const game = games.get(info.roomCode);
         if (!game)
             return;
-        console.log("game players on chat message", game.players);
         if (!game.started)
             return;
         const player = game.players.find((p) => p.address === info.address);
         if (!player)
             return;
-        console.log("text", info.text, "currentWord", game.currentWord);
         const message = {
             player: player,
             text: info.text,
             isCorrect: info.text === game.currentWord,
         };
-        console.log("message", message);
         io.emit("message", { message: message, roomCode: info.roomCode });
         if (message.isCorrect) {
             if (!game.correctPlayersThisRound.find((p) => p.pandaName === message.player.pandaName)) {
-                game.correctPlayersThisRound.push(message.player);
-            }
-            console.log("correct players", game.correctPlayersThisRound.length);
-            console.log("current players", game.players);
-            if (game.correctPlayersThisRound.length === game.players.length - 1) {
-                const timer = timers.get(game.roomCode);
-                clearInterval(timer.interval);
-                timers.delete(game.roomCode);
-                console.log("round over!");
-                game.playerOrder.shift();
-                game.correctPlayersThisRound = [];
-                console.log("game player order", game.playerOrder);
-                console.log("game players after playerOrder shift", game.players);
-                io.emit("clearCanvas", { roomCode: game.roomCode });
-                if (game.playerOrder.length === 0) {
-                    console.log("game is finished!");
-                    game.finished = true;
-                    game.started = false;
-                    io.emit("gameOver", { roomCode: game.roomCode });
+                const p = game.players.find((p) => p.pandaName === message.player.pandaName);
+                const points = 100;
+                const score = p.score + points;
+                p.score = score;
+                const panda = p;
+                const docSnap = await firestore_1.getDoc(firestore_1.doc(db, "scores", panda.pandaName));
+                let existingScore = 0;
+                if (docSnap.exists()) {
+                    console.log("Exists!", docSnap.data());
+                    existingScore = docSnap.data().score;
                 }
-                else {
-                    console.log("next round, player is", game.playerOrder[0]);
-                    io.emit("nextRound", {
-                        nextChooser: game.playerOrder[0],
+                await firestore_1.setDoc(firestore_1.doc(firestore_1.collection(db, "scores"), panda.pandaName), {
+                    address: panda.address,
+                    pandaName: panda.pandaName,
+                    thumbnail: panda.thumbnail,
+                    score: existingScore + points,
+                });
+                game.players = game.players.map((player) => {
+                    if (player.pandaName === message.player.pandaName) {
+                        return {
+                            address: player.address,
+                            thumbnail: player.thumbnail,
+                            score: score,
+                            isHost: player.isHost,
+                            pandaName: player.pandaName,
+                        };
+                    }
+                    else {
+                        return player;
+                    }
+                });
+                game.correctPlayersThisRound.push(p);
+                if (game.correctPlayersThisRound.length === game.players.length - 1) {
+                    const timer = timers.get(game.roomCode);
+                    clearInterval(timer.interval);
+                    timers.delete(game.roomCode);
+                    game.playerOrder.shift();
+                    game.correctPlayersThisRound = [];
+                    io.emit("clearCanvas", {
                         roomCode: game.roomCode,
+                        players: game.players,
                     });
+                    if (game.playerOrder.length === 0) {
+                        game.finished = true;
+                        game.started = false;
+                        io.emit("gameOver", { roomCode: game.roomCode });
+                    }
+                    else {
+                        io.emit("nextRound", {
+                            nextChooser: game.playerOrder[0],
+                            roomCode: game.roomCode,
+                        });
+                    }
                 }
+                games.set(game.roomCode, game);
             }
-            games.set(game.roomCode, game);
         }
     });
 });
 const host = "0.0.0.0";
 const port = process.env.PORT || 3000;
-console.log("PORT", port, "HOST", host);
 server.listen(Number(port), host, () => console.log("SERVER LISTENING ON", host, port));
 //# sourceMappingURL=main.js.map
