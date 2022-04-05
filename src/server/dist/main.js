@@ -27,7 +27,12 @@ app.use(cors_1.default({
     origin: "*",
 }));
 const server = http_1.default.createServer(app);
-const io = new socket_io_1.Server(server);
+const io = new socket_io_1.Server(server, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"],
+    },
+});
 const games = new Map();
 const timers = new Map();
 app.get("/choices", (req, res) => {
