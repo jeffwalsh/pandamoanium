@@ -59,7 +59,7 @@
 <div class="container">
   <div class="flex flex-col game-lobby-head">
     <h2 class="grey6">Game Lobby</h2>
-    <h3> Room Code: <span class="text-animation"> {$currentGame?.roomCode}</span> </h3>
+    <h3> Room Code: <span class="text-animation"> {$currentGame?.roomCode} </span> </h3>
    
   </div>
 
