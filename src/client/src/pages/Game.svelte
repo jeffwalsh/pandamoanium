@@ -262,46 +262,70 @@
   }
 </script>
 
-{#if active}
-  Timer: {timer}
-{/if}
-{#if activePlayer && activePlayer.pandaName === $currentPanda.name && choices && !active}
-  <h2>Choices</h2>
-  {#each choices as choice}
-    <p class="cursor-pointer" on:click={async () => await selectChoice(choice)}>
-      {choice}
-    </p>
-  {/each}
-{/if}
 
-<canvas style="background:white;" id="imageView" width="400" height="300" />
 
-<!-- chat box -->
-<div id="chat-box">
-  {#each messages as message}
-    <p
-      class={message.isCorrect
-        ? "green"
-        : message.player.pandaName === "Lawyer Crow"
-        ? "red"
-        : ""}
-    >
-      {#if message.isCorrect}
-        {message.player.pandaName} got the answer!
-      {:else}
-        {message.player.pandaName}: {message.text}
-      {/if}
-    </p>
-  {/each}
+<div class="container">
+  <div class="flex flex-col game-lobby-head">
+    <h2 class="grey6">Game In Progress </h2>
+    <h3> Room Code: <span class="text-animation"> {$currentGame?.roomCode} </span> </h3>
+   
+  </div>
 </div>
 
-<input
-  type="text"
-  disabled={(activePlayer && activePlayer.pandaName === $currentPanda.name) ||
-    !active}
-  bind:value={currentMessage}
-  on:keyup|preventDefault={handleKeyup}
-/>
+
+<!-- Game Container STart -->
+
+<div class="container game-container">
+
+  <div class="grid grid-cols-3"> 
+  <!-- Canvas Left Section -->
+  <div class="game-canvas-left col-span-2">
+
+    {#if active}
+      Timer: {timer}
+    {/if}
+    {#if activePlayer && activePlayer.pandaName === $currentPanda.name && choices && !active}
+      <h2>Choices</h2>
+      {#each choices as choice}
+        <p class="cursor-pointer" on:click={async () => await selectChoice(choice)}>
+          {choice}
+        </p>
+      {/each}
+    {/if}
+
+    <canvas style="background:white;" id="imageView" width="400" height="300" />
+
+  </div>
+
+  <!-- chat box RIght Setion -->
+  <div class="chat-right-section">
+      <div id="chat-box">
+      {#each messages as message}
+        <p
+          class={message.isCorrect
+            ? "green"
+            : message.player.pandaName === "Lawyer Crow"
+            ? "red"
+            : ""}
+        >
+          {#if message.isCorrect}
+            {message.player.pandaName} got the answer!
+          {:else}
+            {message.player.pandaName}: {message.text}
+          {/if}
+        </p>
+      {/each}
+    </div>
+
+  <input
+    type="text"
+    disabled={(activePlayer && activePlayer.pandaName === $currentPanda.name) ||
+      !active}
+    bind:value={currentMessage}
+    on:keyup|preventDefault={handleKeyup}
+  />
+
+  </div>
 
 {#if $currentGame.finished}
   Game is finished!
@@ -313,6 +337,13 @@
 {#if timedOut}
   Timed out!
 {/if}
+
+  </div>
+</div>
+
+<!-- Game Container End -->
+
+<div class="container">
 
 <div
   class="grid grid-cols-4 auto-rows-max gap-x-5 gap-y-5 w-auto panda-container"
@@ -327,6 +358,8 @@
   {/if}
 </div>
 
+</div>
+
 <style>
   .green {
     color: green;
@@ -339,4 +372,46 @@
     background: white;
     color: black;
   }
+
+
+  h3 {
+  color: #9DA2AD;
+  margin: -28px 0px 8px 0px;
+}
+
+
+.grid.grid-cols-3 {
+    grid-template-columns: repeat(3,minmax(0,1fr));
+}
+
+.col-span-2 {
+    grid-column: span 2/span 2;
+}
+
+.container.game-container {
+  background: rgba(33, 30, 30, 0.59);
+box-sizing: border-box;
+backdrop-filter: blur(15px);
+
+}
+
+
+
+
+@media (max-width:600px) {
+  h3 {
+  color: #9DA2AD;
+  margin: 0px;
+}
+
+.grid.grid-cols-3 {
+    grid-template-columns: repeat(1,minmax(0,1fr));
+}
+
+.col-span-2 {
+    grid-column: span 1/span 1;
+}
+
+  }
+
 </style>
