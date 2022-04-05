@@ -23,7 +23,9 @@ const firebaseConfig = {
 const firebaseApp = app_1.initializeApp(firebaseConfig);
 const db = firestore_1.getFirestore(firebaseApp);
 const app = express_1.default();
-app.use(cors_1.default());
+app.use(cors_1.default({
+    origin: "*",
+}));
 const server = http_1.default.createServer(app);
 const io = new socket_io_1.Server(server);
 const games = new Map();
