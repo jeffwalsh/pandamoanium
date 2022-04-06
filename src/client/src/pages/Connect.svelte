@@ -15,7 +15,6 @@
 {#if $currentAddress}
   <span class="hidden"> Address: {$currentAddress}</span>
 {:else}
-
   <Nav />
 
   <div class="container">
@@ -34,7 +33,7 @@
 
 <div class="audio">
   <audio controls autoplay>
-    <source src="/public/images/cgod.mp3" type="audio/mpeg">
+    <source src="images/cgod.mp3" type="audio/mpeg" />
   </audio>
 </div>
 
@@ -77,7 +76,7 @@
 
   .center-content.flex-col {
     margin-top: -60px;
-}
+  }
 
   @media (max-width: 600px) {
     p {
@@ -91,7 +90,5 @@
     right: 40px;
     bottom: 40px;
     opacity: 30%;
-}
-
-
+  }
 </style>

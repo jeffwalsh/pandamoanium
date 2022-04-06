@@ -64594,8 +64594,8 @@ const file = "src/pages/Connect.svelte";
 
 function add_css() {
 	var style = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("style");
-	style.id = "svelte-12led50-style";
-	style.textContent = "h1.svelte-12led50{font-size:7vw;font-weight:800;line-height:9.5vw}.text-animation.svelte-12led50{text-align:center;background:linear-gradient(\n      to right,\n      #fff 20%,\n      #ff0 40%,\n      #ff0 60%,\n      #fff 80%\n    );background-size:200% auto;color:#000;background-clip:text;text-fill-color:transparent;-webkit-background-clip:text;-webkit-text-fill-color:transparent;-webkit-animation:svelte-12led50-shine 1s linear infinite;animation:svelte-12led50-shine 1s linear infinite}@-webkit-keyframes svelte-12led50-shine{to{background-position:200% center}}@keyframes svelte-12led50-shine{to{background-position:200% center}}p.svelte-12led50{font-size:18px;text-align:center;max-width:50%;margin:-10px 0px 35px 0px}.center-content.flex-col.svelte-12led50{margin-top:-60px}@media(max-width: 600px){p.svelte-12led50{max-width:100%;margin-top:4px}}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ29ubmVjdC5zdmVsdGUiLCJtYXBwaW5ncyI6Ijs7Ozs7O3FuQkFpRkEiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiQ29ubmVjdC5zdmVsdGUiXX0= */";
+	style.id = "svelte-sbu6kw-style";
+	style.textContent = "h1.svelte-sbu6kw{font-size:7vw;font-weight:800;line-height:9.5vw}.text-animation.svelte-sbu6kw{text-align:center;background:linear-gradient(\n      to right,\n      #fff 20%,\n      #ff0 40%,\n      #ff0 60%,\n      #fff 80%\n    );background-size:200% auto;color:#000;background-clip:text;text-fill-color:transparent;-webkit-background-clip:text;-webkit-text-fill-color:transparent;-webkit-animation:svelte-sbu6kw-shine 1s linear infinite;animation:svelte-sbu6kw-shine 1s linear infinite}@-webkit-keyframes svelte-sbu6kw-shine{to{background-position:200% center}}@keyframes svelte-sbu6kw-shine{to{background-position:200% center}}p.svelte-sbu6kw{font-size:18px;text-align:center;max-width:50%;margin:-10px 0px 35px 0px}.center-content.flex-col.svelte-sbu6kw{margin-top:-60px}@media(max-width: 600px){p.svelte-sbu6kw{max-width:100%;margin-top:4px}}.audio.svelte-sbu6kw{position:absolute;right:40px;bottom:40px;opacity:30%}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ29ubmVjdC5zdmVsdGUiLCJtYXBwaW5ncyI6Ijs7Ozs7O3dyQkE2RkEiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiQ29ubmVjdC5zdmVsdGUiXX0= */";
 	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(document.head, style);
 }
 
@@ -64629,16 +64629,16 @@ function create_else_block(ctx) {
 			t4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			button = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("button");
 			button.textContent = "Connect";
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(h1, "class", "text-animation svelte-12led50");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h1, file, 30, 6, 1294);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(p, "class", "svelte-12led50");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 31, 6, 1345);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(h1, "class", "text-animation svelte-sbu6kw");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h1, file, 29, 6, 1293);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(p, "class", "svelte-sbu6kw");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 30, 6, 1344);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(button, "class", "btn btn-primary");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(button, file, 35, 6, 1466);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div0, "class", "center-content flex-col svelte-12led50");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div0, file, 29, 4, 1250);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(button, file, 34, 6, 1465);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div0, "class", "center-content flex-col svelte-sbu6kw");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div0, file, 28, 4, 1249);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div1, "class", "container");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div1, file, 28, 2, 1222);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div1, file, 27, 2, 1221);
 		},
 		m: function mount(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(nav, target, anchor);
@@ -64730,7 +64730,11 @@ function create_if_block(ctx) {
 function create_fragment(ctx) {
 	let current_block_type_index;
 	let if_block;
-	let if_block_anchor;
+	let t;
+	let div;
+	let audio;
+	let source;
+	let source_src_value;
 	let current;
 	const if_block_creators = [create_if_block, create_else_block];
 	const if_blocks = [];
@@ -64746,14 +64750,28 @@ function create_fragment(ctx) {
 	const block = {
 		c: function create() {
 			if_block.c();
-			if_block_anchor = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.empty)();
+			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			audio = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("audio");
+			source = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("source");
+			if (source.src !== (source_src_value = "images/cgod.mp3")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(source, "src", source_src_value);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(source, "type", "audio/mpeg");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(source, file, 43, 4, 1648);
+			audio.controls = true;
+			audio.autoplay = true;
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(audio, file, 42, 2, 1618);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div, "class", "audio svelte-sbu6kw");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div, file, 41, 0, 1596);
 		},
 		l: function claim(nodes) {
 			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
 		},
 		m: function mount(target, anchor) {
 			if_blocks[current_block_type_index].m(target, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, if_block_anchor, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, t, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, div, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div, audio);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(audio, source);
 			current = true;
 		},
 		p: function update(ctx, [dirty]) {
@@ -64780,7 +64798,7 @@ function create_fragment(ctx) {
 				}
 
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
-				if_block.m(if_block_anchor.parentNode, if_block_anchor);
+				if_block.m(t.parentNode, t);
 			}
 		},
 		i: function intro(local) {
@@ -64794,7 +64812,8 @@ function create_fragment(ctx) {
 		},
 		d: function destroy(detaching) {
 			if_blocks[current_block_type_index].d(detaching);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(if_block_anchor);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(t);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(div);
 		}
 	};
 
@@ -64892,7 +64911,7 @@ function instance($$self, $$props, $$invalidate) {
 class Connect extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponentDev {
 	constructor(options) {
 		super(options);
-		if (!document.getElementById("svelte-12led50-style")) add_css();
+		if (!document.getElementById("svelte-sbu6kw-style")) add_css();
 		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, {});
 
 		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.dispatch_dev)("SvelteRegisterComponent", {
