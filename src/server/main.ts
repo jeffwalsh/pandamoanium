@@ -216,7 +216,7 @@ io.on("connection", (_socket) => {
       const message: Message = {
         player: player,
         text: info.text,
-        isCorrect: info.text === game.currentWord,
+        isCorrect: info.text.toLowerCase() === game.currentWord.toLowerCase(),
       };
       io.emit("message", { message: message, roomCode: info.roomCode });
 
