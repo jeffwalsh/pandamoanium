@@ -79,8 +79,6 @@
     margin: 0 auto;
   }
 
-
-
   .container {
     max-width: 1000px;
     margin: 0 auto;
@@ -186,25 +184,29 @@
     font-size: 1.5rem;
     font-weight: 700;
     color: E5E6EA;
-}
+  }
 
-.text-animation {
-	 background: linear-gradient(to right,#FFF 20%,#FF0 40%,#FF0 60%,#FFF 80%);
-	 background-size: 200% auto;
-	 color: #000;
-	 background-clip: text;
-	 text-fill-color: transparent;
-	 -webkit-background-clip: text;
-	 -webkit-text-fill-color: transparent;
-	 animation: shine 1s linear infinite;
-}
- @keyframes shine {
-	 to {
-		 background-position: 200% center;
-	}
-}
- 
-
+  .text-animation {
+    background: linear-gradient(
+      to right,
+      #fff 20%,
+      #ff0 40%,
+      #ff0 60%,
+      #fff 80%
+    );
+    background-size: 200% auto;
+    color: #000;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 1s linear infinite;
+  }
+  @keyframes shine {
+    to {
+      background-position: 200% center;
+    }
+  }
 
   /* Buttons */
   .btn-primary {
@@ -263,27 +265,22 @@
 
   .justify-between {
     justify-content: space-between;
-}
-.content-center {
+  }
+  .content-center {
     align-content: center;
-}
+  }
 
-.nav {
+  .nav {
     font-size: 1rem;
     font-weight: 700;
     padding: 10px 0px;
-}
+  }
 
-.nav svg {
+  .nav svg {
     max-width: 170px;
-}
-
-
-
-  // Start Media Query
+  }
 
   @media (max-width: 600px) {
-
     .grid-cols-4.panda-container {
       grid-template-columns: repeat(1, minmax(0, 1fr));
       margin: 0 auto;
@@ -291,12 +288,12 @@
     }
 
     .leaderboard.cursor-pointer {
-    padding-top: 7px;
-      }
+      padding-top: 7px;
+    }
 
-      .nav {
-          padding: 10px 20px;
-      }
+    .nav {
+      padding: 10px 20px;
+    }
 
     .container {
       text-align: center;
@@ -315,10 +312,5 @@
     .panda-pp img.panda {
       max-width: 100%;
     }
-
-
   }
-
-  // End Media QUery
-
 </style>
