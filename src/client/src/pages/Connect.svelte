@@ -1,7 +1,7 @@
 <script lang="ts">
   import { push } from "svelte-spa-router";
   import Logo from "../components/Logo.svelte";
-import Nav from "../components/Nav.svelte";
+  import Nav from "../components/Nav.svelte";
 
   import { currentAddress } from "../stores/currentAddress";
 
@@ -10,18 +10,12 @@ import Nav from "../components/Nav.svelte";
     currentAddress.set(res.publicKey);
     await push("/selectPanda");
   }
-
-  async function leaderboard() {
-    await push("/leaderboard");
-  }
 </script>
 
 {#if $currentAddress}
   <span class="hidden"> Address: {$currentAddress}</span>
 {:else}
-
-
-  <Nav/>
+  <Nav />
 
   <div class="container">
     <div class="center-content flex-col">
@@ -33,10 +27,6 @@ import Nav from "../components/Nav.svelte";
       <button class="btn btn-primary" on:click={async () => await connect()}
         >Connect</button
       >
-
-      <button class="btn btn-outline" on:click={async () => await leaderboard()}
-        >Leaderboard
-      </button>
     </div>
   </div>
 {/if}
