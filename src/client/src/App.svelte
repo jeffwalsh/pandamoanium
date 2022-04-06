@@ -79,31 +79,7 @@
     margin: 0 auto;
   }
 
-  @media (max-width: 600px) {
-    .grid-cols-4.panda-container {
-      grid-template-columns: repeat(1, minmax(0, 1fr));
-      margin: 0 auto;
-      padding: 40px;
-    }
 
-    .container {
-      text-align: center;
-    }
-
-    .container h2 {
-      width: 100%;
-      margin-bottom: 4px;
-    }
-
-    .panda-pp {
-      max-width: 300px;
-      margin: 0 auto;
-    }
-
-    .panda-pp img.panda {
-      max-width: 100%;
-    }
-  }
 
   .container {
     max-width: 1000px;
@@ -301,4 +277,48 @@
 .nav svg {
     max-width: 170px;
 }
+
+
+
+  // Start Media Query
+
+  @media (max-width: 600px) {
+
+    .grid-cols-4.panda-container {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      margin: 0 auto;
+      padding: 40px;
+    }
+
+    .leaderboard.cursor-pointer {
+    padding-top: 7px;
+      }
+
+      .nav {
+          padding: 10px 20px;
+      }
+
+    .container {
+      text-align: center;
+    }
+
+    .container h2 {
+      width: 100%;
+      margin-bottom: 4px;
+    }
+
+    .panda-pp {
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    .panda-pp img.panda {
+      max-width: 100%;
+    }
+
+
+  }
+
+  // End Media QUery
+
 </style>

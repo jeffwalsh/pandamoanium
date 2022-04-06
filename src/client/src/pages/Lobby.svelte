@@ -61,7 +61,7 @@ import Nav from "../components/Nav.svelte";
     </h3>
   </div>
 
-  <div class="flex start-game">
+  <div class="start-game">
     {#if isHost}
       <button class="btn btn-primary" on:click={startGame}>Start Game</button>
     {/if}
