@@ -120,7 +120,7 @@ export const choices = [
   "heart and soul",
   "discord cord cord",
   "19 eth",
-  "$5 a weeek",
+  "$5 a week",
   "up only",
   "wen nft dividend",
   "zeeple dome",

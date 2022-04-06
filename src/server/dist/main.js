@@ -57,7 +57,10 @@ app.get("/selectWord", (req, res) => {
         return;
     game.currentWord = word;
     games.set(roomCode, game);
-    io.emit("wordSelected", { roomCode: roomCode });
+    io.emit("wordSelected", {
+        roomCode: roomCode,
+        currentWord: word,
+    });
     const myTimer = setInterval(() => {
         const timer = timers.get(roomCode);
         const v = (timer.n -
