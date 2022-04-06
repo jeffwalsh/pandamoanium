@@ -9,7 +9,6 @@
   import { currentPanda } from "../stores/currentPanda";
   import { push } from "svelte-spa-router";
   import Nav from "../components/Nav.svelte";
-  import App from "../App.svelte";
   import { randomLawyerCrow } from "../utils/randomLawyerCrow";
 
   let messages: Message[] = [];
@@ -196,6 +195,18 @@
     canvas.addEventListener("mousedown", ev_canvas, false);
     canvas.addEventListener("mousemove", ev_canvas, false);
     canvas.addEventListener("mouseup", ev_canvas, false);
+    canvas.addEventListener(
+      "touchmove",
+      function (e) {
+        var touch = e.touches[0];
+        var mouseEvent = new MouseEvent("mouseup", {
+          clientX: touch.clientX,
+          clientY: touch.clientY,
+        });
+        canvas.dispatchEvent(mouseEvent);
+      },
+      false
+    );
   }
 
   // This painting tool works like a drawing pencil which tracks the mouse
