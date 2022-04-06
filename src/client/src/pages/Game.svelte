@@ -10,6 +10,7 @@
   import { push } from "svelte-spa-router";
   import Nav from "../components/Nav.svelte";
   import { randomLawyerCrow } from "../utils/randomLawyerCrow";
+  import { posix } from "path";
 
   let messages: Message[] = [];
   let currentMessage: string = "";
@@ -277,10 +278,11 @@
 
     // This is called when you start holding down the mouse button.
     // This starts the pencil drawing.
-    this.mousedown = function (ev) {
+    this.mousedown = function (evt) {
       if (activePlayer.pandaName === $currentPanda.name && active) {
         context.beginPath();
-        context.moveTo(ev._x, ev._y);
+        const pos = getMousePos(canvas, evt);
+        context.moveTo(pos.x, pos.y);
         tool.started = true;
       }
     };
@@ -288,23 +290,32 @@
     // This function is called every time you move the mouse. Obviously, it only
     // draws if the tool.started state is set to true (when you are holding down
     // the mouse button).
-    this.mousemove = function (ev) {
+    this.mousemove = function (evt) {
       if (
         tool.started &&
         activePlayer.pandaName === $currentPanda.name &&
         active
       ) {
-        context.lineTo(ev._x, ev._y);
+        const pos = getMousePos(canvas, evt);
+        context.lineTo(pos.x, pos.y);
         context.stroke();
 
         $socket.emit("sendDraw", {
-          x: ev._x,
-          y: ev._y,
+          x: pos.x,
+          y: pos.y,
           color: context.strokeStyle,
           roomCode: $currentGame.roomCode,
         });
       }
     };
+
+    function getMousePos(canvas, evt) {
+      var rect = canvas.getBoundingClientRect();
+      return {
+        x: evt.clientX - rect.left,
+        y: evt.clientY - rect.top,
+      };
+    }
 
     // This is called when you release the mouse button.
     this.mouseup = function (ev) {
@@ -450,7 +461,7 @@
       </div>
 
       <canvas
-        style="background:#333333;touch-action:none;width:100%"
+        style="background:#333333;touch-action:none;"
         id="imageView"
         width="600"
         height="400"

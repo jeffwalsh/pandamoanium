@@ -50489,6 +50489,435 @@ function queryKey(uri, query) {
 
 /***/ }),
 
+/***/ "./node_modules/path-browserify/index.js":
+/*!***********************************************!*\
+  !*** ./node_modules/path-browserify/index.js ***!
+  \***********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+/* provided dependency */ var process = __webpack_require__(/*! ./node_modules/process/browser.js */ "./node_modules/process/browser.js");
+
+function assertPath(path) {
+  if (typeof path !== "string") {
+    throw new TypeError("Path must be a string. Received " + JSON.stringify(path));
+  }
+}
+function normalizeStringPosix(path, allowAboveRoot) {
+  var res = "";
+  var lastSegmentLength = 0;
+  var lastSlash = -1;
+  var dots = 0;
+  var code;
+  for (var i = 0; i <= path.length; ++i) {
+    if (i < path.length)
+      code = path.charCodeAt(i);
+    else if (code === 47)
+      break;
+    else
+      code = 47;
+    if (code === 47) {
+      if (lastSlash === i - 1 || dots === 1) {
+      } else if (lastSlash !== i - 1 && dots === 2) {
+        if (res.length < 2 || lastSegmentLength !== 2 || res.charCodeAt(res.length - 1) !== 46 || res.charCodeAt(res.length - 2) !== 46) {
+          if (res.length > 2) {
+            var lastSlashIndex = res.lastIndexOf("/");
+            if (lastSlashIndex !== res.length - 1) {
+              if (lastSlashIndex === -1) {
+                res = "";
+                lastSegmentLength = 0;
+              } else {
+                res = res.slice(0, lastSlashIndex);
+                lastSegmentLength = res.length - 1 - res.lastIndexOf("/");
+              }
+              lastSlash = i;
+              dots = 0;
+              continue;
+            }
+          } else if (res.length === 2 || res.length === 1) {
+            res = "";
+            lastSegmentLength = 0;
+            lastSlash = i;
+            dots = 0;
+            continue;
+          }
+        }
+        if (allowAboveRoot) {
+          if (res.length > 0)
+            res += "/..";
+          else
+            res = "..";
+          lastSegmentLength = 2;
+        }
+      } else {
+        if (res.length > 0)
+          res += "/" + path.slice(lastSlash + 1, i);
+        else
+          res = path.slice(lastSlash + 1, i);
+        lastSegmentLength = i - lastSlash - 1;
+      }
+      lastSlash = i;
+      dots = 0;
+    } else if (code === 46 && dots !== -1) {
+      ++dots;
+    } else {
+      dots = -1;
+    }
+  }
+  return res;
+}
+function _format(sep, pathObject) {
+  var dir = pathObject.dir || pathObject.root;
+  var base = pathObject.base || (pathObject.name || "") + (pathObject.ext || "");
+  if (!dir) {
+    return base;
+  }
+  if (dir === pathObject.root) {
+    return dir + base;
+  }
+  return dir + sep + base;
+}
+var posix = {
+  resolve: function resolve() {
+    var resolvedPath = "";
+    var resolvedAbsolute = false;
+    var cwd;
+    for (var i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
+      var path;
+      if (i >= 0)
+        path = arguments[i];
+      else {
+        if (cwd === void 0)
+          cwd = process.cwd();
+        path = cwd;
+      }
+      assertPath(path);
+      if (path.length === 0) {
+        continue;
+      }
+      resolvedPath = path + "/" + resolvedPath;
+      resolvedAbsolute = path.charCodeAt(0) === 47;
+    }
+    resolvedPath = normalizeStringPosix(resolvedPath, !resolvedAbsolute);
+    if (resolvedAbsolute) {
+      if (resolvedPath.length > 0)
+        return "/" + resolvedPath;
+      else
+        return "/";
+    } else if (resolvedPath.length > 0) {
+      return resolvedPath;
+    } else {
+      return ".";
+    }
+  },
+  normalize: function normalize(path) {
+    assertPath(path);
+    if (path.length === 0)
+      return ".";
+    var isAbsolute2 = path.charCodeAt(0) === 47;
+    var trailingSeparator = path.charCodeAt(path.length - 1) === 47;
+    path = normalizeStringPosix(path, !isAbsolute2);
+    if (path.length === 0 && !isAbsolute2)
+      path = ".";
+    if (path.length > 0 && trailingSeparator)
+      path += "/";
+    if (isAbsolute2)
+      return "/" + path;
+    return path;
+  },
+  isAbsolute: function isAbsolute(path) {
+    assertPath(path);
+    return path.length > 0 && path.charCodeAt(0) === 47;
+  },
+  join: function join() {
+    if (arguments.length === 0)
+      return ".";
+    var joined;
+    for (var i = 0; i < arguments.length; ++i) {
+      var arg = arguments[i];
+      assertPath(arg);
+      if (arg.length > 0) {
+        if (joined === void 0)
+          joined = arg;
+        else
+          joined += "/" + arg;
+      }
+    }
+    if (joined === void 0)
+      return ".";
+    return posix.normalize(joined);
+  },
+  relative: function relative(from, to) {
+    assertPath(from);
+    assertPath(to);
+    if (from === to)
+      return "";
+    from = posix.resolve(from);
+    to = posix.resolve(to);
+    if (from === to)
+      return "";
+    var fromStart = 1;
+    for (; fromStart < from.length; ++fromStart) {
+      if (from.charCodeAt(fromStart) !== 47)
+        break;
+    }
+    var fromEnd = from.length;
+    var fromLen = fromEnd - fromStart;
+    var toStart = 1;
+    for (; toStart < to.length; ++toStart) {
+      if (to.charCodeAt(toStart) !== 47)
+        break;
+    }
+    var toEnd = to.length;
+    var toLen = toEnd - toStart;
+    var length = fromLen < toLen ? fromLen : toLen;
+    var lastCommonSep = -1;
+    var i = 0;
+    for (; i <= length; ++i) {
+      if (i === length) {
+        if (toLen > length) {
+          if (to.charCodeAt(toStart + i) === 47) {
+            return to.slice(toStart + i + 1);
+          } else if (i === 0) {
+            return to.slice(toStart + i);
+          }
+        } else if (fromLen > length) {
+          if (from.charCodeAt(fromStart + i) === 47) {
+            lastCommonSep = i;
+          } else if (i === 0) {
+            lastCommonSep = 0;
+          }
+        }
+        break;
+      }
+      var fromCode = from.charCodeAt(fromStart + i);
+      var toCode = to.charCodeAt(toStart + i);
+      if (fromCode !== toCode)
+        break;
+      else if (fromCode === 47)
+        lastCommonSep = i;
+    }
+    var out = "";
+    for (i = fromStart + lastCommonSep + 1; i <= fromEnd; ++i) {
+      if (i === fromEnd || from.charCodeAt(i) === 47) {
+        if (out.length === 0)
+          out += "..";
+        else
+          out += "/..";
+      }
+    }
+    if (out.length > 0)
+      return out + to.slice(toStart + lastCommonSep);
+    else {
+      toStart += lastCommonSep;
+      if (to.charCodeAt(toStart) === 47)
+        ++toStart;
+      return to.slice(toStart);
+    }
+  },
+  _makeLong: function _makeLong(path) {
+    return path;
+  },
+  dirname: function dirname(path) {
+    assertPath(path);
+    if (path.length === 0)
+      return ".";
+    var code = path.charCodeAt(0);
+    var hasRoot = code === 47;
+    var end = -1;
+    var matchedSlash = true;
+    for (var i = path.length - 1; i >= 1; --i) {
+      code = path.charCodeAt(i);
+      if (code === 47) {
+        if (!matchedSlash) {
+          end = i;
+          break;
+        }
+      } else {
+        matchedSlash = false;
+      }
+    }
+    if (end === -1)
+      return hasRoot ? "/" : ".";
+    if (hasRoot && end === 1)
+      return "//";
+    return path.slice(0, end);
+  },
+  basename: function basename(path, ext) {
+    if (ext !== void 0 && typeof ext !== "string")
+      throw new TypeError('"ext" argument must be a string');
+    assertPath(path);
+    var start = 0;
+    var end = -1;
+    var matchedSlash = true;
+    var i;
+    if (ext !== void 0 && ext.length > 0 && ext.length <= path.length) {
+      if (ext.length === path.length && ext === path)
+        return "";
+      var extIdx = ext.length - 1;
+      var firstNonSlashEnd = -1;
+      for (i = path.length - 1; i >= 0; --i) {
+        var code = path.charCodeAt(i);
+        if (code === 47) {
+          if (!matchedSlash) {
+            start = i + 1;
+            break;
+          }
+        } else {
+          if (firstNonSlashEnd === -1) {
+            matchedSlash = false;
+            firstNonSlashEnd = i + 1;
+          }
+          if (extIdx >= 0) {
+            if (code === ext.charCodeAt(extIdx)) {
+              if (--extIdx === -1) {
+                end = i;
+              }
+            } else {
+              extIdx = -1;
+              end = firstNonSlashEnd;
+            }
+          }
+        }
+      }
+      if (start === end)
+        end = firstNonSlashEnd;
+      else if (end === -1)
+        end = path.length;
+      return path.slice(start, end);
+    } else {
+      for (i = path.length - 1; i >= 0; --i) {
+        if (path.charCodeAt(i) === 47) {
+          if (!matchedSlash) {
+            start = i + 1;
+            break;
+          }
+        } else if (end === -1) {
+          matchedSlash = false;
+          end = i + 1;
+        }
+      }
+      if (end === -1)
+        return "";
+      return path.slice(start, end);
+    }
+  },
+  extname: function extname(path) {
+    assertPath(path);
+    var startDot = -1;
+    var startPart = 0;
+    var end = -1;
+    var matchedSlash = true;
+    var preDotState = 0;
+    for (var i = path.length - 1; i >= 0; --i) {
+      var code = path.charCodeAt(i);
+      if (code === 47) {
+        if (!matchedSlash) {
+          startPart = i + 1;
+          break;
+        }
+        continue;
+      }
+      if (end === -1) {
+        matchedSlash = false;
+        end = i + 1;
+      }
+      if (code === 46) {
+        if (startDot === -1)
+          startDot = i;
+        else if (preDotState !== 1)
+          preDotState = 1;
+      } else if (startDot !== -1) {
+        preDotState = -1;
+      }
+    }
+    if (startDot === -1 || end === -1 || preDotState === 0 || preDotState === 1 && startDot === end - 1 && startDot === startPart + 1) {
+      return "";
+    }
+    return path.slice(startDot, end);
+  },
+  format: function format(pathObject) {
+    if (pathObject === null || typeof pathObject !== "object") {
+      throw new TypeError('The "pathObject" argument must be of type Object. Received type ' + typeof pathObject);
+    }
+    return _format("/", pathObject);
+  },
+  parse: function parse(path) {
+    assertPath(path);
+    var ret = { root: "", dir: "", base: "", ext: "", name: "" };
+    if (path.length === 0)
+      return ret;
+    var code = path.charCodeAt(0);
+    var isAbsolute2 = code === 47;
+    var start;
+    if (isAbsolute2) {
+      ret.root = "/";
+      start = 1;
+    } else {
+      start = 0;
+    }
+    var startDot = -1;
+    var startPart = 0;
+    var end = -1;
+    var matchedSlash = true;
+    var i = path.length - 1;
+    var preDotState = 0;
+    for (; i >= start; --i) {
+      code = path.charCodeAt(i);
+      if (code === 47) {
+        if (!matchedSlash) {
+          startPart = i + 1;
+          break;
+        }
+        continue;
+      }
+      if (end === -1) {
+        matchedSlash = false;
+        end = i + 1;
+      }
+      if (code === 46) {
+        if (startDot === -1)
+          startDot = i;
+        else if (preDotState !== 1)
+          preDotState = 1;
+      } else if (startDot !== -1) {
+        preDotState = -1;
+      }
+    }
+    if (startDot === -1 || end === -1 || preDotState === 0 || preDotState === 1 && startDot === end - 1 && startDot === startPart + 1) {
+      if (end !== -1) {
+        if (startPart === 0 && isAbsolute2)
+          ret.base = ret.name = path.slice(1, end);
+        else
+          ret.base = ret.name = path.slice(startPart, end);
+      }
+    } else {
+      if (startPart === 0 && isAbsolute2) {
+        ret.name = path.slice(1, startDot);
+        ret.base = path.slice(1, end);
+      } else {
+        ret.name = path.slice(startPart, startDot);
+        ret.base = path.slice(startPart, end);
+      }
+      ret.ext = path.slice(startDot, end);
+    }
+    if (startPart > 0)
+      ret.dir = path.slice(0, startPart - 1);
+    else if (isAbsolute2)
+      ret.dir = "/";
+    return ret;
+  },
+  sep: "/",
+  delimiter: ":",
+  win32: null,
+  posix: null
+};
+posix.posix = posix;
+module.exports = posix;
+
+
+/***/ }),
+
 /***/ "./node_modules/process/browser.js":
 /*!*****************************************!*\
   !*** ./node_modules/process/browser.js ***!
@@ -64952,8 +65381,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_spa_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! svelte-spa-router */ "./node_modules/svelte-spa-router/Router.svelte");
 /* harmony import */ var _components_Nav_svelte__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/Nav.svelte */ "./src/components/Nav.svelte");
 /* harmony import */ var _utils_randomLawyerCrow__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../utils/randomLawyerCrow */ "./src/utils/randomLawyerCrow.ts");
-/* harmony import */ var _home_jeff_code_pandamoanium_src_client_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
-/* harmony import */ var _home_jeff_code_pandamoanium_src_client_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! path */ "./node_modules/path-browserify/index.js");
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _home_jeff_code_pandamoanium_src_client_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
+/* harmony import */ var _home_jeff_code_pandamoanium_src_client_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* provided dependency */ var console = __webpack_require__(/*! ./node_modules/console-browserify/index.js */ "./node_modules/console-browserify/index.js");
 /* src/pages/Game.svelte generated by Svelte v3.38.2 */
@@ -64969,12 +65400,13 @@ const { document: document_1 } = svelte_internal__WEBPACK_IMPORTED_MODULE_0__.gl
 
 
 
+
 const file = "src/pages/Game.svelte";
 
 function add_css() {
 	var style = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("style");
 	style.id = "svelte-j6apr1-style";
-	style.textContent = ".green.svelte-j6apr1.svelte-j6apr1{color:green}.red.svelte-j6apr1.svelte-j6apr1{color:red}.container.game-container.svelte-j6apr1.svelte-j6apr1{padding:0;background:#333;box-sizing:border-box;-webkit-backdrop-filter:blur(15px);backdrop-filter:blur(15px);min-height:480px;border-radius:5px;margin-bottom:10px}.game-canvas-left.svelte-j6apr1.svelte-j6apr1{padding:10px 19px;position:relative}.choices.svelte-j6apr1.svelte-j6apr1{position:absolute;padding:0px 14px}.choices.svelte-j6apr1 h2.svelte-j6apr1{margin:6px 0px 0px 0px}p.marb-10.svelte-j6apr1.svelte-j6apr1{margin-bottom:11px}p.cursor-pointer.choice.svelte-j6apr1.svelte-j6apr1{font-size:1.2rem;font-weight:600;color:#f8f83b;margin:0px 0px 4px 0px}.chat-right-section.svelte-j6apr1.svelte-j6apr1{background:#000;padding:10px 19px}#chat-box.svelte-j6apr1.svelte-j6apr1{background:black;color:white;border-radius:7px;padding:20px;position:relative;max-height:400px;overflow-y:scroll;height:400px}.chat-input.svelte-j6apr1.svelte-j6apr1{padding:12px 22px;border-radius:0.5rem;background:#211e1ebf;width:100%;margin:29px 0px 0px 0px}h3.svelte-j6apr1.svelte-j6apr1{color:#9da2ad;margin:-28px 0px 8px 0px}.grid.grid-cols-3.svelte-j6apr1.svelte-j6apr1{grid-template-columns:repeat(3, minmax(0, 1fr))}.grid.grid-cols-6.svelte-j6apr1.svelte-j6apr1{grid-template-columns:repeat(6, minmax(0, 1fr))}.col-span-2.svelte-j6apr1.svelte-j6apr1{grid-column:span 2 / span 2}.colors.svelte-j6apr1.svelte-j6apr1{max-width:255px}.color.svelte-j6apr1.svelte-j6apr1{width:30px;height:30px;border-radius:5px}.cwhite.svelte-j6apr1.svelte-j6apr1{background-color:#fff}.cred.svelte-j6apr1.svelte-j6apr1{background-color:#ff0000}.cyellow.svelte-j6apr1.svelte-j6apr1{background-color:#f8f83b}.cteal.svelte-j6apr1.svelte-j6apr1{background-color:#00ffff}.game-finished.svelte-j6apr1.svelte-j6apr1{-webkit-box-ordinal-group:99999;text-align:center;position:absolute;top:20px;margin:0 auto;width:90%;background:#333}.game-finished.svelte-j6apr1 h2.svelte-j6apr1{margin:31px 0px 10px 0px}.game-container.svelte-j6apr1 h2.svelte-j6apr1{font-size:1.5rem}p.score.svelte-j6apr1.svelte-j6apr1{font-size:1rem;font-weight:600;line-height:20px}p.panda-title.svelte-j6apr1.svelte-j6apr1{font-size:0.83rem;font-weight:500;margin:8px 0px 0px 0px}@media(max-width: 800px){.grid.grid-cols-6.svelte-j6apr1.svelte-j6apr1{grid-template-columns:repeat(4, minmax(0, 1fr))}}@media(max-width: 600px){h3.svelte-j6apr1.svelte-j6apr1{color:#9da2ad;margin:0px}.grid.grid-cols-3.svelte-j6apr1.svelte-j6apr1{grid-template-columns:repeat(1, minmax(0, 1fr))}.col-span-2.svelte-j6apr1.svelte-j6apr1{grid-column:span 1 / span 1}}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiR2FtZS5zdmVsdGUiLCJtYXBwaW5ncyI6IjRqRkFvckJBIiwibmFtZXMiOltdLCJzb3VyY2VzIjpbIkdhbWUuc3ZlbHRlIl19 */";
+	style.textContent = ".green.svelte-j6apr1.svelte-j6apr1{color:green}.red.svelte-j6apr1.svelte-j6apr1{color:red}.container.game-container.svelte-j6apr1.svelte-j6apr1{padding:0;background:#333;box-sizing:border-box;-webkit-backdrop-filter:blur(15px);backdrop-filter:blur(15px);min-height:480px;border-radius:5px;margin-bottom:10px}.game-canvas-left.svelte-j6apr1.svelte-j6apr1{padding:10px 19px;position:relative}.choices.svelte-j6apr1.svelte-j6apr1{position:absolute;padding:0px 14px}.choices.svelte-j6apr1 h2.svelte-j6apr1{margin:6px 0px 0px 0px}p.marb-10.svelte-j6apr1.svelte-j6apr1{margin-bottom:11px}p.cursor-pointer.choice.svelte-j6apr1.svelte-j6apr1{font-size:1.2rem;font-weight:600;color:#f8f83b;margin:0px 0px 4px 0px}.chat-right-section.svelte-j6apr1.svelte-j6apr1{background:#000;padding:10px 19px}#chat-box.svelte-j6apr1.svelte-j6apr1{background:black;color:white;border-radius:7px;padding:20px;position:relative;max-height:400px;overflow-y:scroll;height:400px}.chat-input.svelte-j6apr1.svelte-j6apr1{padding:12px 22px;border-radius:0.5rem;background:#211e1ebf;width:100%;margin:29px 0px 0px 0px}h3.svelte-j6apr1.svelte-j6apr1{color:#9da2ad;margin:-28px 0px 8px 0px}.grid.grid-cols-3.svelte-j6apr1.svelte-j6apr1{grid-template-columns:repeat(3, minmax(0, 1fr))}.grid.grid-cols-6.svelte-j6apr1.svelte-j6apr1{grid-template-columns:repeat(6, minmax(0, 1fr))}.col-span-2.svelte-j6apr1.svelte-j6apr1{grid-column:span 2 / span 2}.colors.svelte-j6apr1.svelte-j6apr1{max-width:255px}.color.svelte-j6apr1.svelte-j6apr1{width:30px;height:30px;border-radius:5px}.cwhite.svelte-j6apr1.svelte-j6apr1{background-color:#fff}.cred.svelte-j6apr1.svelte-j6apr1{background-color:#ff0000}.cyellow.svelte-j6apr1.svelte-j6apr1{background-color:#f8f83b}.cteal.svelte-j6apr1.svelte-j6apr1{background-color:#00ffff}.game-finished.svelte-j6apr1.svelte-j6apr1{-webkit-box-ordinal-group:99999;text-align:center;position:absolute;top:20px;margin:0 auto;width:90%;background:#333}.game-finished.svelte-j6apr1 h2.svelte-j6apr1{margin:31px 0px 10px 0px}.game-container.svelte-j6apr1 h2.svelte-j6apr1{font-size:1.5rem}p.score.svelte-j6apr1.svelte-j6apr1{font-size:1rem;font-weight:600;line-height:20px}p.panda-title.svelte-j6apr1.svelte-j6apr1{font-size:0.83rem;font-weight:500;margin:8px 0px 0px 0px}@media(max-width: 800px){.grid.grid-cols-6.svelte-j6apr1.svelte-j6apr1{grid-template-columns:repeat(4, minmax(0, 1fr))}}@media(max-width: 600px){h3.svelte-j6apr1.svelte-j6apr1{color:#9da2ad;margin:0px}.grid.grid-cols-3.svelte-j6apr1.svelte-j6apr1{grid-template-columns:repeat(1, minmax(0, 1fr))}.col-span-2.svelte-j6apr1.svelte-j6apr1{grid-column:span 1 / span 1}}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiR2FtZS5zdmVsdGUiLCJtYXBwaW5ncyI6IjRqRkErckJBIiwibmFtZXMiOltdLCJzb3VyY2VzIjpbIkdhbWUuc3ZlbHRlIl19 */";
 	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(document_1.head, style);
 }
 
@@ -65002,7 +65434,7 @@ function get_each_context_3(ctx, list, i) {
 	return child_ctx;
 }
 
-// (321:4) {#if currentWord}
+// (331:4) {#if currentWord}
 function create_if_block_10(ctx) {
 	let h2;
 	let t;
@@ -65020,7 +65452,7 @@ function create_if_block_10(ctx) {
 			h2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("h2");
 			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Current Word:\n        ");
 			if_block.c();
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h2, file, 321, 6, 10849);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h2, file, 331, 6, 11185);
 		},
 		m: function mount(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, h2, anchor);
@@ -65050,14 +65482,14 @@ function create_if_block_10(ctx) {
 		block,
 		id: create_if_block_10.name,
 		type: "if",
-		source: "(321:4) {#if currentWord}",
+		source: "(331:4) {#if currentWord}",
 		ctx
 	});
 
 	return block;
 }
 
-// (326:8) {:else}
+// (336:8) {:else}
 function create_else_block_1(ctx) {
 	let each_1_anchor;
 	let each_value_3 = /*currentWord*/ ctx[8];
@@ -65118,14 +65550,14 @@ function create_else_block_1(ctx) {
 		block,
 		id: create_else_block_1.name,
 		type: "else",
-		source: "(326:8) {:else}",
+		source: "(336:8) {:else}",
 		ctx
 	});
 
 	return block;
 }
 
-// (324:8) {#if shouldShowWord}
+// (334:8) {#if shouldShowWord}
 function create_if_block_11(ctx) {
 	let t;
 
@@ -65148,14 +65580,14 @@ function create_if_block_11(ctx) {
 		block,
 		id: create_if_block_11.name,
 		type: "if",
-		source: "(324:8) {#if shouldShowWord}",
+		source: "(334:8) {#if shouldShowWord}",
 		ctx
 	});
 
 	return block;
 }
 
-// (330:12) {:else}
+// (340:12) {:else}
 function create_else_block_2(ctx) {
 	let t;
 
@@ -65175,14 +65607,14 @@ function create_else_block_2(ctx) {
 		block,
 		id: create_else_block_2.name,
 		type: "else",
-		source: "(330:12) {:else}",
+		source: "(340:12) {:else}",
 		ctx
 	});
 
 	return block;
 }
 
-// (328:12) {#if letter === " "}
+// (338:12) {#if letter === " "}
 function create_if_block_12(ctx) {
 	let t;
 
@@ -65202,14 +65634,14 @@ function create_if_block_12(ctx) {
 		block,
 		id: create_if_block_12.name,
 		type: "if",
-		source: "(328:12) {#if letter === \\\" \\\"}",
+		source: "(338:12) {#if letter === \\\" \\\"}",
 		ctx
 	});
 
 	return block;
 }
 
-// (327:10) {#each currentWord as letter}
+// (337:10) {#each currentWord as letter}
 function create_each_block_3(ctx) {
 	let if_block_anchor;
 
@@ -65251,14 +65683,14 @@ function create_each_block_3(ctx) {
 		block,
 		id: create_each_block_3.name,
 		type: "each",
-		source: "(327:10) {#each currentWord as letter}",
+		source: "(337:10) {#each currentWord as letter}",
 		ctx
 	});
 
 	return block;
 }
 
-// (347:8) {#if active}
+// (357:8) {#if active}
 function create_if_block_9(ctx) {
 	let t0;
 	let t1;
@@ -65285,14 +65717,14 @@ function create_if_block_9(ctx) {
 		block,
 		id: create_if_block_9.name,
 		type: "if",
-		source: "(347:8) {#if active}",
+		source: "(357:8) {#if active}",
 		ctx
 	});
 
 	return block;
 }
 
-// (350:8) {#if activePlayer && activePlayer.pandaName === $currentPanda.name && choices && choices.length && !active}
+// (360:8) {#if activePlayer && activePlayer.pandaName === $currentPanda.name && choices && choices.length && !active}
 function create_if_block_8(ctx) {
 	let h2;
 	let t1;
@@ -65322,9 +65754,9 @@ function create_if_block_8(ctx) {
 
 			each_1_anchor = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.empty)();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(h2, "class", "svelte-j6apr1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h2, file, 350, 10, 11560);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h2, file, 360, 10, 11896);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(p, "class", "marb-10  svelte-j6apr1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 351, 10, 11587);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 361, 10, 11923);
 		},
 		m: function mount(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, h2, anchor);
@@ -65377,14 +65809,14 @@ function create_if_block_8(ctx) {
 		block,
 		id: create_if_block_8.name,
 		type: "if",
-		source: "(350:8) {#if activePlayer && activePlayer.pandaName === $currentPanda.name && choices && choices.length && !active}",
+		source: "(360:8) {#if activePlayer && activePlayer.pandaName === $currentPanda.name && choices && choices.length && !active}",
 		ctx
 	});
 
 	return block;
 }
 
-// (355:10) {#each choices as choice}
+// (365:10) {#each choices as choice}
 function create_each_block_2(ctx) {
 	let p;
 	let t0_value = /*choice*/ ctx[39] + "";
@@ -65403,7 +65835,7 @@ function create_each_block_2(ctx) {
 			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t0_value);
 			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(p, "class", "cursor-pointer choice svelte-j6apr1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 355, 12, 11752);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 365, 12, 12088);
 		},
 		m: function mount(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, p, anchor);
@@ -65430,14 +65862,14 @@ function create_each_block_2(ctx) {
 		block,
 		id: create_each_block_2.name,
 		type: "each",
-		source: "(355:10) {#each choices as choice}",
+		source: "(365:10) {#each choices as choice}",
 		ctx
 	});
 
 	return block;
 }
 
-// (366:6) {#if $currentGame.finished}
+// (376:6) {#if $currentGame.finished}
 function create_if_block_6(ctx) {
 	let div;
 	let h2;
@@ -65452,9 +65884,9 @@ function create_if_block_6(ctx) {
 			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			if (if_block) if_block.c();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(h2, "class", "svelte-j6apr1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h2, file, 367, 10, 12043);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h2, file, 377, 10, 12379);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div, "class", "game-finished svelte-j6apr1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div, file, 366, 8, 12005);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div, file, 376, 8, 12341);
 		},
 		m: function mount(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, div, anchor);
@@ -65486,14 +65918,14 @@ function create_if_block_6(ctx) {
 		block,
 		id: create_if_block_6.name,
 		type: "if",
-		source: "(366:6) {#if $currentGame.finished}",
+		source: "(376:6) {#if $currentGame.finished}",
 		ctx
 	});
 
 	return block;
 }
 
-// (369:10) {#if isHost}
+// (379:10) {#if isHost}
 function create_if_block_7(ctx) {
 	let button;
 	let mounted;
@@ -65504,7 +65936,7 @@ function create_if_block_7(ctx) {
 			button = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("button");
 			button.textContent = "Play Again?";
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(button, "class", "btn btn-primary");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(button, file, 369, 12, 12105);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(button, file, 379, 12, 12441);
 		},
 		m: function mount(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, button, anchor);
@@ -65526,14 +65958,14 @@ function create_if_block_7(ctx) {
 		block,
 		id: create_if_block_7.name,
 		type: "if",
-		source: "(369:10) {#if isHost}",
+		source: "(379:10) {#if isHost}",
 		ctx
 	});
 
 	return block;
 }
 
-// (378:8) {#if timedOut}
+// (388:8) {#if timedOut}
 function create_if_block_5(ctx) {
 	let p;
 
@@ -65542,7 +65974,7 @@ function create_if_block_5(ctx) {
 			p = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			p.textContent = "Timed out!";
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(p, "class", "timed-out");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 378, 10, 12320);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 388, 10, 12656);
 		},
 		m: function mount(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, p, anchor);
@@ -65556,14 +65988,14 @@ function create_if_block_5(ctx) {
 		block,
 		id: create_if_block_5.name,
 		type: "if",
-		source: "(378:8) {#if timedOut}",
+		source: "(388:8) {#if timedOut}",
 		ctx
 	});
 
 	return block;
 }
 
-// (390:6) {#if activePlayer && activePlayer.pandaName === $currentPanda.name}
+// (400:6) {#if activePlayer && activePlayer.pandaName === $currentPanda.name}
 function create_if_block_4(ctx) {
 	let div4;
 	let div0;
@@ -65587,15 +66019,15 @@ function create_if_block_4(ctx) {
 			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			div3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div0, "class", "cwhite color svelte-j6apr1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div0, file, 393, 10, 12722);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div0, file, 403, 10, 13048);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div1, "class", "cred color svelte-j6apr1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div1, file, 394, 10, 12798);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div1, file, 404, 10, 13124);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div2, "class", "cyellow color svelte-j6apr1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div2, file, 395, 10, 12875);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div2, file, 405, 10, 13201);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div3, "class", "cteal color svelte-j6apr1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div3, file, 396, 10, 12955);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div3, file, 406, 10, 13281);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div4, "class", "colors grid grid-cols-6 auto-rows-max gap-x-5 gap-y-5 w-auto svelte-j6apr1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div4, file, 390, 8, 12618);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div4, file, 400, 8, 12944);
 		},
 		m: function mount(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, div4, anchor);
@@ -65630,14 +66062,14 @@ function create_if_block_4(ctx) {
 		block,
 		id: create_if_block_4.name,
 		type: "if",
-		source: "(390:6) {#if activePlayer && activePlayer.pandaName === $currentPanda.name}",
+		source: "(400:6) {#if activePlayer && activePlayer.pandaName === $currentPanda.name}",
 		ctx
 	});
 
 	return block;
 }
 
-// (405:8) {#if messages}
+// (415:8) {#if messages}
 function create_if_block_2(ctx) {
 	let each_1_anchor;
 	let each_value_1 = /*messages*/ ctx[0];
@@ -65698,14 +66130,14 @@ function create_if_block_2(ctx) {
 		block,
 		id: create_if_block_2.name,
 		type: "if",
-		source: "(405:8) {#if messages}",
+		source: "(415:8) {#if messages}",
 		ctx
 	});
 
 	return block;
 }
 
-// (416:14) {:else}
+// (426:14) {:else}
 function create_else_block(ctx) {
 	let t0_value = /*message*/ ctx[36].player.pandaName + "";
 	let t0;
@@ -65739,14 +66171,14 @@ function create_else_block(ctx) {
 		block,
 		id: create_else_block.name,
 		type: "else",
-		source: "(416:14) {:else}",
+		source: "(426:14) {:else}",
 		ctx
 	});
 
 	return block;
 }
 
-// (414:14) {#if message.isCorrect}
+// (424:14) {#if message.isCorrect}
 function create_if_block_3(ctx) {
 	let t0_value = /*message*/ ctx[36].player.pandaName + "";
 	let t0;
@@ -65774,14 +66206,14 @@ function create_if_block_3(ctx) {
 		block,
 		id: create_if_block_3.name,
 		type: "if",
-		source: "(414:14) {#if message.isCorrect}",
+		source: "(424:14) {#if message.isCorrect}",
 		ctx
 	});
 
 	return block;
 }
 
-// (406:10) {#each messages as message}
+// (416:10) {#each messages as message}
 function create_each_block_1(ctx) {
 	let p;
 	let t;
@@ -65807,7 +66239,7 @@ function create_each_block_1(ctx) {
 				? "red"
 				: "") + " svelte-j6apr1"));
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 406, 12, 13234);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 416, 12, 13560);
 		},
 		m: function mount(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, p, anchor);
@@ -65845,14 +66277,14 @@ function create_each_block_1(ctx) {
 		block,
 		id: create_each_block_1.name,
 		type: "each",
-		source: "(406:10) {#each messages as message}",
+		source: "(416:10) {#each messages as message}",
 		ctx
 	});
 
 	return block;
 }
 
-// (444:4) {#if $currentGame.players}
+// (454:4) {#if $currentGame.players}
 function create_if_block(ctx) {
 	let each_1_anchor;
 	let each_value = /*$currentGame*/ ctx[11].players;
@@ -65913,14 +66345,14 @@ function create_if_block(ctx) {
 		block,
 		id: create_if_block.name,
 		type: "if",
-		source: "(444:4) {#if $currentGame.players}",
+		source: "(454:4) {#if $currentGame.players}",
 		ctx
 	});
 
 	return block;
 }
 
-// (450:10) {#if $currentGame.correctPlayersThisRound.find((p) => p.pandaName === player.pandaName)}
+// (460:10) {#if $currentGame.correctPlayersThisRound.find((p) => p.pandaName === player.pandaName)}
 function create_if_block_1(ctx) {
 	let p;
 
@@ -65928,7 +66360,7 @@ function create_if_block_1(ctx) {
 		c: function create() {
 			p = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			p.textContent = "Correct!";
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 450, 12, 14571);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 460, 12, 14897);
 		},
 		m: function mount(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, p, anchor);
@@ -65942,14 +66374,14 @@ function create_if_block_1(ctx) {
 		block,
 		id: create_if_block_1.name,
 		type: "if",
-		source: "(450:10) {#if $currentGame.correctPlayersThisRound.find((p) => p.pandaName === player.pandaName)}",
+		source: "(460:10) {#if $currentGame.correctPlayersThisRound.find((p) => p.pandaName === player.pandaName)}",
 		ctx
 	});
 
 	return block;
 }
 
-// (445:6) {#each $currentGame.players as player}
+// (455:6) {#each $currentGame.players as player}
 function create_each_block(ctx) {
 	let div;
 	let img;
@@ -65991,14 +66423,14 @@ function create_each_block(ctx) {
 			t6 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			if (img.src !== (img_src_value = /*player*/ ctx[33].thumbnail)) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(img, "src", img_src_value);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(img, "class", "panda");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(img, file, 446, 10, 14288);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(img, file, 456, 10, 14614);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(p0, "class", "grey5 panda-title svelte-j6apr1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p0, file, 447, 10, 14343);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(span, file, 448, 33, 14428);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p0, file, 457, 10, 14669);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(span, file, 458, 33, 14754);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(p1, "class", "score svelte-j6apr1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p1, file, 448, 10, 14405);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p1, file, 458, 10, 14731);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div, "class", "panda-pp rounded-md");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div, file, 445, 8, 14244);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div, file, 455, 8, 14570);
 		},
 		m: function mount(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, div, anchor);
@@ -66049,7 +66481,7 @@ function create_each_block(ctx) {
 		block,
 		id: create_each_block.name,
 		type: "each",
-		source: "(445:6) {#each $currentGame.players as player}",
+		source: "(455:6) {#each $currentGame.players as player}",
 		ctx
 	});
 
@@ -66146,46 +66578,45 @@ function create_fragment(ctx) {
 			div9 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			if (if_block7) if_block7.c();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(h2, "class", "grey6");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h2, file, 316, 4, 10682);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h2, file, 326, 4, 11018);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(span, "class", "text-animation");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(span, file, 318, 17, 10748);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(span, file, 328, 17, 11084);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(h3, "class", "svelte-j6apr1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h3, file, 317, 4, 10726);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h3, file, 327, 4, 11062);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div0, "class", "flex flex-col game-lobby-head");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div0, file, 315, 2, 10634);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div0, file, 325, 2, 10970);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div1, "class", "container");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div1, file, 314, 0, 10608);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div1, file, 324, 0, 10944);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div2, "class", "choices svelte-j6apr1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div2, file, 345, 6, 11352);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div2, file, 355, 6, 11688);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div3, "class", "game-finished svelte-j6apr1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div3, file, 376, 6, 12259);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div3, file, 386, 6, 12595);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(canvas_1, "background", "#333333");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(canvas_1, "touch-action", "none");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(canvas_1, "width", "100%");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(canvas_1, "id", "imageView");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(canvas_1, "width", "600");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(canvas_1, "height", "400");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(canvas_1, file, 382, 6, 12390);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(canvas_1, file, 392, 6, 12726);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div4, "class", "game-canvas-left col-span-2 svelte-j6apr1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div4, file, 344, 4, 11304);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div4, file, 354, 4, 11640);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div5, "id", "chat-box");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div5, "class", "svelte-j6apr1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div5, file, 403, 6, 13141);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div5, file, 413, 6, 13467);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(input, "placeholder", "Type Here Noob");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(input, "class", "chat-input svelte-j6apr1");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(input, "type", "text");
 			input.disabled = input_disabled_value = /*activePlayer*/ ctx[2] && /*activePlayer*/ ctx[2].pandaName === /*$currentPanda*/ ctx[10].name || !/*active*/ ctx[4];
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(input, file, 423, 6, 13690);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(input, file, 433, 6, 14016);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div6, "class", "chat-right-section svelte-j6apr1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div6, file, 402, 4, 13102);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div6, file, 412, 4, 13428);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div7, "class", "grid grid-cols-3 svelte-j6apr1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div7, file, 342, 2, 11236);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div7, file, 352, 2, 11572);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div8, "class", "container game-container svelte-j6apr1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div8, file, 341, 0, 11195);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div8, file, 351, 0, 11531);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div9, "class", "grid grid-cols-6 auto-rows-max gap-x-5 gap-y-5 w-auto panda-container svelte-j6apr1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div9, file, 440, 2, 14069);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div9, file, 450, 2, 14395);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div10, "class", "container");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div10, file, 439, 0, 14043);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div10, file, 449, 0, 14369);
 		},
 		l: function claim(nodes) {
 			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -66733,10 +67164,11 @@ function instance($$self, $$props, $$invalidate) {
 
 		// This is called when you start holding down the mouse button.
 		// This starts the pencil drawing.
-		this.mousedown = function (ev) {
+		this.mousedown = function (evt) {
 			if (activePlayer.pandaName === $currentPanda.name && active) {
 				context.beginPath();
-				context.moveTo(ev._x, ev._y);
+				const pos = getMousePos(canvas, evt);
+				context.moveTo(pos.x, pos.y);
 				tool.started = true;
 			}
 		};
@@ -66744,19 +67176,29 @@ function instance($$self, $$props, $$invalidate) {
 		// This function is called every time you move the mouse. Obviously, it only
 		// draws if the tool.started state is set to true (when you are holding down
 		// the mouse button).
-		this.mousemove = function (ev) {
+		this.mousemove = function (evt) {
 			if (tool.started && activePlayer.pandaName === $currentPanda.name && active) {
-				context.lineTo(ev._x, ev._y);
+				const pos = getMousePos(canvas, evt);
+				context.lineTo(pos.x, pos.y);
 				context.stroke();
 
 				$socket.emit("sendDraw", {
-					x: ev._x,
-					y: ev._y,
+					x: pos.x,
+					y: pos.y,
 					color: context.strokeStyle,
 					roomCode: $currentGame.roomCode
 				});
 			}
 		};
+
+		function getMousePos(canvas, evt) {
+			var rect = canvas.getBoundingClientRect();
+
+			return {
+				x: evt.clientX - rect.left,
+				y: evt.clientY - rect.top
+			};
+		}
 
 		// This is called when you release the mouse button.
 		this.mouseup = function (ev) {
@@ -66848,6 +67290,7 @@ function instance($$self, $$props, $$invalidate) {
 		push: svelte_spa_router__WEBPACK_IMPORTED_MODULE_7__.push,
 		Nav: _components_Nav_svelte__WEBPACK_IMPORTED_MODULE_8__["default"],
 		randomLawyerCrow: _utils_randomLawyerCrow__WEBPACK_IMPORTED_MODULE_9__.randomLawyerCrow,
+		posix: path__WEBPACK_IMPORTED_MODULE_10__.posix,
 		messages,
 		currentMessage,
 		activePlayer,
