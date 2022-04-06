@@ -3,6 +3,7 @@
 
   import { onMount } from "svelte";
   import { push } from "svelte-spa-router";
+import Nav from "../components/Nav.svelte";
   import type { Player } from "../domain/game";
   let sorted: Player[];
 
@@ -14,6 +15,8 @@
     sorted = players.data.sort((a, b) => b.score - a.score);
   });
 </script>
+
+<Nav/>
 
 <div class="container">
 
