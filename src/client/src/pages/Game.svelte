@@ -326,6 +326,13 @@
 
     <canvas style="background:#333333;" id="imageView" width="600" height="400" />
 
+    <div class="colors grid grid-cols-6 auto-rows-max gap-x-5 gap-y-5 w-auto">
+        <div class="cwhite color active"> </div>
+        <div class="cred color"> </div>
+        <div class="cyellow color"> </div>
+        <div class="cteal color"> </div>
+    </div>
+
   </div>
 
   <!-- chat box RIght Setion -->
@@ -474,6 +481,38 @@ p.marb-10 {
     grid-column: span 2/span 2;
 }
 
+.colors {
+  max-width: 255px;
+}
+
+.color {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.cwhite {
+  background-color: #fff;
+}
+
+.cred {
+  background-color: #FF0000;
+}
+
+.cyellow {
+  background-color: #F8F83B;
+}
+
+.cteal {
+  background-color: #00FFFF;
+}
+
+.color.active {
+    border: 4px solid #000;
+}
+
+
+
 
 .game-finished {
     -webkit-box-ordinal-group: 99999;
@@ -505,6 +544,8 @@ p.panda-title {
     font-weight: 500;
     margin: 8px 0px 0px 0px;
 }
+
+
 
 @media (max-width:800px) {
   .grid.grid-cols-6 {
