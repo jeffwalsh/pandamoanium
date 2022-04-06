@@ -27,6 +27,9 @@
       await push("/");
       return;
     }
+
+    const canvas = document.getElementById("imageView");
+    canvas.height = canvas.width * 1.1;
     if (
       $currentGame.players.find(
         (p) => p.pandaName === $currentPanda.name && p.isHost
@@ -449,10 +452,8 @@
       </div>
 
       <canvas
-        style="background:#333333;touch-action:none;"
+        style="background:#333333;touch-action:none;width:100%"
         id="imageView"
-        width="600"
-        height="400"
       />
 
       {#if activePlayer && activePlayer.pandaName === $currentPanda.name}
