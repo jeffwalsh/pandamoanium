@@ -172,6 +172,7 @@
 
     // Pencil tool instance.
     tool = new tool_pencil();
+    
 
     // Attach the mousedown, mousemove and mouseup event listeners.
     canvas.addEventListener("mousedown", ev_canvas, false);
