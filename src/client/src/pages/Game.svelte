@@ -7,9 +7,6 @@
   import axios from "axios";
   import type { Player } from "../domain/game";
   import { currentPanda } from "../stores/currentPanda";
-  import { xlink_attr } from "svelte/internal";
-  import { stringify } from "querystring";
-  import App from "../App.svelte";
   import { push } from "svelte-spa-router";
 
   let messages: Message[] = [];
@@ -40,6 +37,12 @@
       console.log("client received message", info.message);
       messages.push(info.message);
       messages = messages;
+      const c = document.getElementById("chat-box");
+      if (!c) return;
+      const shouldScroll = c.scrollTop + c.clientHeight === c.scrollHeight;
+      if (!shouldScroll) {
+        c.scrollTop = c.scrollHeight;
+      }
     });
 
     $socket.on("wordSelected", (info: { roomCode: string }) => {
@@ -54,6 +57,7 @@
     });
 
     $socket.on("timeout", (info: { roomCode: string }) => {
+      if (info.roomCode !== $currentGame.roomCode) return;
       active = false;
       timedOut = true;
     });
@@ -169,10 +173,10 @@
 
     // Get the 2D canvas context.
     context = canvas.getContext("2d");
+    context.strokeStyle = "#fff";
 
     // Pencil tool instance.
     tool = new tool_pencil();
-    
 
     // Attach the mousedown, mousemove and mouseup event listeners.
     canvas.addEventListener("mousedown", ev_canvas, false);
@@ -189,9 +193,11 @@
     // This is called when you start holding down the mouse button.
     // This starts the pencil drawing.
     this.mousedown = function (ev) {
-      context.beginPath();
-      context.moveTo(ev._x, ev._y);
-      tool.started = true;
+      if (activePlayer.pandaName === $currentPanda.name && active) {
+        context.beginPath();
+        context.moveTo(ev._x, ev._y);
+        tool.started = true;
+      }
     };
 
     // This function is called every time you move the mouse. Obviously, it only
@@ -205,10 +211,12 @@
       ) {
         context.lineTo(ev._x, ev._y);
         context.stroke();
+
         console.log("emitting sendDraw");
         $socket.emit("sendDraw", {
           x: ev._x,
           y: ev._y,
+          color: context.strokeStyle,
           roomCode: $currentGame.roomCode,
         });
       }
@@ -225,12 +233,20 @@
     const t = this;
     $socket.on(
       "receiveDraw",
-      (info: { x: number | string; y: number | string; roomCode: string }) => {
+      (info: {
+        x: number | string;
+        y: number | string;
+        color: string;
+        roomCode: string;
+      }) => {
+        const ss = context.strokeStyle;
         console.log("receiveDraw", info);
         if (info.roomCode !== $currentGame.roomCode) return;
         if (activePlayer.pandaName === $currentPanda.name) return;
+        context.strokeStyle = info.color;
         context.lineTo(info.x, info.y);
         context.stroke();
+        context.strokeSTyle = ss;
       }
     );
 
@@ -267,128 +283,138 @@
       func(ev);
     }
   }
+
+  function changeColor(color: string) {
+    if (context) {
+      context.strokeStyle = color;
+    }
+  }
 </script>
-
-
 
 <div class="container">
   <div class="flex flex-col game-lobby-head">
-    <h2 class="grey6">Game In Progress </h2>
-    <h3> Room Code: <span class="text-animation"> {$currentGame?.roomCode} </span> </h3>
-   
+    <h2 class="grey6">Game In Progress</h2>
+    <h3>
+      Room Code: <span class="text-animation"> {$currentGame?.roomCode} </span>
+    </h3>
   </div>
 </div>
-
 
 <!-- Game Container STart -->
 
 <div class="container game-container">
-
-  <div class="grid grid-cols-3"> 
-  <!-- Canvas Left Section -->
-  <div class="game-canvas-left col-span-2">
-
-    <div class="choices">
-      {#if active}
-        Timer: {timer}
-      {/if}
-      {#if activePlayer && activePlayer.pandaName === $currentPanda.name && choices && !active}
-        <h2>Choices</h2>
-        <p class="marb-10 "> Choose an option that you want to draw. Others will try to guess it. </p>
-        {#each choices as choice}
-          <p class="cursor-pointer choice" on:click={async () => await selectChoice(choice)}>
-            {choice}
+  <div class="grid grid-cols-3">
+    <!-- Canvas Left Section -->
+    <div class="game-canvas-left col-span-2">
+      <div class="choices">
+        {#if active}
+          Timer: {timer}
+        {/if}
+        {#if activePlayer && activePlayer.pandaName === $currentPanda.name && choices && choices.length && !active}
+          <h2>Choices</h2>
+          <p class="marb-10 ">
+            Choose an option that you want to draw. Others will try to guess it.
           </p>
-        {/each}
-      {/if}
-    </div>
-
-    
+          {#each choices as choice}
+            <p
+              class="cursor-pointer choice"
+              on:click={async () => await selectChoice(choice)}
+            >
+              {choice}
+            </p>
+          {/each}
+        {/if}
+      </div>
 
       {#if $currentGame.finished}
+        <div class="game-finished">
+          <h2>Game is finished!</h2>
+          {#if isHost}
+            <button class="btn btn-primary" on:click={restartGame}
+              >Play Again?</button
+            >
+          {/if}
+        </div>
+      {/if}
 
       <div class="game-finished">
-         <h2> Game is finished! </h2>
-          {#if isHost}
-            <button class="btn btn-primary" on:click={restartGame}>Play Again?</button>
-          {/if}
-        </div>
-
-        {/if}
-
-        <div class="game-finished">
         {#if timedOut}
-         <p class="timed-out"> Timed out! </p>
+          <p class="timed-out">Timed out!</p>
         {/if}
-        </div>
+      </div>
 
+      <canvas
+        style="background:#333333;"
+        id="imageView"
+        width="600"
+        height="400"
+      />
 
-
-
-    <canvas style="background:#333333;" id="imageView" width="600" height="400" />
-
-    <div class="colors grid grid-cols-6 auto-rows-max gap-x-5 gap-y-5 w-auto">
-        <div class="cwhite color active"> </div>
-        <div class="cred color"> </div>
-        <div class="cyellow color"> </div>
-        <div class="cteal color"> </div>
-    </div>
-
-  </div>
-
-  <!-- chat box RIght Setion -->
-  <div class="chat-right-section">
-      <div id="chat-box">
-      {#each messages as message}
-        <p
-          class={message.isCorrect
-            ? "green"
-            : message.player.pandaName === "Lawyer Crow"
-            ? "red"
-            : ""}
+      {#if activePlayer && activePlayer.pandaName === $currentPanda.name}
+        <div
+          class="colors grid grid-cols-6 auto-rows-max gap-x-5 gap-y-5 w-auto"
         >
-          {#if message.isCorrect}
-            {message.player.pandaName} got the answer!
-          {:else}
-            {message.player.pandaName}: {message.text}
-          {/if}
-        </p>
-      {/each}
+          <div
+            class="cwhite color active"
+            on:click={() => changeColor("#fff")}
+          />
+          <div class="cred color" on:click={() => changeColor("#ff0000")} />
+          <div class="cyellow color" on:click={() => changeColor("#f8f83b")} />
+          <div class="cteal color" on:click={() => changeColor(" #00ffff")} />
+        </div>
+      {/if}
     </div>
 
-  <input placeholder="Type Here Noob" class="chat-input"
-    type="text"
-    disabled={(activePlayer && activePlayer.pandaName === $currentPanda.name) ||
-      !active}
-    bind:value={currentMessage}
-    on:keyup|preventDefault={handleKeyup}
-  />
+    <!-- chat box RIght Setion -->
+    <div class="chat-right-section">
+      <div id="chat-box">
+        {#each messages as message}
+          <p
+            class={message.isCorrect
+              ? "green"
+              : message.player.pandaName === "Lawyer Crow"
+              ? "red"
+              : ""}
+          >
+            {#if message.isCorrect}
+              {message.player.pandaName} got the answer!
+            {:else}
+              {message.player.pandaName}: {message.text}
+            {/if}
+          </p>
+        {/each}
+      </div>
 
-  </div>
-
-
-
+      <input
+        placeholder="Type Here Noob"
+        class="chat-input"
+        type="text"
+        disabled={(activePlayer &&
+          activePlayer.pandaName === $currentPanda.name) ||
+          !active}
+        bind:value={currentMessage}
+        on:keyup|preventDefault={handleKeyup}
+      />
+    </div>
   </div>
 </div>
 
 <!-- Game Container End -->
 
 <div class="container">
-
-<div
-  class="grid grid-cols-6 auto-rows-max gap-x-5 gap-y-5 w-auto panda-container"
->
-  {#if $currentGame.players}
-    {#each $currentGame.players as player}
-      <div class="panda-pp rounded-md">
-        <img src={player.thumbnail} class="panda" />
-        <p class="grey5 panda-title">{player.pandaName}</p>
-        <p class="score"> Score:<span>{player.score}</span> </p>
-      </div>
-    {/each}
-  {/if}
-</div>
-
+  <div
+    class="grid grid-cols-6 auto-rows-max gap-x-5 gap-y-5 w-auto panda-container"
+  >
+    {#if $currentGame.players}
+      {#each $currentGame.players as player}
+        <div class="panda-pp rounded-md">
+          <img src={player.thumbnail} class="panda" />
+          <p class="grey5 panda-title">{player.pandaName}</p>
+          <p class="score">Score:<span>{player.score}</span></p>
+        </div>
+      {/each}
+    {/if}
+  </div>
 </div>
 
 <style>
@@ -401,15 +427,14 @@
   }
 
   .container.game-container {
-  padding: 0;
-  background: #333;
-  box-sizing: border-box;
-  backdrop-filter: blur(15px);
-  min-height: 480px;
-  border-radius: 5px;
-  margin-bottom: 10px;
-}
-
+    padding: 0;
+    background: #333;
+    box-sizing: border-box;
+    backdrop-filter: blur(15px);
+    min-height: 480px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
 
   .game-canvas-left {
     padding: 10px 19px;
@@ -423,24 +448,23 @@
 
   .choices h2 {
     margin: 6px 0px 0px 0px;
-}
+  }
 
-p.marb-10 {
+  p.marb-10 {
     margin-bottom: 11px;
-}
+  }
 
   p.cursor-pointer.choice {
     font-size: 1.2rem;
     font-weight: 600;
-    color: #F8F83B;
+    color: #f8f83b;
     margin: 0px 0px 4px 0px;
-}
+  }
 
   .chat-right-section {
     background: #000;
     padding: 10px 19px;
-}
-
+  }
 
   #chat-box {
     background: black;
@@ -453,69 +477,62 @@ p.marb-10 {
     height: 400px;
   }
 
-
-.chat-input {
-   padding: 12px 22px;
+  .chat-input {
+    padding: 12px 22px;
     border-radius: 0.5rem;
     background: #211e1ebf;
     width: 100%;
     margin: 29px 0px 0px 0px;
   }
 
-
   h3 {
-  color: #9DA2AD;
-  margin: -28px 0px 8px 0px;
-}
+    color: #9da2ad;
+    margin: -28px 0px 8px 0px;
+  }
 
+  .grid.grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 
-.grid.grid-cols-3 {
-    grid-template-columns: repeat(3,minmax(0,1fr));
-}
+  .grid.grid-cols-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
 
-.grid.grid-cols-6 {
-    grid-template-columns: repeat(6,minmax(0,1fr));
-}
+  .col-span-2 {
+    grid-column: span 2 / span 2;
+  }
 
+  .colors {
+    max-width: 255px;
+  }
 
-.col-span-2 {
-    grid-column: span 2/span 2;
-}
-
-.colors {
-  max-width: 255px;
-}
-
-.color {
+  .color {
     width: 30px;
     height: 30px;
     border-radius: 5px;
-}
+  }
 
-.cwhite {
-  background-color: #fff;
-}
+  .cwhite {
+    background-color: #fff;
+  }
 
-.cred {
-  background-color: #FF0000;
-}
+  .cred {
+    background-color: #ff0000;
+  }
 
-.cyellow {
-  background-color: #F8F83B;
-}
+  .cyellow {
+    background-color: #f8f83b;
+  }
 
-.cteal {
-  background-color: #00FFFF;
-}
+  .cteal {
+    background-color: #00ffff;
+  }
 
-.color.active {
+  .color.active {
     border: 4px solid #000;
-}
+  }
 
-
-
-
-.game-finished {
+  .game-finished {
     -webkit-box-ordinal-group: 99999;
     -webkit-box-ordinal-group: 99999;
     text-align: center;
@@ -524,52 +541,46 @@ p.marb-10 {
     margin: 0 auto;
     width: 90%;
     background: #333;
-}
+  }
 
-.game-finished h2 {
+  .game-finished h2 {
     margin: 31px 0px 10px 0px;
-}
+  }
 
-.game-container h2 {
+  .game-container h2 {
     font-size: 1.5rem;
-}
+  }
 
-p.score {
+  p.score {
     font-size: 1rem;
     font-weight: 600;
     line-height: 20px;
-}
-
-p.panda-title {
-  font-size: 0.83rem;
-    font-weight: 500;
-    margin: 8px 0px 0px 0px;
-}
-
-
-
-@media (max-width:800px) {
-  .grid.grid-cols-6 {
-    grid-template-columns: repeat(4,minmax(0,1fr));
-}
-
-
-}
-
-@media (max-width:600px) {
-  h3 {
-  color: #9DA2AD;
-  margin: 0px;
-}
-
-.grid.grid-cols-3 {
-    grid-template-columns: repeat(1,minmax(0,1fr));
-}
-
-.col-span-2 {
-    grid-column: span 1/span 1;
-}
-
   }
 
+  p.panda-title {
+    font-size: 0.83rem;
+    font-weight: 500;
+    margin: 8px 0px 0px 0px;
+  }
+
+  @media (max-width: 800px) {
+    .grid.grid-cols-6 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 600px) {
+    h3 {
+      color: #9da2ad;
+      margin: 0px;
+    }
+
+    .grid.grid-cols-3 {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .col-span-2 {
+      grid-column: span 1 / span 1;
+    }
+  }
 </style>

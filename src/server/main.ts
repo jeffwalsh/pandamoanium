@@ -178,7 +178,12 @@ io.on("connection", (_socket) => {
 
   socket.on(
     "sendDraw",
-    (info: { x: string | number; y: string | number; roomCode: string }) => {
+    (info: {
+      x: string | number;
+      y: string | number;
+      color: string;
+      roomCode: string;
+    }) => {
       const game = games.get(info.roomCode);
       if (!game) return;
 
@@ -218,6 +223,7 @@ io.on("connection", (_socket) => {
         text: info.text,
         isCorrect: info.text.toLowerCase() === game.currentWord.toLowerCase(),
       };
+
       io.emit("message", { message: message, roomCode: info.roomCode });
 
       if (message.isCorrect) {
