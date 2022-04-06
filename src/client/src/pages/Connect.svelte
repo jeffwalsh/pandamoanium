@@ -32,6 +32,12 @@
   </div>
 {/if}
 
+<div class="audio">
+  <audio controls autoplay>
+    <source src="/public/images/cgod.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
 <style>
   h1 {
     font-size: 7vw;
@@ -79,4 +85,13 @@
       margin-top: 4px;
     }
   }
+
+  .audio {
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+    opacity: 30%;
+}
+
+
 </style>
