@@ -293,7 +293,7 @@
       {/if}
       {#if activePlayer && activePlayer.pandaName === $currentPanda.name && choices && !active}
         <h2>Choices</h2>
-        <p> Choose an option that you want to draw. Others will try to guess it. </p>
+        <p class="marb-10 "> Choose an option that you want to draw. Others will try to guess it. </p>
         {#each choices as choice}
           <p class="cursor-pointer choice" on:click={async () => await selectChoice(choice)}>
             {choice}
@@ -301,6 +301,28 @@
         {/each}
       {/if}
     </div>
+
+    
+
+      {#if $currentGame.finished}
+
+      <div class="game-finished">
+         <h2> Game is finished! </h2>
+          {#if isHost}
+            <button class="btn btn-primary" on:click={restartGame}>Play Again?</button>
+          {/if}
+        </div>
+
+        {/if}
+
+        <div class="game-finished">
+        {#if timedOut}
+         <p class="timed-out"> Timed out! </p>
+        {/if}
+        </div>
+
+
+
 
     <canvas style="background:#333333;" id="imageView" width="600" height="400" />
 
@@ -336,16 +358,7 @@
 
   </div>
 
-{#if $currentGame.finished}
-  Game is finished!
-  {#if isHost}
-    <button class="btn btn-primary" on:click={restartGame}>Play Again?</button>
-  {/if}
-{/if}
 
-{#if timedOut}
-  Timed out!
-{/if}
 
   </div>
 </div>
@@ -355,14 +368,14 @@
 <div class="container">
 
 <div
-  class="grid grid-cols-4 auto-rows-max gap-x-5 gap-y-5 w-auto panda-container"
+  class="grid grid-cols-6 auto-rows-max gap-x-5 gap-y-5 w-auto panda-container"
 >
   {#if $currentGame.players}
     {#each $currentGame.players as player}
       <div class="panda-pp rounded-md">
         <img src={player.thumbnail} class="panda" />
-        <p class="grey5">{player.pandaName}</p>
-        Score:<span>{player.score}</span>
+        <p class="grey5 panda-title">{player.pandaName}</p>
+        <p class="score"> Score:<span>{player.score}</span> </p>
       </div>
     {/each}
   {/if}
@@ -381,10 +394,12 @@
 
   .container.game-container {
   padding: 0;
-  background: rgba(33, 30, 30, 0.59);
+  background: #333;
   box-sizing: border-box;
   backdrop-filter: blur(15px);
   min-height: 480px;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 
 
@@ -402,10 +417,15 @@
     margin: 6px 0px 0px 0px;
 }
 
+p.marb-10 {
+    margin-bottom: 11px;
+}
+
   p.cursor-pointer.choice {
     font-size: 1.2rem;
     font-weight: 600;
     color: #F8F83B;
+    margin: 0px 0px 4px 0px;
 }
 
   .chat-right-section {
@@ -445,13 +465,54 @@
     grid-template-columns: repeat(3,minmax(0,1fr));
 }
 
+.grid.grid-cols-6 {
+    grid-template-columns: repeat(6,minmax(0,1fr));
+}
+
+
 .col-span-2 {
     grid-column: span 2/span 2;
 }
 
 
+.game-finished {
+    -webkit-box-ordinal-group: 99999;
+    -webkit-box-ordinal-group: 99999;
+    text-align: center;
+    position: absolute;
+    top: 20px;
+    margin: 0 auto;
+    width: 90%;
+    background: #333;
+}
+
+.game-finished h2 {
+    margin: 31px 0px 10px 0px;
+}
+
+.game-container h2 {
+    font-size: 1.5rem;
+}
+
+p.score {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+p.panda-title {
+  font-size: 0.83rem;
+    font-weight: 500;
+    margin: 8px 0px 0px 0px;
+}
+
+@media (max-width:800px) {
+  .grid.grid-cols-6 {
+    grid-template-columns: repeat(4,minmax(0,1fr));
+}
 
 
+}
 
 @media (max-width:600px) {
   h3 {
