@@ -86,6 +86,10 @@
       padding: 40px;
     }
 
+    .leaderboard.cursor-pointer {
+    padding-top: 7px;
+}
+
     .container {
       text-align: center;
     }
