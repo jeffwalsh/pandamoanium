@@ -185,13 +185,6 @@ export const getSnapshot = async (
     })
   );
 
-  // redisClient.set("pandas", pandas);
-
-  // console.log("getting from redis")
-  // const p = redisClient.get("pandas");
-  // console.log(p);
-
-  console.log(attributes);
   return {
     pandas: pandas,
     list: newList,
@@ -211,16 +204,12 @@ export const getPandasForAddress = async (
     }
   );
 
-  console.log(tokenAccounts);
-
   await Promise.all(
     tokenAccounts.value.map(async (tokenAccount) => {
       try {
         if (tokenAccount.account.data.parsed.info.tokenAmount.amount === "0") {
           return;
         }
-        // get metadata account that holds the metadata information
-        console.log(tokenAccount.account.data.parsed.info);
         const m = await metadata.getMetadataAccount(
           tokenAccount.account.data.parsed.info.mint
         );

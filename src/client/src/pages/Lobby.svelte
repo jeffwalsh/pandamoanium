@@ -25,12 +25,6 @@ import Nav from "../components/Nav.svelte";
     $socket.on(
       "updatePlayers",
       (info: { player: Player; roomCode: string }) => {
-        console.log(
-          "update players",
-          info.player,
-          info.roomCode,
-          $currentGame.roomCode
-        );
         if (info.roomCode !== $currentGame.roomCode) return;
         const game = $currentGame;
 
@@ -62,10 +56,10 @@ import Nav from "../components/Nav.svelte";
 <div class="container">
   <div class="flex flex-col game-lobby-head">
     <h2 class="grey6">Game Lobby</h2>
-    <h3> Room Code: <span class="text-animation"> {$currentGame?.roomCode} </span> </h3>
-   
+    <h3>
+      Room Code: <span class="text-animation"> {$currentGame?.roomCode} </span>
+    </h3>
   </div>
-
 
   <div class="flex start-game">
     {#if isHost}
@@ -73,35 +67,32 @@ import Nav from "../components/Nav.svelte";
     {/if}
   </div>
 
-<div
-  class="grid grid-cols-4 auto-rows-max gap-x-5 gap-y-5 w-auto panda-container"
->
-  {#each $currentGame.players as player}
-    <div class="panda-pp rounded-md">
-      <img alt="Panda Profile" src={player.thumbnail} class="panda" />
-      <p class="grey5">{player.pandaName}</p>
-    </div>
-  {/each}
-</div>
-
+  <div
+    class="grid grid-cols-4 auto-rows-max gap-x-5 gap-y-5 w-auto panda-container"
+  >
+    {#each $currentGame.players as player}
+      <div class="panda-pp rounded-md">
+        <img alt="Panda Profile" src={player.thumbnail} class="panda" />
+        <p class="grey5">{player.pandaName}</p>
+      </div>
+    {/each}
+  </div>
 </div>
 
 <style>
-
-h3 {
-  color: #9DA2AD;
-  margin: -28px 0px 8px 0px;
-}
-
-.start-game {
-    margin: 10px 0px 29px 0px;
-}
-
-@media (max-width:600px) {
   h3 {
-  color: #9DA2AD;
-  margin: 0px;
-}
+    color: #9da2ad;
+    margin: -28px 0px 8px 0px;
   }
 
+  .start-game {
+    margin: 10px 0px 29px 0px;
+  }
+
+  @media (max-width: 600px) {
+    h3 {
+      color: #9da2ad;
+      margin: 0px;
+    }
+  }
 </style>

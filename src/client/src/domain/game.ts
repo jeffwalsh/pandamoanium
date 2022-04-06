@@ -12,6 +12,7 @@ type Game = {
   roomCode: string;
   finished: boolean;
   correctPlayersThisRound: Player[];
+  currentWord: string;
 };
 
 export type { Player, Game };

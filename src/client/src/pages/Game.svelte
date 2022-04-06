@@ -8,7 +8,12 @@
   import type { Player } from "../domain/game";
   import { currentPanda } from "../stores/currentPanda";
   import { push } from "svelte-spa-router";
+<<<<<<< HEAD
 import Nav from "../components/Nav.svelte";
+=======
+  import App from "../App.svelte";
+  import { randomLawyerCrow } from "../utils/randomLawyerCrow";
+>>>>>>> 2ea7eb24fef9a3602a81338a09c6b9a483c16f9c
 
   let messages: Message[] = [];
   let currentMessage: string = "";
@@ -18,6 +23,8 @@ import Nav from "../components/Nav.svelte";
   let isHost: boolean = false;
   let timedOut: boolean = false;
   let timer: number = 69;
+  let currentWord: string = "";
+  let shouldShowWord: boolean = false;
 
   onMount(async () => {
     if (!$currentPanda || !$currentPanda.name) {
@@ -33,9 +40,7 @@ import Nav from "../components/Nav.svelte";
     }
 
     $socket.on("message", (info: { roomCode: string; message: Message }) => {
-      console.log("got message", info);
       if ($currentGame.roomCode !== info.roomCode) return;
-      console.log("client received message", info.message);
       messages.push(info.message);
       messages = messages;
       const c = document.getElementById("chat-box");
@@ -46,11 +51,16 @@ import Nav from "../components/Nav.svelte";
       }
     });
 
-    $socket.on("wordSelected", (info: { roomCode: string }) => {
-      if ($currentGame.roomCode !== info.roomCode) return;
-      timer = 69;
-      active = true;
-    });
+    $socket.on(
+      "wordSelected",
+      (info: { roomCode: string; currentWord: string }) => {
+        if ($currentGame.roomCode !== info.roomCode) return;
+        shouldShowWord = false;
+        timer = 69;
+        active = true;
+        currentWord = info.currentWord;
+      }
+    );
 
     $socket.on("countdown", (info: { t: number; roomCode: string }) => {
       if ($currentGame.roomCode !== info.roomCode) return;
@@ -76,15 +86,16 @@ import Nav from "../components/Nav.svelte";
     "nextRound",
     async (info: { nextChooser: Player; roomCode: string }) => {
       if (info.roomCode !== $currentGame.roomCode) return;
-
       timedOut = false;
       activePlayer = info.nextChooser;
-      messages.push({
-        player: { pandaName: "Lawyer Crow" } as any as Player,
-        text: info.nextChooser.pandaName + " Is drawing this round!",
-        isCorrect: false,
-      });
-      messages = messages;
+      if (info.nextChooser.pandaName !== "") {
+        messages.push({
+          player: { pandaName: "Lawyer Crow" } as any as Player,
+          text: info.nextChooser.pandaName + " Is drawing this round!",
+          isCorrect: false,
+        });
+        messages = messages;
+      }
 
       if (activePlayer.pandaName === $currentPanda.name) {
         await getChoices();
@@ -94,13 +105,12 @@ import Nav from "../components/Nav.svelte";
 
   $socket.on("gameOver", (info: { roomCode: string }) => {
     if (info.roomCode !== $currentGame.roomCode) return;
-    console.log("game over!");
     const game = $currentGame;
     game.finished = true;
     active = false;
     messages.push({
       player: { pandaName: "Lawyer Crow" } as any as Player,
-      text: "Is drawing this round!",
+      text: randomLawyerCrow() as string,
       isCorrect: false,
     });
     messages = messages;
@@ -134,12 +144,18 @@ import Nav from "../components/Nav.svelte";
     "restartedGame",
     async (info: { roomCode: string; playerOrder: Player[] }) => {
       if (info.roomCode !== $currentGame.roomCode) return;
-      console.log("restartedGame!", info);
       const game = $currentGame;
       game.playerOrder = info.playerOrder;
       game.finished = false;
 
       activePlayer = game.playerOrder[0] as Player;
+
+      messages.push({
+        player: { pandaName: "Lawyer Crow" } as any as Player,
+        text: info.playerOrder[0]?.pandaName + " Is drawing this round!",
+        isCorrect: false,
+      });
+      messages = messages;
 
       if (activePlayer.pandaName === $currentPanda.name) {
         await getChoices();
@@ -213,7 +229,6 @@ import Nav from "../components/Nav.svelte";
         context.lineTo(ev._x, ev._y);
         context.stroke();
 
-        console.log("emitting sendDraw");
         $socket.emit("sendDraw", {
           x: ev._x,
           y: ev._y,
@@ -225,7 +240,11 @@ import Nav from "../components/Nav.svelte";
 
     // This is called when you release the mouse button.
     this.mouseup = function (ev) {
-      if (tool.started && activePlayer.pandaName === $currentPanda.name) {
+      if (
+        tool.started &&
+        activePlayer.pandaName === $currentPanda.name &&
+        active
+      ) {
         tool.mousemove(ev);
         tool.started = false;
       }
@@ -241,13 +260,12 @@ import Nav from "../components/Nav.svelte";
         roomCode: string;
       }) => {
         const ss = context.strokeStyle;
-        console.log("receiveDraw", info);
         if (info.roomCode !== $currentGame.roomCode) return;
         if (activePlayer.pandaName === $currentPanda.name) return;
         context.strokeStyle = info.color;
         context.lineTo(info.x, info.y);
         context.stroke();
-        context.strokeSTyle = ss;
+        context.strokeStyle = ss;
       }
     );
 
@@ -255,6 +273,7 @@ import Nav from "../components/Nav.svelte";
       "clearCanvas",
       (info: { roomCode: string; players: Player[] }) => {
         if (info.roomCode !== $currentGame.roomCode) return;
+        shouldShowWord = true;
         context.clearRect(0, 0, canvas.width, canvas.height);
         active = false;
         timer = 0;
@@ -300,6 +319,22 @@ import Nav from "../components/Nav.svelte";
     <h3>
       Room Code: <span class="text-animation"> {$currentGame?.roomCode} </span>
     </h3>
+    {#if currentWord}
+      <h2>
+        Current Word:
+        {#if shouldShowWord}
+          {currentWord}
+        {:else}
+          {#each currentWord as letter}
+            {#if letter === " "}
+              &nbsp;
+            {:else}
+              _
+            {/if}
+          {/each}
+        {/if}
+      </h2>
+    {/if}
   </div>
 </div>
 
@@ -357,10 +392,7 @@ import Nav from "../components/Nav.svelte";
         <div
           class="colors grid grid-cols-6 auto-rows-max gap-x-5 gap-y-5 w-auto"
         >
-          <div
-            class="cwhite color"
-            on:click={() => changeColor("#fff")}
-          />
+          <div class="cwhite color" on:click={() => changeColor("#fff")} />
           <div class="cred color" on:click={() => changeColor("#ff0000")} />
           <div class="cyellow color" on:click={() => changeColor("#f8f83b")} />
           <div class="cteal color" on:click={() => changeColor(" #00ffff")} />
@@ -371,21 +403,23 @@ import Nav from "../components/Nav.svelte";
     <!-- chat box RIght Setion -->
     <div class="chat-right-section">
       <div id="chat-box">
-        {#each messages as message}
-          <p
-            class={message.isCorrect
-              ? "green"
-              : message.player.pandaName === "Lawyer Crow"
-              ? "red"
-              : ""}
-          >
-            {#if message.isCorrect}
-              {message.player.pandaName} got the answer!
-            {:else}
-              {message.player.pandaName}: {message.text}
-            {/if}
-          </p>
-        {/each}
+        {#if messages}
+          {#each messages as message}
+            <p
+              class={message.isCorrect
+                ? "green"
+                : message.player.pandaName === "Lawyer Crow"
+                ? "red"
+                : ""}
+            >
+              {#if message.isCorrect}
+                {message.player.pandaName} got the answer!
+              {:else}
+                {message.player.pandaName}: {message.text}
+              {/if}
+            </p>
+          {/each}
+        {/if}
       </div>
 
       <input
@@ -414,6 +448,8 @@ import Nav from "../components/Nav.svelte";
           <img src={player.thumbnail} class="panda" />
           <p class="grey5 panda-title">{player.pandaName}</p>
           <p class="score">Score:<span>{player.score}</span></p>
+          {#if $currentGame.correctPlayersThisRound.find((p) => p.pandaName === player.pandaName)}
+            <p>Correct!</p>{/if}
         </div>
       {/each}
     {/if}

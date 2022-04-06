@@ -44,7 +44,6 @@ app.get("/leaderboard", async (req, res) => {
     const querySnapshot = await firestore_1.getDocs(firestore_1.collection(db, "scores"));
     const resp = [];
     querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);
         resp.push(doc.data());
     });
     res.send({ data: resp });
@@ -57,7 +56,10 @@ app.get("/selectWord", (req, res) => {
         return;
     game.currentWord = word;
     games.set(roomCode, game);
-    io.emit("wordSelected", { roomCode: roomCode });
+    io.emit("wordSelected", {
+        roomCode: roomCode,
+        currentWord: word,
+    });
     const myTimer = setInterval(() => {
         const timer = timers.get(roomCode);
         const v = (timer.n -
