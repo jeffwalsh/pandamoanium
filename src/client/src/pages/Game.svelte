@@ -355,7 +355,7 @@
           class="colors grid grid-cols-6 auto-rows-max gap-x-5 gap-y-5 w-auto"
         >
           <div
-            class="cwhite color active"
+            class="cwhite color"
             on:click={() => changeColor("#fff")}
           />
           <div class="cred color" on:click={() => changeColor("#ff0000")} />
