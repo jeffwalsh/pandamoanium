@@ -36,9 +36,7 @@
     }
 
     $socket.on("message", (info: { roomCode: string; message: Message }) => {
-      console.log("got message", info);
       if ($currentGame.roomCode !== info.roomCode) return;
-      console.log("client received message", info.message);
       messages.push(info.message);
       messages = messages;
       const c = document.getElementById("chat-box");
@@ -103,7 +101,6 @@
 
   $socket.on("gameOver", (info: { roomCode: string }) => {
     if (info.roomCode !== $currentGame.roomCode) return;
-    console.log("game over!");
     const game = $currentGame;
     game.finished = true;
     active = false;
@@ -143,7 +140,6 @@
     "restartedGame",
     async (info: { roomCode: string; playerOrder: Player[] }) => {
       if (info.roomCode !== $currentGame.roomCode) return;
-      console.log("restartedGame!", info);
       const game = $currentGame;
       game.playerOrder = info.playerOrder;
       game.finished = false;
@@ -229,7 +225,6 @@
         context.lineTo(ev._x, ev._y);
         context.stroke();
 
-        console.log("emitting sendDraw");
         $socket.emit("sendDraw", {
           x: ev._x,
           y: ev._y,
@@ -261,7 +256,6 @@
         roomCode: string;
       }) => {
         const ss = context.strokeStyle;
-        console.log("receiveDraw", info);
         if (info.roomCode !== $currentGame.roomCode) return;
         if (activePlayer.pandaName === $currentPanda.name) return;
         context.strokeStyle = info.color;
@@ -392,10 +386,7 @@
         <div
           class="colors grid grid-cols-6 auto-rows-max gap-x-5 gap-y-5 w-auto"
         >
-          <div
-            class="cwhite color"
-            on:click={() => changeColor("#fff")}
-          />
+          <div class="cwhite color" on:click={() => changeColor("#fff")} />
           <div class="cred color" on:click={() => changeColor("#ff0000")} />
           <div class="cyellow color" on:click={() => changeColor("#f8f83b")} />
           <div class="cteal color" on:click={() => changeColor(" #00ffff")} />

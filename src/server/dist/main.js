@@ -44,7 +44,6 @@ app.get("/leaderboard", async (req, res) => {
     const querySnapshot = await firestore_1.getDocs(firestore_1.collection(db, "scores"));
     const resp = [];
     querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);
         resp.push(doc.data());
     });
     res.send({ data: resp });

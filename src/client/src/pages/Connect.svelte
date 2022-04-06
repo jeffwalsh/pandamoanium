@@ -6,7 +6,6 @@
 
   async function connect() {
     const res = await window.solana.connect();
-    console.log(res.publicKey.toString());
     currentAddress.set(res.publicKey);
     await push("/selectPanda");
   }

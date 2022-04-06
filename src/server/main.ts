@@ -61,7 +61,6 @@ app.get("/leaderboard", async (req, res) => {
   const querySnapshot = await getDocs(collection(db, "scores"));
   const resp: unknown[] = [];
   querySnapshot.forEach((doc) => {
-    console.log(`${doc.id} => ${doc.data()}`);
     resp.push(doc.data());
   });
 
