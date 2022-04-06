@@ -15,32 +15,72 @@
   });
 </script>
 
-<button class="btn btn-primary" on:click={async () => await push("/")}
-  >Back</button
->
+<div class="container">
+
+  <div class="flex flex-col game-lobby-head">
+    <!-- <button class="btn btn-primary" on:click={async () => await push("/")}
+      >Back</button> -->
+      <h2 class="grey6">Leaderboard</h2>
+  </div>
+
 {#if sorted}
-  <div class="grid grid-rows-1 max-w-md bg-gray-200 p-2">
+<div
+class="grid grid-cols-6 auto-rows-max gap-x-5 gap-y-5 w-auto panda-container"
+>
     {#each sorted as panda, i}
-      <div class="row-span-full">
-        <p class="black">{i}:</p>
-        <img src={panda.thumbnail} class="panda-pic cursor-pointer" />
-        <p class="black">{panda.pandaName}</p>
-        <p class="red">Score: {panda.score}</p>
+       <div class="panda-pp rounded-md">
+        <p class="rank">#{i}</p>
+        <img src={panda.thumbnail} class="panda" />
+        <p class="panda-title">{panda.pandaName}</p>
+        <p class="score">Score: {panda.score}</p>
       </div>
     {/each}
   </div>
 {/if}
 
+</div>
+
 <style>
-  .panda-pic {
-    height: 120px;
-    width: 120px;
+
+.panda  {
+  max-width: 90%;
+}
+
+  .grid.grid-cols-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 
-  .black {
-    color: black;
+  p.score {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 20px;
   }
-  .red {
-    color: red;
+
+  p.panda-title {
+    font-size: 0.83rem;
+    font-weight: 500;
+    margin: 8px 0px 0px 0px;
   }
+
+  .panda-pp {
+    position: relative;
+}
+
+  p.rank {
+    font-size: 1rem;
+    font-weight: 900;
+    background: #F8F83B;
+    color: #000;
+    border-radius: 2px;
+    padding: 2px 6px;
+    position: absolute;
+}
+
+@media (max-width: 600px) {
+  .grid.grid-cols-6 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+}
+
 </style>
