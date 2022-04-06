@@ -284,4 +284,21 @@
       transform: translate3d(0, 0, 0) translateZ(0);
     }
   }
+
+  .justify-between {
+    justify-content: space-between;
+}
+.content-center {
+    align-content: center;
+}
+
+.nav {
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 10px 0px;
+}
+
+.nav svg {
+    max-width: 170px;
+}
 </style>

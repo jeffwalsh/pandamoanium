@@ -8,6 +8,7 @@
   import { getPandasForAddress } from "../utils/getPandasForAddress";
   import type { Panda } from "../utils/getPandasForAddress";
   import { push } from "svelte-spa-router";
+import Nav from "../components/Nav.svelte";
   const connection = new anchor.web3.Connection(
     process.env.SOLANA_RPC_HOST as string
   );
@@ -28,6 +29,8 @@
     await push("/gameMenu");
   }
 </script>
+
+<Nav/>
 
 <div class="container">
   <div class="flex">

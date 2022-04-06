@@ -1,6 +1,7 @@
 <script lang="ts">
   import { push } from "svelte-spa-router";
   import Logo from "../components/Logo.svelte";
+import Nav from "../components/Nav.svelte";
 
   import { currentAddress } from "../stores/currentAddress";
 
@@ -19,9 +20,12 @@
 {#if $currentAddress}
   <span class="hidden"> Address: {$currentAddress}</span>
 {:else}
+
+
+  <Nav/>
+
   <div class="container">
     <div class="center-content flex-col">
-      <span class="logo"> <Logo /> </span>
       <h1 class="text-animation">pandaMOANium</h1>
       <p>
         Play the stupid ass game that the stupid ass devs made for the stupid

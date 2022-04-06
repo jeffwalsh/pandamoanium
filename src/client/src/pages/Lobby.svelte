@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { push } from "svelte-spa-router";
+import Nav from "../components/Nav.svelte";
   import type { Player } from "../domain/game";
   import { currentAddress } from "../stores/currentAddress";
   import { currentGame } from "../stores/currentGame";
@@ -55,6 +56,8 @@
     $socket.emit("startGame", $currentGame.roomCode);
   }
 </script>
+
+<Nav/>
 
 <div class="container">
   <div class="flex flex-col game-lobby-head">

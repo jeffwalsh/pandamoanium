@@ -8,6 +8,7 @@
   import type { Player } from "../domain/game";
   import { currentPanda } from "../stores/currentPanda";
   import { push } from "svelte-spa-router";
+import Nav from "../components/Nav.svelte";
 
   let messages: Message[] = [];
   let currentMessage: string = "";
@@ -290,6 +291,8 @@
     }
   }
 </script>
+
+<Nav/>
 
 <div class="container">
   <div class="flex flex-col game-lobby-head">
