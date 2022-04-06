@@ -8,12 +8,9 @@
   import type { Player } from "../domain/game";
   import { currentPanda } from "../stores/currentPanda";
   import { push } from "svelte-spa-router";
-<<<<<<< HEAD
-import Nav from "../components/Nav.svelte";
-=======
+  import Nav from "../components/Nav.svelte";
   import App from "../App.svelte";
   import { randomLawyerCrow } from "../utils/randomLawyerCrow";
->>>>>>> 2ea7eb24fef9a3602a81338a09c6b9a483c16f9c
 
   let messages: Message[] = [];
   let currentMessage: string = "";
@@ -311,7 +308,7 @@ import Nav from "../components/Nav.svelte";
   }
 </script>
 
-<Nav/>
+<Nav />
 
 <div class="container">
   <div class="flex flex-col game-lobby-head">

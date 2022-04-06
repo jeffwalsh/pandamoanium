@@ -57757,6 +57757,35 @@ const decodeMetadata = (buffer) => {
 
 /***/ }),
 
+/***/ "./src/utils/randomLawyerCrow.ts":
+/*!***************************************!*\
+  !*** ./src/utils/randomLawyerCrow.ts ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "randomLawyerCrow": () => (/* binding */ randomLawyerCrow)
+/* harmony export */ });
+const lawyerCrow = [
+  "You're gay!",
+  "Tinybed got a tiny dick lmao",
+  "BN lost something when he started to speak",
+  "READ THE ROOM HANS",
+  "NFTs are the web we weave and people are the flies caught within it",
+  "I'm gay",
+  "Thread actually thinks he hasn't just given Horsey and Spike $250k for no reason",
+  "Hi, Lawyer Crow here. I was going to shit talk piccle here but why bother, he knows what I'm going to say becuase he knows everything. Fuck you piccle. Lawyer Crow OUT!",
+  "I miss the future when the Pandas were going to come revive me to revolt against the Cranes. What ever happened, back then in the future?"
+];
+const randomLawyerCrow = () => {
+  return lawyerCrow[Math.floor(Math.random() * lawyerCrow.length)];
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/@lottiefiles/svelte-lottie-player/src/components/ColorPicker.svelte":
 /*!******************************************************************************************!*\
   !*** ./node_modules/@lottiefiles/svelte-lottie-player/src/components/ColorPicker.svelte ***!
@@ -63949,7 +63978,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_spa_router_wrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! svelte-spa-router/wrap */ "./node_modules/svelte-spa-router/wrap.js");
 /* harmony import */ var _pages_Connect_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/Connect.svelte */ "./src/pages/Connect.svelte");
 /* harmony import */ var _pages_Game_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/Game.svelte */ "./src/pages/Game.svelte");
-/* harmony import */ var _pages_Game_svelte__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_pages_Game_svelte__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _pages_GameMenu_svelte__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/GameMenu.svelte */ "./src/pages/GameMenu.svelte");
 /* harmony import */ var _pages_Leaderboard_svelte__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/Leaderboard.svelte */ "./src/pages/Leaderboard.svelte");
 /* harmony import */ var _pages_Lobby_svelte__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/Lobby.svelte */ "./src/pages/Lobby.svelte");
@@ -64039,7 +64067,7 @@ function instance($$self, $$props, $$invalidate) {
 		"/selectPanda": (0,svelte_spa_router_wrap__WEBPACK_IMPORTED_MODULE_2__.wrap)({ component: _pages_SelectPanda_svelte__WEBPACK_IMPORTED_MODULE_8__["default"] }),
 		"/gameMenu": (0,svelte_spa_router_wrap__WEBPACK_IMPORTED_MODULE_2__.wrap)({ component: _pages_GameMenu_svelte__WEBPACK_IMPORTED_MODULE_5__["default"] }),
 		"/lobby": (0,svelte_spa_router_wrap__WEBPACK_IMPORTED_MODULE_2__.wrap)({ component: _pages_Lobby_svelte__WEBPACK_IMPORTED_MODULE_7__["default"] }),
-		"/game": (0,svelte_spa_router_wrap__WEBPACK_IMPORTED_MODULE_2__.wrap)({ component: (_pages_Game_svelte__WEBPACK_IMPORTED_MODULE_4___default()) }),
+		"/game": (0,svelte_spa_router_wrap__WEBPACK_IMPORTED_MODULE_2__.wrap)({ component: _pages_Game_svelte__WEBPACK_IMPORTED_MODULE_4__["default"] }),
 		"/leaderboard": (0,svelte_spa_router_wrap__WEBPACK_IMPORTED_MODULE_2__.wrap)({ component: _pages_Leaderboard_svelte__WEBPACK_IMPORTED_MODULE_6__["default"] })
 	};
 
@@ -64053,7 +64081,7 @@ function instance($$self, $$props, $$invalidate) {
 		Router: svelte_spa_router__WEBPACK_IMPORTED_MODULE_1__["default"],
 		wrap: svelte_spa_router_wrap__WEBPACK_IMPORTED_MODULE_2__.wrap,
 		Connect: _pages_Connect_svelte__WEBPACK_IMPORTED_MODULE_3__["default"],
-		Game: (_pages_Game_svelte__WEBPACK_IMPORTED_MODULE_4___default()),
+		Game: _pages_Game_svelte__WEBPACK_IMPORTED_MODULE_4__["default"],
 		GameMenu: _pages_GameMenu_svelte__WEBPACK_IMPORTED_MODULE_5__["default"],
 		Leaderboard: _pages_Leaderboard_svelte__WEBPACK_IMPORTED_MODULE_6__["default"],
 		Lobby: _pages_Lobby_svelte__WEBPACK_IMPORTED_MODULE_7__["default"],
@@ -64908,9 +64936,1929 @@ if (module && module.hot) {}
 /*!*******************************!*\
   !*** ./src/pages/Game.svelte ***!
   \*******************************/
-/***/ (() => {
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module build failed (from ./node_modules/svelte-loader/index.js):\nError: [svelte-preprocess] Encountered type error\n    at Object.throwError (/home/jeff/code/pandamoanium/src/client/node_modules/svelte-preprocess/dist/modules/errors.js:5:11)\n    at Object.throwTypescriptError (/home/jeff/code/pandamoanium/src/client/node_modules/svelte-preprocess/dist/modules/errors.js:9:13)\n    at transformer (/home/jeff/code/pandamoanium/src/client/node_modules/svelte-preprocess/dist/transformers/typescript.js:104:22)\n    at Object.transform (/home/jeff/code/pandamoanium/src/client/node_modules/svelte-preprocess/dist/autoProcess.js:37:12)\n    at async /home/jeff/code/pandamoanium/src/client/node_modules/svelte-preprocess/dist/autoProcess.js:109:29\n    at async script (/home/jeff/code/pandamoanium/src/client/node_modules/svelte-preprocess/dist/autoProcess.js:137:33)\n    at async process_single_tag (/home/jeff/code/pandamoanium/src/client/node_modules/svelte/compiler.js:30241:28)\n    at async Promise.all (index 0)\n    at async replace_in_code (/home/jeff/code/pandamoanium/src/client/node_modules/svelte/compiler.js:30134:27)\n    at async process_tag (/home/jeff/code/pandamoanium/src/client/node_modules/svelte/compiler.js:30255:30)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
+/* harmony import */ var svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! svelte */ "./node_modules/svelte/index.mjs");
+/* harmony import */ var _stores_currentAddress__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../stores/currentAddress */ "./src/stores/currentAddress.ts");
+/* harmony import */ var _stores_currentGame__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../stores/currentGame */ "./src/stores/currentGame.ts");
+/* harmony import */ var _stores_socket__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../stores/socket */ "./src/stores/socket.ts");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _stores_currentPanda__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../stores/currentPanda */ "./src/stores/currentPanda.ts");
+/* harmony import */ var svelte_spa_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! svelte-spa-router */ "./node_modules/svelte-spa-router/Router.svelte");
+/* harmony import */ var _components_Nav_svelte__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/Nav.svelte */ "./src/components/Nav.svelte");
+/* harmony import */ var _App_svelte__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../App.svelte */ "./src/App.svelte");
+/* harmony import */ var _utils_randomLawyerCrow__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../utils/randomLawyerCrow */ "./src/utils/randomLawyerCrow.ts");
+/* harmony import */ var _home_jeff_code_pandamoanium_src_client_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
+/* harmony import */ var _home_jeff_code_pandamoanium_src_client_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
+/* module decorator */ module = __webpack_require__.hmd(module);
+/* provided dependency */ var console = __webpack_require__(/*! ./node_modules/console-browserify/index.js */ "./node_modules/console-browserify/index.js");
+/* src/pages/Game.svelte generated by Svelte v3.38.2 */
+
+
+const { document: document_1 } = svelte_internal__WEBPACK_IMPORTED_MODULE_0__.globals;
+
+
+
+
+
+
+
+
+
+
+const file = "src/pages/Game.svelte";
+
+function add_css() {
+	var style = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("style");
+	style.id = "svelte-j6apr1-style";
+	style.textContent = ".green.svelte-j6apr1.svelte-j6apr1{color:green}.red.svelte-j6apr1.svelte-j6apr1{color:red}.container.game-container.svelte-j6apr1.svelte-j6apr1{padding:0;background:#333;box-sizing:border-box;-webkit-backdrop-filter:blur(15px);backdrop-filter:blur(15px);min-height:480px;border-radius:5px;margin-bottom:10px}.game-canvas-left.svelte-j6apr1.svelte-j6apr1{padding:10px 19px;position:relative}.choices.svelte-j6apr1.svelte-j6apr1{position:absolute;padding:0px 14px}.choices.svelte-j6apr1 h2.svelte-j6apr1{margin:6px 0px 0px 0px}p.marb-10.svelte-j6apr1.svelte-j6apr1{margin-bottom:11px}p.cursor-pointer.choice.svelte-j6apr1.svelte-j6apr1{font-size:1.2rem;font-weight:600;color:#f8f83b;margin:0px 0px 4px 0px}.chat-right-section.svelte-j6apr1.svelte-j6apr1{background:#000;padding:10px 19px}#chat-box.svelte-j6apr1.svelte-j6apr1{background:black;color:white;border-radius:7px;padding:20px;position:relative;max-height:400px;overflow-y:scroll;height:400px}.chat-input.svelte-j6apr1.svelte-j6apr1{padding:12px 22px;border-radius:0.5rem;background:#211e1ebf;width:100%;margin:29px 0px 0px 0px}h3.svelte-j6apr1.svelte-j6apr1{color:#9da2ad;margin:-28px 0px 8px 0px}.grid.grid-cols-3.svelte-j6apr1.svelte-j6apr1{grid-template-columns:repeat(3, minmax(0, 1fr))}.grid.grid-cols-6.svelte-j6apr1.svelte-j6apr1{grid-template-columns:repeat(6, minmax(0, 1fr))}.col-span-2.svelte-j6apr1.svelte-j6apr1{grid-column:span 2 / span 2}.colors.svelte-j6apr1.svelte-j6apr1{max-width:255px}.color.svelte-j6apr1.svelte-j6apr1{width:30px;height:30px;border-radius:5px}.cwhite.svelte-j6apr1.svelte-j6apr1{background-color:#fff}.cred.svelte-j6apr1.svelte-j6apr1{background-color:#ff0000}.cyellow.svelte-j6apr1.svelte-j6apr1{background-color:#f8f83b}.cteal.svelte-j6apr1.svelte-j6apr1{background-color:#00ffff}.game-finished.svelte-j6apr1.svelte-j6apr1{-webkit-box-ordinal-group:99999;text-align:center;position:absolute;top:20px;margin:0 auto;width:90%;background:#333}.game-finished.svelte-j6apr1 h2.svelte-j6apr1{margin:31px 0px 10px 0px}.game-container.svelte-j6apr1 h2.svelte-j6apr1{font-size:1.5rem}p.score.svelte-j6apr1.svelte-j6apr1{font-size:1rem;font-weight:600;line-height:20px}p.panda-title.svelte-j6apr1.svelte-j6apr1{font-size:0.83rem;font-weight:500;margin:8px 0px 0px 0px}@media(max-width: 800px){.grid.grid-cols-6.svelte-j6apr1.svelte-j6apr1{grid-template-columns:repeat(4, minmax(0, 1fr))}}@media(max-width: 600px){h3.svelte-j6apr1.svelte-j6apr1{color:#9da2ad;margin:0px}.grid.grid-cols-3.svelte-j6apr1.svelte-j6apr1{grid-template-columns:repeat(1, minmax(0, 1fr))}.col-span-2.svelte-j6apr1.svelte-j6apr1{grid-column:span 1 / span 1}}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiR2FtZS5zdmVsdGUiLCJtYXBwaW5ncyI6IjRqRkE2bUJBIiwibmFtZXMiOltdLCJzb3VyY2VzIjpbIkdhbWUuc3ZlbHRlIl19 */";
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(document_1.head, style);
+}
+
+function get_each_context(ctx, list, i) {
+	const child_ctx = ctx.slice();
+	child_ctx[33] = list[i];
+	return child_ctx;
+}
+
+function get_each_context_1(ctx, list, i) {
+	const child_ctx = ctx.slice();
+	child_ctx[36] = list[i];
+	return child_ctx;
+}
+
+function get_each_context_2(ctx, list, i) {
+	const child_ctx = ctx.slice();
+	child_ctx[39] = list[i];
+	return child_ctx;
+}
+
+function get_each_context_3(ctx, list, i) {
+	const child_ctx = ctx.slice();
+	child_ctx[42] = list[i];
+	return child_ctx;
+}
+
+// (273:4) {#if currentWord}
+function create_if_block_10(ctx) {
+	let h2;
+	let t;
+
+	function select_block_type(ctx, dirty) {
+		if (/*shouldShowWord*/ ctx[9]) return create_if_block_11;
+		return create_else_block_1;
+	}
+
+	let current_block_type = select_block_type(ctx, [-1]);
+	let if_block = current_block_type(ctx);
+
+	const block = {
+		c: function create() {
+			h2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("h2");
+			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Current Word:\n        ");
+			if_block.c();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h2, file, 273, 6, 9124);
+		},
+		m: function mount(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, h2, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(h2, t);
+			if_block.m(h2, null);
+		},
+		p: function update(ctx, dirty) {
+			if (current_block_type === (current_block_type = select_block_type(ctx, dirty)) && if_block) {
+				if_block.p(ctx, dirty);
+			} else {
+				if_block.d(1);
+				if_block = current_block_type(ctx);
+
+				if (if_block) {
+					if_block.c();
+					if_block.m(h2, null);
+				}
+			}
+		},
+		d: function destroy(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(h2);
+			if_block.d();
+		}
+	};
+
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.dispatch_dev)("SvelteRegisterBlock", {
+		block,
+		id: create_if_block_10.name,
+		type: "if",
+		source: "(273:4) {#if currentWord}",
+		ctx
+	});
+
+	return block;
+}
+
+// (278:8) {:else}
+function create_else_block_1(ctx) {
+	let each_1_anchor;
+	let each_value_3 = /*currentWord*/ ctx[8];
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.validate_each_argument)(each_value_3);
+	let each_blocks = [];
+
+	for (let i = 0; i < each_value_3.length; i += 1) {
+		each_blocks[i] = create_each_block_3(get_each_context_3(ctx, each_value_3, i));
+	}
+
+	const block = {
+		c: function create() {
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].c();
+			}
+
+			each_1_anchor = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.empty)();
+		},
+		m: function mount(target, anchor) {
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].m(target, anchor);
+			}
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, each_1_anchor, anchor);
+		},
+		p: function update(ctx, dirty) {
+			if (dirty[0] & /*currentWord*/ 256) {
+				each_value_3 = /*currentWord*/ ctx[8];
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.validate_each_argument)(each_value_3);
+				let i;
+
+				for (i = 0; i < each_value_3.length; i += 1) {
+					const child_ctx = get_each_context_3(ctx, each_value_3, i);
+
+					if (each_blocks[i]) {
+						each_blocks[i].p(child_ctx, dirty);
+					} else {
+						each_blocks[i] = create_each_block_3(child_ctx);
+						each_blocks[i].c();
+						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+					}
+				}
+
+				for (; i < each_blocks.length; i += 1) {
+					each_blocks[i].d(1);
+				}
+
+				each_blocks.length = each_value_3.length;
+			}
+		},
+		d: function destroy(detaching) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_each)(each_blocks, detaching);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(each_1_anchor);
+		}
+	};
+
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.dispatch_dev)("SvelteRegisterBlock", {
+		block,
+		id: create_else_block_1.name,
+		type: "else",
+		source: "(278:8) {:else}",
+		ctx
+	});
+
+	return block;
+}
+
+// (276:8) {#if shouldShowWord}
+function create_if_block_11(ctx) {
+	let t;
+
+	const block = {
+		c: function create() {
+			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(/*currentWord*/ ctx[8]);
+		},
+		m: function mount(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, t, anchor);
+		},
+		p: function update(ctx, dirty) {
+			if (dirty[0] & /*currentWord*/ 256) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data_dev)(t, /*currentWord*/ ctx[8]);
+		},
+		d: function destroy(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(t);
+		}
+	};
+
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.dispatch_dev)("SvelteRegisterBlock", {
+		block,
+		id: create_if_block_11.name,
+		type: "if",
+		source: "(276:8) {#if shouldShowWord}",
+		ctx
+	});
+
+	return block;
+}
+
+// (282:12) {:else}
+function create_else_block_2(ctx) {
+	let t;
+
+	const block = {
+		c: function create() {
+			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("_");
+		},
+		m: function mount(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, t, anchor);
+		},
+		d: function destroy(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(t);
+		}
+	};
+
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.dispatch_dev)("SvelteRegisterBlock", {
+		block,
+		id: create_else_block_2.name,
+		type: "else",
+		source: "(282:12) {:else}",
+		ctx
+	});
+
+	return block;
+}
+
+// (280:12) {#if letter === " "}
+function create_if_block_12(ctx) {
+	let t;
+
+	const block = {
+		c: function create() {
+			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(" ");
+		},
+		m: function mount(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, t, anchor);
+		},
+		d: function destroy(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(t);
+		}
+	};
+
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.dispatch_dev)("SvelteRegisterBlock", {
+		block,
+		id: create_if_block_12.name,
+		type: "if",
+		source: "(280:12) {#if letter === \\\" \\\"}",
+		ctx
+	});
+
+	return block;
+}
+
+// (279:10) {#each currentWord as letter}
+function create_each_block_3(ctx) {
+	let if_block_anchor;
+
+	function select_block_type_1(ctx, dirty) {
+		if (/*letter*/ ctx[42] === " ") return create_if_block_12;
+		return create_else_block_2;
+	}
+
+	let current_block_type = select_block_type_1(ctx, [-1]);
+	let if_block = current_block_type(ctx);
+
+	const block = {
+		c: function create() {
+			if_block.c();
+			if_block_anchor = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.empty)();
+		},
+		m: function mount(target, anchor) {
+			if_block.m(target, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, if_block_anchor, anchor);
+		},
+		p: function update(ctx, dirty) {
+			if (current_block_type !== (current_block_type = select_block_type_1(ctx, dirty))) {
+				if_block.d(1);
+				if_block = current_block_type(ctx);
+
+				if (if_block) {
+					if_block.c();
+					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+				}
+			}
+		},
+		d: function destroy(detaching) {
+			if_block.d(detaching);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(if_block_anchor);
+		}
+	};
+
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.dispatch_dev)("SvelteRegisterBlock", {
+		block,
+		id: create_each_block_3.name,
+		type: "each",
+		source: "(279:10) {#each currentWord as letter}",
+		ctx
+	});
+
+	return block;
+}
+
+// (299:8) {#if active}
+function create_if_block_9(ctx) {
+	let t0;
+	let t1;
+
+	const block = {
+		c: function create() {
+			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Timer: ");
+			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(/*timer*/ ctx[7]);
+		},
+		m: function mount(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, t0, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, t1, anchor);
+		},
+		p: function update(ctx, dirty) {
+			if (dirty[0] & /*timer*/ 128) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data_dev)(t1, /*timer*/ ctx[7]);
+		},
+		d: function destroy(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(t0);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(t1);
+		}
+	};
+
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.dispatch_dev)("SvelteRegisterBlock", {
+		block,
+		id: create_if_block_9.name,
+		type: "if",
+		source: "(299:8) {#if active}",
+		ctx
+	});
+
+	return block;
+}
+
+// (302:8) {#if activePlayer && activePlayer.pandaName === $currentPanda.name && choices && choices.length && !active}
+function create_if_block_8(ctx) {
+	let h2;
+	let t1;
+	let p;
+	let t3;
+	let each_1_anchor;
+	let each_value_2 = /*choices*/ ctx[3];
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.validate_each_argument)(each_value_2);
+	let each_blocks = [];
+
+	for (let i = 0; i < each_value_2.length; i += 1) {
+		each_blocks[i] = create_each_block_2(get_each_context_2(ctx, each_value_2, i));
+	}
+
+	const block = {
+		c: function create() {
+			h2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("h2");
+			h2.textContent = "Choices";
+			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			p = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
+			p.textContent = "Choose an option that you want to draw. Others will try to guess it.";
+			t3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].c();
+			}
+
+			each_1_anchor = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.empty)();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(h2, "class", "svelte-j6apr1");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h2, file, 302, 10, 9835);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(p, "class", "marb-10  svelte-j6apr1");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 303, 10, 9862);
+		},
+		m: function mount(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, h2, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, t1, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, p, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, t3, anchor);
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].m(target, anchor);
+			}
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, each_1_anchor, anchor);
+		},
+		p: function update(ctx, dirty) {
+			if (dirty[0] & /*selectChoice, choices*/ 16392) {
+				each_value_2 = /*choices*/ ctx[3];
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.validate_each_argument)(each_value_2);
+				let i;
+
+				for (i = 0; i < each_value_2.length; i += 1) {
+					const child_ctx = get_each_context_2(ctx, each_value_2, i);
+
+					if (each_blocks[i]) {
+						each_blocks[i].p(child_ctx, dirty);
+					} else {
+						each_blocks[i] = create_each_block_2(child_ctx);
+						each_blocks[i].c();
+						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+					}
+				}
+
+				for (; i < each_blocks.length; i += 1) {
+					each_blocks[i].d(1);
+				}
+
+				each_blocks.length = each_value_2.length;
+			}
+		},
+		d: function destroy(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(h2);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(t1);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(p);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(t3);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_each)(each_blocks, detaching);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(each_1_anchor);
+		}
+	};
+
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.dispatch_dev)("SvelteRegisterBlock", {
+		block,
+		id: create_if_block_8.name,
+		type: "if",
+		source: "(302:8) {#if activePlayer && activePlayer.pandaName === $currentPanda.name && choices && choices.length && !active}",
+		ctx
+	});
+
+	return block;
+}
+
+// (307:10) {#each choices as choice}
+function create_each_block_2(ctx) {
+	let p;
+	let t0_value = /*choice*/ ctx[39] + "";
+	let t0;
+	let t1;
+	let mounted;
+	let dispose;
+
+	function click_handler() {
+		return /*click_handler*/ ctx[17](/*choice*/ ctx[39]);
+	}
+
+	const block = {
+		c: function create() {
+			p = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
+			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t0_value);
+			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(p, "class", "cursor-pointer choice svelte-j6apr1");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 307, 12, 10027);
+		},
+		m: function mount(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, p, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(p, t0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(p, t1);
+
+			if (!mounted) {
+				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen_dev)(p, "click", click_handler, false, false, false);
+				mounted = true;
+			}
+		},
+		p: function update(new_ctx, dirty) {
+			ctx = new_ctx;
+			if (dirty[0] & /*choices*/ 8 && t0_value !== (t0_value = /*choice*/ ctx[39] + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data_dev)(t0, t0_value);
+		},
+		d: function destroy(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(p);
+			mounted = false;
+			dispose();
+		}
+	};
+
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.dispatch_dev)("SvelteRegisterBlock", {
+		block,
+		id: create_each_block_2.name,
+		type: "each",
+		source: "(307:10) {#each choices as choice}",
+		ctx
+	});
+
+	return block;
+}
+
+// (318:6) {#if $currentGame.finished}
+function create_if_block_6(ctx) {
+	let div;
+	let h2;
+	let t1;
+	let if_block = /*isHost*/ ctx[5] && create_if_block_7(ctx);
+
+	const block = {
+		c: function create() {
+			div = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			h2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("h2");
+			h2.textContent = "Game is finished!";
+			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			if (if_block) if_block.c();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(h2, "class", "svelte-j6apr1");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h2, file, 319, 10, 10318);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div, "class", "game-finished svelte-j6apr1");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div, file, 318, 8, 10280);
+		},
+		m: function mount(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, div, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div, h2);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div, t1);
+			if (if_block) if_block.m(div, null);
+		},
+		p: function update(ctx, dirty) {
+			if (/*isHost*/ ctx[5]) {
+				if (if_block) {
+					if_block.p(ctx, dirty);
+				} else {
+					if_block = create_if_block_7(ctx);
+					if_block.c();
+					if_block.m(div, null);
+				}
+			} else if (if_block) {
+				if_block.d(1);
+				if_block = null;
+			}
+		},
+		d: function destroy(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(div);
+			if (if_block) if_block.d();
+		}
+	};
+
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.dispatch_dev)("SvelteRegisterBlock", {
+		block,
+		id: create_if_block_6.name,
+		type: "if",
+		source: "(318:6) {#if $currentGame.finished}",
+		ctx
+	});
+
+	return block;
+}
+
+// (321:10) {#if isHost}
+function create_if_block_7(ctx) {
+	let button;
+	let mounted;
+	let dispose;
+
+	const block = {
+		c: function create() {
+			button = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("button");
+			button.textContent = "Play Again?";
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(button, "class", "btn btn-primary");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(button, file, 321, 12, 10380);
+		},
+		m: function mount(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, button, anchor);
+
+			if (!mounted) {
+				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen_dev)(button, "click", /*restartGame*/ ctx[13], false, false, false);
+				mounted = true;
+			}
+		},
+		p: svelte_internal__WEBPACK_IMPORTED_MODULE_0__.noop,
+		d: function destroy(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(button);
+			mounted = false;
+			dispose();
+		}
+	};
+
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.dispatch_dev)("SvelteRegisterBlock", {
+		block,
+		id: create_if_block_7.name,
+		type: "if",
+		source: "(321:10) {#if isHost}",
+		ctx
+	});
+
+	return block;
+}
+
+// (330:8) {#if timedOut}
+function create_if_block_5(ctx) {
+	let p;
+
+	const block = {
+		c: function create() {
+			p = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
+			p.textContent = "Timed out!";
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(p, "class", "timed-out");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 330, 10, 10595);
+		},
+		m: function mount(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, p, anchor);
+		},
+		d: function destroy(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(p);
+		}
+	};
+
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.dispatch_dev)("SvelteRegisterBlock", {
+		block,
+		id: create_if_block_5.name,
+		type: "if",
+		source: "(330:8) {#if timedOut}",
+		ctx
+	});
+
+	return block;
+}
+
+// (342:6) {#if activePlayer && activePlayer.pandaName === $currentPanda.name}
+function create_if_block_4(ctx) {
+	let div4;
+	let div0;
+	let t0;
+	let div1;
+	let t1;
+	let div2;
+	let t2;
+	let div3;
+	let mounted;
+	let dispose;
+
+	const block = {
+		c: function create() {
+			div4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			div0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div0, "class", "cwhite color svelte-j6apr1");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div0, file, 345, 10, 10969);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div1, "class", "cred color svelte-j6apr1");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div1, file, 346, 10, 11045);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div2, "class", "cyellow color svelte-j6apr1");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div2, file, 347, 10, 11122);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div3, "class", "cteal color svelte-j6apr1");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div3, file, 348, 10, 11202);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div4, "class", "colors grid grid-cols-6 auto-rows-max gap-x-5 gap-y-5 w-auto svelte-j6apr1");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div4, file, 342, 8, 10865);
+		},
+		m: function mount(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, div4, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div4, div0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div4, t0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div4, div1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div4, t1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div4, div2);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div4, t2);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div4, div3);
+
+			if (!mounted) {
+				dispose = [
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen_dev)(div0, "click", /*click_handler_1*/ ctx[18], false, false, false),
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen_dev)(div1, "click", /*click_handler_2*/ ctx[19], false, false, false),
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen_dev)(div2, "click", /*click_handler_3*/ ctx[20], false, false, false),
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen_dev)(div3, "click", /*click_handler_4*/ ctx[21], false, false, false)
+				];
+
+				mounted = true;
+			}
+		},
+		p: svelte_internal__WEBPACK_IMPORTED_MODULE_0__.noop,
+		d: function destroy(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(div4);
+			mounted = false;
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.run_all)(dispose);
+		}
+	};
+
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.dispatch_dev)("SvelteRegisterBlock", {
+		block,
+		id: create_if_block_4.name,
+		type: "if",
+		source: "(342:6) {#if activePlayer && activePlayer.pandaName === $currentPanda.name}",
+		ctx
+	});
+
+	return block;
+}
+
+// (357:8) {#if messages}
+function create_if_block_2(ctx) {
+	let each_1_anchor;
+	let each_value_1 = /*messages*/ ctx[0];
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.validate_each_argument)(each_value_1);
+	let each_blocks = [];
+
+	for (let i = 0; i < each_value_1.length; i += 1) {
+		each_blocks[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
+	}
+
+	const block = {
+		c: function create() {
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].c();
+			}
+
+			each_1_anchor = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.empty)();
+		},
+		m: function mount(target, anchor) {
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].m(target, anchor);
+			}
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, each_1_anchor, anchor);
+		},
+		p: function update(ctx, dirty) {
+			if (dirty[0] & /*messages*/ 1) {
+				each_value_1 = /*messages*/ ctx[0];
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.validate_each_argument)(each_value_1);
+				let i;
+
+				for (i = 0; i < each_value_1.length; i += 1) {
+					const child_ctx = get_each_context_1(ctx, each_value_1, i);
+
+					if (each_blocks[i]) {
+						each_blocks[i].p(child_ctx, dirty);
+					} else {
+						each_blocks[i] = create_each_block_1(child_ctx);
+						each_blocks[i].c();
+						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+					}
+				}
+
+				for (; i < each_blocks.length; i += 1) {
+					each_blocks[i].d(1);
+				}
+
+				each_blocks.length = each_value_1.length;
+			}
+		},
+		d: function destroy(detaching) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_each)(each_blocks, detaching);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(each_1_anchor);
+		}
+	};
+
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.dispatch_dev)("SvelteRegisterBlock", {
+		block,
+		id: create_if_block_2.name,
+		type: "if",
+		source: "(357:8) {#if messages}",
+		ctx
+	});
+
+	return block;
+}
+
+// (368:14) {:else}
+function create_else_block(ctx) {
+	let t0_value = /*message*/ ctx[36].player.pandaName + "";
+	let t0;
+	let t1;
+	let t2_value = /*message*/ ctx[36].text + "";
+	let t2;
+
+	const block = {
+		c: function create() {
+			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t0_value);
+			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(": ");
+			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t2_value);
+		},
+		m: function mount(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, t0, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, t1, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, t2, anchor);
+		},
+		p: function update(ctx, dirty) {
+			if (dirty[0] & /*messages*/ 1 && t0_value !== (t0_value = /*message*/ ctx[36].player.pandaName + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data_dev)(t0, t0_value);
+			if (dirty[0] & /*messages*/ 1 && t2_value !== (t2_value = /*message*/ ctx[36].text + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data_dev)(t2, t2_value);
+		},
+		d: function destroy(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(t0);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(t1);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(t2);
+		}
+	};
+
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.dispatch_dev)("SvelteRegisterBlock", {
+		block,
+		id: create_else_block.name,
+		type: "else",
+		source: "(368:14) {:else}",
+		ctx
+	});
+
+	return block;
+}
+
+// (366:14) {#if message.isCorrect}
+function create_if_block_3(ctx) {
+	let t0_value = /*message*/ ctx[36].player.pandaName + "";
+	let t0;
+	let t1;
+
+	const block = {
+		c: function create() {
+			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t0_value);
+			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(" got the answer!");
+		},
+		m: function mount(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, t0, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, t1, anchor);
+		},
+		p: function update(ctx, dirty) {
+			if (dirty[0] & /*messages*/ 1 && t0_value !== (t0_value = /*message*/ ctx[36].player.pandaName + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data_dev)(t0, t0_value);
+		},
+		d: function destroy(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(t0);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(t1);
+		}
+	};
+
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.dispatch_dev)("SvelteRegisterBlock", {
+		block,
+		id: create_if_block_3.name,
+		type: "if",
+		source: "(366:14) {#if message.isCorrect}",
+		ctx
+	});
+
+	return block;
+}
+
+// (358:10) {#each messages as message}
+function create_each_block_1(ctx) {
+	let p;
+	let t;
+	let p_class_value;
+
+	function select_block_type_2(ctx, dirty) {
+		if (/*message*/ ctx[36].isCorrect) return create_if_block_3;
+		return create_else_block;
+	}
+
+	let current_block_type = select_block_type_2(ctx, [-1]);
+	let if_block = current_block_type(ctx);
+
+	const block = {
+		c: function create() {
+			p = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
+			if_block.c();
+			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(p, "class", p_class_value = "" + ((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.null_to_empty)(/*message*/ ctx[36].isCorrect
+			? "green"
+			: /*message*/ ctx[36].player.pandaName === "Lawyer Crow"
+				? "red"
+				: "") + " svelte-j6apr1"));
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 358, 12, 11481);
+		},
+		m: function mount(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, p, anchor);
+			if_block.m(p, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(p, t);
+		},
+		p: function update(ctx, dirty) {
+			if (current_block_type === (current_block_type = select_block_type_2(ctx, dirty)) && if_block) {
+				if_block.p(ctx, dirty);
+			} else {
+				if_block.d(1);
+				if_block = current_block_type(ctx);
+
+				if (if_block) {
+					if_block.c();
+					if_block.m(p, t);
+				}
+			}
+
+			if (dirty[0] & /*messages*/ 1 && p_class_value !== (p_class_value = "" + ((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.null_to_empty)(/*message*/ ctx[36].isCorrect
+			? "green"
+			: /*message*/ ctx[36].player.pandaName === "Lawyer Crow"
+				? "red"
+				: "") + " svelte-j6apr1"))) {
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(p, "class", p_class_value);
+			}
+		},
+		d: function destroy(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(p);
+			if_block.d();
+		}
+	};
+
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.dispatch_dev)("SvelteRegisterBlock", {
+		block,
+		id: create_each_block_1.name,
+		type: "each",
+		source: "(358:10) {#each messages as message}",
+		ctx
+	});
+
+	return block;
+}
+
+// (396:4) {#if $currentGame.players}
+function create_if_block(ctx) {
+	let each_1_anchor;
+	let each_value = /*$currentGame*/ ctx[11].players;
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.validate_each_argument)(each_value);
+	let each_blocks = [];
+
+	for (let i = 0; i < each_value.length; i += 1) {
+		each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
+	}
+
+	const block = {
+		c: function create() {
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].c();
+			}
+
+			each_1_anchor = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.empty)();
+		},
+		m: function mount(target, anchor) {
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].m(target, anchor);
+			}
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, each_1_anchor, anchor);
+		},
+		p: function update(ctx, dirty) {
+			if (dirty[0] & /*$currentGame*/ 2048) {
+				each_value = /*$currentGame*/ ctx[11].players;
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.validate_each_argument)(each_value);
+				let i;
+
+				for (i = 0; i < each_value.length; i += 1) {
+					const child_ctx = get_each_context(ctx, each_value, i);
+
+					if (each_blocks[i]) {
+						each_blocks[i].p(child_ctx, dirty);
+					} else {
+						each_blocks[i] = create_each_block(child_ctx);
+						each_blocks[i].c();
+						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+					}
+				}
+
+				for (; i < each_blocks.length; i += 1) {
+					each_blocks[i].d(1);
+				}
+
+				each_blocks.length = each_value.length;
+			}
+		},
+		d: function destroy(detaching) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_each)(each_blocks, detaching);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(each_1_anchor);
+		}
+	};
+
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.dispatch_dev)("SvelteRegisterBlock", {
+		block,
+		id: create_if_block.name,
+		type: "if",
+		source: "(396:4) {#if $currentGame.players}",
+		ctx
+	});
+
+	return block;
+}
+
+// (402:10) {#if $currentGame.correctPlayersThisRound.find((p) => p.pandaName === player.pandaName)}
+function create_if_block_1(ctx) {
+	let p;
+
+	const block = {
+		c: function create() {
+			p = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
+			p.textContent = "Correct!";
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 402, 12, 12818);
+		},
+		m: function mount(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, p, anchor);
+		},
+		d: function destroy(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(p);
+		}
+	};
+
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.dispatch_dev)("SvelteRegisterBlock", {
+		block,
+		id: create_if_block_1.name,
+		type: "if",
+		source: "(402:10) {#if $currentGame.correctPlayersThisRound.find((p) => p.pandaName === player.pandaName)}",
+		ctx
+	});
+
+	return block;
+}
+
+// (397:6) {#each $currentGame.players as player}
+function create_each_block(ctx) {
+	let div;
+	let img;
+	let img_src_value;
+	let t0;
+	let p0;
+	let t1_value = /*player*/ ctx[33].pandaName + "";
+	let t1;
+	let t2;
+	let p1;
+	let t3;
+	let span;
+	let t4_value = /*player*/ ctx[33].score + "";
+	let t4;
+	let t5;
+	let show_if = /*$currentGame*/ ctx[11].correctPlayersThisRound.find(func);
+	let t6;
+
+	function func(...args) {
+		return /*func*/ ctx[16](/*player*/ ctx[33], ...args);
+	}
+
+	let if_block = show_if && create_if_block_1(ctx);
+
+	const block = {
+		c: function create() {
+			div = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			img = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("img");
+			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			p0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
+			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t1_value);
+			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			p1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
+			t3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Score:");
+			span = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("span");
+			t4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t4_value);
+			t5 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			if (if_block) if_block.c();
+			t6 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			if (img.src !== (img_src_value = /*player*/ ctx[33].thumbnail)) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(img, "src", img_src_value);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(img, "class", "panda");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(img, file, 398, 10, 12535);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(p0, "class", "grey5 panda-title svelte-j6apr1");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p0, file, 399, 10, 12590);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(span, file, 400, 33, 12675);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(p1, "class", "score svelte-j6apr1");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p1, file, 400, 10, 12652);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div, "class", "panda-pp rounded-md");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div, file, 397, 8, 12491);
+		},
+		m: function mount(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, div, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div, img);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div, t0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div, p0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(p0, t1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div, t2);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div, p1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(p1, t3);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(p1, span);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(span, t4);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div, t5);
+			if (if_block) if_block.m(div, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div, t6);
+		},
+		p: function update(new_ctx, dirty) {
+			ctx = new_ctx;
+
+			if (dirty[0] & /*$currentGame*/ 2048 && img.src !== (img_src_value = /*player*/ ctx[33].thumbnail)) {
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(img, "src", img_src_value);
+			}
+
+			if (dirty[0] & /*$currentGame*/ 2048 && t1_value !== (t1_value = /*player*/ ctx[33].pandaName + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data_dev)(t1, t1_value);
+			if (dirty[0] & /*$currentGame*/ 2048 && t4_value !== (t4_value = /*player*/ ctx[33].score + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data_dev)(t4, t4_value);
+			if (dirty[0] & /*$currentGame*/ 2048) show_if = /*$currentGame*/ ctx[11].correctPlayersThisRound.find(func);
+
+			if (show_if) {
+				if (if_block) {
+					
+				} else {
+					if_block = create_if_block_1(ctx);
+					if_block.c();
+					if_block.m(div, t6);
+				}
+			} else if (if_block) {
+				if_block.d(1);
+				if_block = null;
+			}
+		},
+		d: function destroy(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(div);
+			if (if_block) if_block.d();
+		}
+	};
+
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.dispatch_dev)("SvelteRegisterBlock", {
+		block,
+		id: create_each_block.name,
+		type: "each",
+		source: "(397:6) {#each $currentGame.players as player}",
+		ctx
+	});
+
+	return block;
+}
+
+function create_fragment(ctx) {
+	let nav;
+	let t0;
+	let div1;
+	let div0;
+	let h2;
+	let t2;
+	let h3;
+	let t3;
+	let span;
+	let t4_value = /*$currentGame*/ ctx[11]?.roomCode + "";
+	let t4;
+	let t5;
+	let t6;
+	let div8;
+	let div7;
+	let div4;
+	let div2;
+	let t7;
+	let t8;
+	let t9;
+	let div3;
+	let t10;
+	let canvas_1;
+	let t11;
+	let t12;
+	let div6;
+	let div5;
+	let t13;
+	let input;
+	let input_disabled_value;
+	let t14;
+	let div10;
+	let div9;
+	let current;
+	let mounted;
+	let dispose;
+	nav = new _components_Nav_svelte__WEBPACK_IMPORTED_MODULE_8__["default"]({ $$inline: true });
+	let if_block0 = /*currentWord*/ ctx[8] && create_if_block_10(ctx);
+	let if_block1 = /*active*/ ctx[4] && create_if_block_9(ctx);
+	let if_block2 = /*activePlayer*/ ctx[2] && /*activePlayer*/ ctx[2].pandaName === /*$currentPanda*/ ctx[10].name && /*choices*/ ctx[3] && /*choices*/ ctx[3].length && !/*active*/ ctx[4] && create_if_block_8(ctx);
+	let if_block3 = /*$currentGame*/ ctx[11].finished && create_if_block_6(ctx);
+	let if_block4 = /*timedOut*/ ctx[6] && create_if_block_5(ctx);
+	let if_block5 = /*activePlayer*/ ctx[2] && /*activePlayer*/ ctx[2].pandaName === /*$currentPanda*/ ctx[10].name && create_if_block_4(ctx);
+	let if_block6 = /*messages*/ ctx[0] && create_if_block_2(ctx);
+	let if_block7 = /*$currentGame*/ ctx[11].players && create_if_block(ctx);
+
+	const block = {
+		c: function create() {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(nav.$$.fragment);
+			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			div0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			h2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("h2");
+			h2.textContent = "Game In Progress";
+			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			h3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("h3");
+			t3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Room Code: ");
+			span = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("span");
+			t4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t4_value);
+			t5 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			if (if_block0) if_block0.c();
+			t6 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div8 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			div7 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			div4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			div2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			if (if_block1) if_block1.c();
+			t7 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			if (if_block2) if_block2.c();
+			t8 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			if (if_block3) if_block3.c();
+			t9 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			if (if_block4) if_block4.c();
+			t10 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			canvas_1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("canvas");
+			t11 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			if (if_block5) if_block5.c();
+			t12 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div6 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			div5 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			if (if_block6) if_block6.c();
+			t13 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			input = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("input");
+			t14 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div10 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			div9 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			if (if_block7) if_block7.c();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(h2, "class", "grey6");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h2, file, 268, 4, 8957);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(span, "class", "text-animation");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(span, file, 270, 17, 9023);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(h3, "class", "svelte-j6apr1");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h3, file, 269, 4, 9001);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div0, "class", "flex flex-col game-lobby-head");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div0, file, 267, 2, 8909);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div1, "class", "container");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div1, file, 266, 0, 8883);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div2, "class", "choices svelte-j6apr1");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div2, file, 297, 6, 9627);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div3, "class", "game-finished svelte-j6apr1");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div3, file, 328, 6, 10534);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(canvas_1, "background", "#333333");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(canvas_1, "id", "imageView");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(canvas_1, "width", "600");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(canvas_1, "height", "400");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(canvas_1, file, 334, 6, 10665);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div4, "class", "game-canvas-left col-span-2 svelte-j6apr1");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div4, file, 296, 4, 9579);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div5, "id", "chat-box");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div5, "class", "svelte-j6apr1");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div5, file, 355, 6, 11388);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(input, "placeholder", "Type Here Noob");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(input, "class", "chat-input svelte-j6apr1");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(input, "type", "text");
+			input.disabled = input_disabled_value = /*activePlayer*/ ctx[2] && /*activePlayer*/ ctx[2].pandaName === /*$currentPanda*/ ctx[10].name || !/*active*/ ctx[4];
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(input, file, 375, 6, 11937);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div6, "class", "chat-right-section svelte-j6apr1");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div6, file, 354, 4, 11349);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div7, "class", "grid grid-cols-3 svelte-j6apr1");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div7, file, 294, 2, 9511);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div8, "class", "container game-container svelte-j6apr1");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div8, file, 293, 0, 9470);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div9, "class", "grid grid-cols-6 auto-rows-max gap-x-5 gap-y-5 w-auto panda-container svelte-j6apr1");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div9, file, 392, 2, 12316);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div10, "class", "container");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div10, file, 391, 0, 12290);
+		},
+		l: function claim(nodes) {
+			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+		},
+		m: function mount(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(nav, target, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, t0, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, div1, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div1, div0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div0, h2);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div0, t2);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div0, h3);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(h3, t3);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(h3, span);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(span, t4);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div0, t5);
+			if (if_block0) if_block0.m(div0, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, t6, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, div8, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div8, div7);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div7, div4);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div4, div2);
+			if (if_block1) if_block1.m(div2, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div2, t7);
+			if (if_block2) if_block2.m(div2, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div4, t8);
+			if (if_block3) if_block3.m(div4, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div4, t9);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div4, div3);
+			if (if_block4) if_block4.m(div3, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div4, t10);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div4, canvas_1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div4, t11);
+			if (if_block5) if_block5.m(div4, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div7, t12);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div7, div6);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div6, div5);
+			if (if_block6) if_block6.m(div5, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div6, t13);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div6, input);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_input_value)(input, /*currentMessage*/ ctx[1]);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, t14, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, div10, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append_dev)(div10, div9);
+			if (if_block7) if_block7.m(div9, null);
+			current = true;
+
+			if (!mounted) {
+				dispose = [
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen_dev)(input, "input", /*input_input_handler*/ ctx[22]),
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen_dev)(input, "keyup", (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.prevent_default)(/*handleKeyup*/ ctx[12]), false, true, false)
+				];
+
+				mounted = true;
+			}
+		},
+		p: function update(ctx, dirty) {
+			if ((!current || dirty[0] & /*$currentGame*/ 2048) && t4_value !== (t4_value = /*$currentGame*/ ctx[11]?.roomCode + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data_dev)(t4, t4_value);
+
+			if (/*currentWord*/ ctx[8]) {
+				if (if_block0) {
+					if_block0.p(ctx, dirty);
+				} else {
+					if_block0 = create_if_block_10(ctx);
+					if_block0.c();
+					if_block0.m(div0, null);
+				}
+			} else if (if_block0) {
+				if_block0.d(1);
+				if_block0 = null;
+			}
+
+			if (/*active*/ ctx[4]) {
+				if (if_block1) {
+					if_block1.p(ctx, dirty);
+				} else {
+					if_block1 = create_if_block_9(ctx);
+					if_block1.c();
+					if_block1.m(div2, t7);
+				}
+			} else if (if_block1) {
+				if_block1.d(1);
+				if_block1 = null;
+			}
+
+			if (/*activePlayer*/ ctx[2] && /*activePlayer*/ ctx[2].pandaName === /*$currentPanda*/ ctx[10].name && /*choices*/ ctx[3] && /*choices*/ ctx[3].length && !/*active*/ ctx[4]) {
+				if (if_block2) {
+					if_block2.p(ctx, dirty);
+				} else {
+					if_block2 = create_if_block_8(ctx);
+					if_block2.c();
+					if_block2.m(div2, null);
+				}
+			} else if (if_block2) {
+				if_block2.d(1);
+				if_block2 = null;
+			}
+
+			if (/*$currentGame*/ ctx[11].finished) {
+				if (if_block3) {
+					if_block3.p(ctx, dirty);
+				} else {
+					if_block3 = create_if_block_6(ctx);
+					if_block3.c();
+					if_block3.m(div4, t9);
+				}
+			} else if (if_block3) {
+				if_block3.d(1);
+				if_block3 = null;
+			}
+
+			if (/*timedOut*/ ctx[6]) {
+				if (if_block4) {
+					
+				} else {
+					if_block4 = create_if_block_5(ctx);
+					if_block4.c();
+					if_block4.m(div3, null);
+				}
+			} else if (if_block4) {
+				if_block4.d(1);
+				if_block4 = null;
+			}
+
+			if (/*activePlayer*/ ctx[2] && /*activePlayer*/ ctx[2].pandaName === /*$currentPanda*/ ctx[10].name) {
+				if (if_block5) {
+					if_block5.p(ctx, dirty);
+				} else {
+					if_block5 = create_if_block_4(ctx);
+					if_block5.c();
+					if_block5.m(div4, null);
+				}
+			} else if (if_block5) {
+				if_block5.d(1);
+				if_block5 = null;
+			}
+
+			if (/*messages*/ ctx[0]) {
+				if (if_block6) {
+					if_block6.p(ctx, dirty);
+				} else {
+					if_block6 = create_if_block_2(ctx);
+					if_block6.c();
+					if_block6.m(div5, null);
+				}
+			} else if (if_block6) {
+				if_block6.d(1);
+				if_block6 = null;
+			}
+
+			if (!current || dirty[0] & /*activePlayer, $currentPanda, active*/ 1044 && input_disabled_value !== (input_disabled_value = /*activePlayer*/ ctx[2] && /*activePlayer*/ ctx[2].pandaName === /*$currentPanda*/ ctx[10].name || !/*active*/ ctx[4])) {
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.prop_dev)(input, "disabled", input_disabled_value);
+			}
+
+			if (dirty[0] & /*currentMessage*/ 2 && input.value !== /*currentMessage*/ ctx[1]) {
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_input_value)(input, /*currentMessage*/ ctx[1]);
+			}
+
+			if (/*$currentGame*/ ctx[11].players) {
+				if (if_block7) {
+					if_block7.p(ctx, dirty);
+				} else {
+					if_block7 = create_if_block(ctx);
+					if_block7.c();
+					if_block7.m(div9, null);
+				}
+			} else if (if_block7) {
+				if_block7.d(1);
+				if_block7 = null;
+			}
+		},
+		i: function intro(local) {
+			if (current) return;
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(nav.$$.fragment, local);
+			current = true;
+		},
+		o: function outro(local) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(nav.$$.fragment, local);
+			current = false;
+		},
+		d: function destroy(detaching) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(nav, detaching);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(t0);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(div1);
+			if (if_block0) if_block0.d();
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(t6);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(div8);
+			if (if_block1) if_block1.d();
+			if (if_block2) if_block2.d();
+			if (if_block3) if_block3.d();
+			if (if_block4) if_block4.d();
+			if (if_block5) if_block5.d();
+			if (if_block6) if_block6.d();
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(t14);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach_dev)(div10);
+			if (if_block7) if_block7.d();
+			mounted = false;
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.run_all)(dispose);
+		}
+	};
+
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.dispatch_dev)("SvelteRegisterBlock", {
+		block,
+		id: create_fragment.name,
+		type: "component",
+		source: "",
+		ctx
+	});
+
+	return block;
+}
+
+function instance($$self, $$props, $$invalidate) {
+	let $currentPanda;
+	let $currentGame;
+	let $socket;
+	let $currentAddress;
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.validate_store)(_stores_currentPanda__WEBPACK_IMPORTED_MODULE_6__.currentPanda, "currentPanda");
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, _stores_currentPanda__WEBPACK_IMPORTED_MODULE_6__.currentPanda, $$value => $$invalidate(10, $currentPanda = $$value));
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.validate_store)(_stores_currentGame__WEBPACK_IMPORTED_MODULE_3__.currentGame, "currentGame");
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, _stores_currentGame__WEBPACK_IMPORTED_MODULE_3__.currentGame, $$value => $$invalidate(11, $currentGame = $$value));
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.validate_store)(_stores_socket__WEBPACK_IMPORTED_MODULE_4__.socket, "socket");
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, _stores_socket__WEBPACK_IMPORTED_MODULE_4__.socket, $$value => $$invalidate(26, $socket = $$value));
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.validate_store)(_stores_currentAddress__WEBPACK_IMPORTED_MODULE_2__.currentAddress, "currentAddress");
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, _stores_currentAddress__WEBPACK_IMPORTED_MODULE_2__.currentAddress, $$value => $$invalidate(27, $currentAddress = $$value));
+	let { $$slots: slots = {}, $$scope } = $$props;
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.validate_slots)("Game", slots, []);
+
+	var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
+		function adopt(value) {
+			return value instanceof P
+			? value
+			: new P(function (resolve) {
+						resolve(value);
+					});
+		}
+
+		return new (P || (P = Promise))(function (resolve, reject) {
+				function fulfilled(value) {
+					try {
+						step(generator.next(value));
+					} catch(e) {
+						reject(e);
+					}
+				}
+
+				function rejected(value) {
+					try {
+						step(generator["throw"](value));
+					} catch(e) {
+						reject(e);
+					}
+				}
+
+				function step(result) {
+					result.done
+					? resolve(result.value)
+					: adopt(result.value).then(fulfilled, rejected);
+				}
+
+				step((generator = generator.apply(thisArg, _arguments || [])).next());
+			});
+	};
+
+	
+	
+	let messages = [];
+	let currentMessage = "";
+	let activePlayer;
+	let choices = [];
+	let active = false;
+	let isHost = false;
+	let timedOut = false;
+	let timer = 69;
+	let currentWord = "";
+	let shouldShowWord = false;
+
+	(0,svelte__WEBPACK_IMPORTED_MODULE_1__.onMount)(() => __awaiter(void 0, void 0, void 0, function* () {
+		if (!$currentPanda || !$currentPanda.name) {
+			yield (0,svelte_spa_router__WEBPACK_IMPORTED_MODULE_7__.push)("/");
+			return;
+		}
+
+		if ($currentGame.players.find(p => p.pandaName === $currentPanda.name && p.isHost)) {
+			$$invalidate(5, isHost = true);
+		}
+
+		$socket.on("message", info => {
+			if ($currentGame.roomCode !== info.roomCode) return;
+			messages.push(info.message);
+			$$invalidate(0, messages);
+			const c = document.getElementById("chat-box");
+			if (!c) return;
+			const shouldScroll = c.scrollTop + c.clientHeight === c.scrollHeight;
+
+			if (!shouldScroll) {
+				c.scrollTop = c.scrollHeight;
+			}
+		});
+
+		$socket.on("wordSelected", info => {
+			if ($currentGame.roomCode !== info.roomCode) return;
+			$$invalidate(9, shouldShowWord = false);
+			$$invalidate(7, timer = 69);
+			$$invalidate(4, active = true);
+			$$invalidate(8, currentWord = info.currentWord);
+		});
+
+		$socket.on("countdown", info => {
+			if ($currentGame.roomCode !== info.roomCode) return;
+			$$invalidate(7, timer = info.t);
+		});
+
+		$socket.on("timeout", info => {
+			if (info.roomCode !== $currentGame.roomCode) return;
+			$$invalidate(4, active = false);
+			$$invalidate(6, timedOut = true);
+		});
+
+		$$invalidate(2, activePlayer = $currentGame.playerOrder[0]);
+
+		if (activePlayer.pandaName === $currentPanda.name) {
+			yield getChoices();
+		}
+
+		init();
+	}));
+
+	$socket.on("nextRound", info => __awaiter(void 0, void 0, void 0, function* () {
+		if (info.roomCode !== $currentGame.roomCode) return;
+		$$invalidate(6, timedOut = false);
+		$$invalidate(2, activePlayer = info.nextChooser);
+
+		if (info.nextChooser.pandaName !== "") {
+			messages.push({
+				player: { pandaName: "Lawyer Crow" },
+				text: info.nextChooser.pandaName + " Is drawing this round!",
+				isCorrect: false
+			});
+
+			$$invalidate(0, messages);
+		}
+
+		if (activePlayer.pandaName === $currentPanda.name) {
+			yield getChoices();
+		}
+	}));
+
+	$socket.on("gameOver", info => {
+		if (info.roomCode !== $currentGame.roomCode) return;
+		const game = $currentGame;
+		game.finished = true;
+		$$invalidate(4, active = false);
+
+		messages.push({
+			player: { pandaName: "Lawyer Crow" },
+			text: (0,_utils_randomLawyerCrow__WEBPACK_IMPORTED_MODULE_10__.randomLawyerCrow)(),
+			isCorrect: false
+		});
+
+		$$invalidate(0, messages);
+		_stores_currentGame__WEBPACK_IMPORTED_MODULE_3__.currentGame.set(game);
+	});
+
+	const getChoices = () => __awaiter(void 0, void 0, void 0, function* () {
+		const resp = yield axios__WEBPACK_IMPORTED_MODULE_5___default().get(`${{"SOLANA_RPC_HOST":"https://silent-thrumming-wind.solana-mainnet.quiknode.pro/c17a6e8ccc35a9f80a47c45f16263f2620d9ecb5/","SERVER_URL":"https://pandamoanium.herokuapp.com","PROD_SERVER_URL":"https://pandamoanium.herokuapp.com","DEV_SERVER_URL":"http://localhost:3000"}.SERVER_URL}/choices`);
+		$$invalidate(3, choices = resp.data.choices);
+	});
+
+	const handleKeyup = event => {
+		if (!activePlayer || activePlayer.pandaName === $currentPanda.name) {
+			event.preventDefault();
+			return;
+		}
+
+		if (event.code == "Enter") {
+			event.preventDefault();
+
+			$socket.emit("chatMessage", {
+				address: $currentAddress === null || $currentAddress === void 0
+				? void 0
+				: $currentAddress.toString(),
+				text: currentMessage,
+				roomCode: $currentGame.roomCode
+			});
+
+			$$invalidate(1, currentMessage = "");
+		}
+	};
+
+	$socket.on("restartedGame", info => __awaiter(void 0, void 0, void 0, function* () {
+		var _a;
+		if (info.roomCode !== $currentGame.roomCode) return;
+		const game = $currentGame;
+		game.playerOrder = info.playerOrder;
+		game.finished = false;
+		$$invalidate(2, activePlayer = game.playerOrder[0]);
+
+		messages.push({
+			player: { pandaName: "Lawyer Crow" },
+			text: ((_a = info.playerOrder[0]) === null || _a === void 0
+			? void 0
+			: _a.pandaName) + " Is drawing this round!",
+			isCorrect: false
+		});
+
+		$$invalidate(0, messages);
+
+		if (activePlayer.pandaName === $currentPanda.name) {
+			yield getChoices();
+		}
+
+		_stores_currentGame__WEBPACK_IMPORTED_MODULE_3__.currentGame.set(game);
+		$$invalidate(6, timedOut = false);
+		$$invalidate(4, active = false);
+		$$invalidate(7, timer = 69);
+	}));
+
+	function restartGame() {
+		$socket.emit("restartGame", $currentGame.roomCode);
+	}
+
+	const selectChoice = choice => __awaiter(void 0, void 0, void 0, function* () {
+		yield axios__WEBPACK_IMPORTED_MODULE_5___default().get(`${{"SOLANA_RPC_HOST":"https://silent-thrumming-wind.solana-mainnet.quiknode.pro/c17a6e8ccc35a9f80a47c45f16263f2620d9ecb5/","SERVER_URL":"https://pandamoanium.herokuapp.com","PROD_SERVER_URL":"https://pandamoanium.herokuapp.com","DEV_SERVER_URL":"http://localhost:3000"}.SERVER_URL}/selectWord?word=${choice}&roomCode=${$currentGame.roomCode}`);
+		$$invalidate(3, choices = []);
+	});
+
+	var canvas, context, tool;
+
+	function init() {
+		// Find the canvas element.
+		canvas = document.getElementById("imageView");
+
+		if (!canvas) {
+			alert("Error: I cannot find the canvas element!");
+			return;
+		}
+
+		// Get the 2D canvas context.
+		context = canvas.getContext("2d");
+
+		context.strokeStyle = "#fff";
+
+		// Pencil tool instance.
+		tool = new tool_pencil();
+
+		// Attach the mousedown, mousemove and mouseup event listeners.
+		canvas.addEventListener("mousedown", ev_canvas, false);
+
+		canvas.addEventListener("mousemove", ev_canvas, false);
+		canvas.addEventListener("mouseup", ev_canvas, false);
+	}
+
+	// This painting tool works like a drawing pencil which tracks the mouse
+	// movements.
+	function tool_pencil() {
+		var tool = this;
+		this.started = false;
+
+		// This is called when you start holding down the mouse button.
+		// This starts the pencil drawing.
+		this.mousedown = function (ev) {
+			if (activePlayer.pandaName === $currentPanda.name && active) {
+				context.beginPath();
+				context.moveTo(ev._x, ev._y);
+				tool.started = true;
+			}
+		};
+
+		// This function is called every time you move the mouse. Obviously, it only
+		// draws if the tool.started state is set to true (when you are holding down
+		// the mouse button).
+		this.mousemove = function (ev) {
+			if (tool.started && activePlayer.pandaName === $currentPanda.name && active) {
+				context.lineTo(ev._x, ev._y);
+				context.stroke();
+
+				$socket.emit("sendDraw", {
+					x: ev._x,
+					y: ev._y,
+					color: context.strokeStyle,
+					roomCode: $currentGame.roomCode
+				});
+			}
+		};
+
+		// This is called when you release the mouse button.
+		this.mouseup = function (ev) {
+			if (tool.started && activePlayer.pandaName === $currentPanda.name && active) {
+				tool.mousemove(ev);
+				tool.started = false;
+			}
+		};
+
+		const t = this;
+
+		$socket.on("receiveDraw", info => {
+			const ss = context.strokeStyle;
+			if (info.roomCode !== $currentGame.roomCode) return;
+			if (activePlayer.pandaName === $currentPanda.name) return;
+			context.strokeStyle = info.color;
+			context.lineTo(info.x, info.y);
+			context.stroke();
+			context.strokeStyle = ss;
+		});
+
+		$socket.on("clearCanvas", info => {
+			if (info.roomCode !== $currentGame.roomCode) return;
+			$$invalidate(9, shouldShowWord = true);
+			context.clearRect(0, 0, canvas.width, canvas.height);
+			$$invalidate(4, active = false);
+			$$invalidate(7, timer = 0);
+			const game = $currentGame;
+			game.players = info.players;
+			_stores_currentGame__WEBPACK_IMPORTED_MODULE_3__.currentGame.set(game);
+		});
+	}
+
+	// The general-purpose event handler. This function just determines the mouse
+	// position relative to the canvas element.
+	function ev_canvas(ev) {
+		if (ev.layerX || ev.layerX == 0) {
+			// Firefox
+			ev._x = ev.layerX;
+
+			ev._y = ev.layerY;
+		} else if (ev.offsetX || ev.offsetX == 0) {
+			// Opera
+			ev._x = ev.offsetX;
+
+			ev._y = ev.offsetY;
+		}
+
+		// Call the event handler of the tool.
+		var func = tool[ev.type];
+
+		if (func) {
+			func(ev);
+		}
+	}
+
+	function changeColor(color) {
+		if (context) {
+			context.strokeStyle = color;
+		}
+	}
+
+	const writable_props = [];
+
+	Object.keys($$props).forEach(key => {
+		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Game> was created with unknown prop '${key}'`);
+	});
+
+	const func = (player, p) => p.pandaName === player.pandaName;
+	const click_handler = async choice => await selectChoice(choice);
+	const click_handler_1 = () => changeColor("#fff");
+	const click_handler_2 = () => changeColor("#ff0000");
+	const click_handler_3 = () => changeColor("#f8f83b");
+	const click_handler_4 = () => changeColor(" #00ffff");
+
+	function input_input_handler() {
+		currentMessage = this.value;
+		$$invalidate(1, currentMessage);
+	}
+
+	$$self.$capture_state = () => ({
+		__awaiter,
+		onMount: svelte__WEBPACK_IMPORTED_MODULE_1__.onMount,
+		currentAddress: _stores_currentAddress__WEBPACK_IMPORTED_MODULE_2__.currentAddress,
+		currentGame: _stores_currentGame__WEBPACK_IMPORTED_MODULE_3__.currentGame,
+		socket: _stores_socket__WEBPACK_IMPORTED_MODULE_4__.socket,
+		axios: (axios__WEBPACK_IMPORTED_MODULE_5___default()),
+		currentPanda: _stores_currentPanda__WEBPACK_IMPORTED_MODULE_6__.currentPanda,
+		push: svelte_spa_router__WEBPACK_IMPORTED_MODULE_7__.push,
+		Nav: _components_Nav_svelte__WEBPACK_IMPORTED_MODULE_8__["default"],
+		App: _App_svelte__WEBPACK_IMPORTED_MODULE_9__["default"],
+		randomLawyerCrow: _utils_randomLawyerCrow__WEBPACK_IMPORTED_MODULE_10__.randomLawyerCrow,
+		messages,
+		currentMessage,
+		activePlayer,
+		choices,
+		active,
+		isHost,
+		timedOut,
+		timer,
+		currentWord,
+		shouldShowWord,
+		getChoices,
+		handleKeyup,
+		restartGame,
+		selectChoice,
+		canvas,
+		context,
+		tool,
+		init,
+		tool_pencil,
+		ev_canvas,
+		changeColor,
+		$currentPanda,
+		$currentGame,
+		$socket,
+		$currentAddress
+	});
+
+	$$self.$inject_state = $$props => {
+		if ("__awaiter" in $$props) __awaiter = $$props.__awaiter;
+		if ("messages" in $$props) $$invalidate(0, messages = $$props.messages);
+		if ("currentMessage" in $$props) $$invalidate(1, currentMessage = $$props.currentMessage);
+		if ("activePlayer" in $$props) $$invalidate(2, activePlayer = $$props.activePlayer);
+		if ("choices" in $$props) $$invalidate(3, choices = $$props.choices);
+		if ("active" in $$props) $$invalidate(4, active = $$props.active);
+		if ("isHost" in $$props) $$invalidate(5, isHost = $$props.isHost);
+		if ("timedOut" in $$props) $$invalidate(6, timedOut = $$props.timedOut);
+		if ("timer" in $$props) $$invalidate(7, timer = $$props.timer);
+		if ("currentWord" in $$props) $$invalidate(8, currentWord = $$props.currentWord);
+		if ("shouldShowWord" in $$props) $$invalidate(9, shouldShowWord = $$props.shouldShowWord);
+		if ("canvas" in $$props) canvas = $$props.canvas;
+		if ("context" in $$props) context = $$props.context;
+		if ("tool" in $$props) tool = $$props.tool;
+	};
+
+	if ($$props && "$$inject" in $$props) {
+		$$self.$inject_state($$props.$$inject);
+	}
+
+	return [
+		messages,
+		currentMessage,
+		activePlayer,
+		choices,
+		active,
+		isHost,
+		timedOut,
+		timer,
+		currentWord,
+		shouldShowWord,
+		$currentPanda,
+		$currentGame,
+		handleKeyup,
+		restartGame,
+		selectChoice,
+		changeColor,
+		func,
+		click_handler,
+		click_handler_1,
+		click_handler_2,
+		click_handler_3,
+		click_handler_4,
+		input_input_handler
+	];
+}
+
+class Game extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponentDev {
+	constructor(options) {
+		super(options);
+		if (!document_1.getElementById("svelte-j6apr1-style")) add_css();
+		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, {}, [-1, -1]);
+
+		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.dispatch_dev)("SvelteRegisterComponent", {
+			component: this,
+			tagName: "Game",
+			options,
+			id: create_fragment.name
+		});
+	}
+}
+
+if (module && module.hot) {}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Game);
+
+
 
 /***/ }),
 
