@@ -15,6 +15,7 @@
 {#if $currentAddress}
   <span class="hidden"> Address: {$currentAddress}</span>
 {:else}
+
   <Nav />
 
   <div class="container">
@@ -67,6 +68,10 @@
     max-width: 50%;
     margin: -10px 0px 35px 0px;
   }
+
+  .center-content.flex-col {
+    margin-top: -60px;
+}
 
   @media (max-width: 600px) {
     p {
