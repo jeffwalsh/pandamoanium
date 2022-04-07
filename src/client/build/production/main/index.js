@@ -64856,8 +64856,9 @@ function create_fragment(ctx) {
 			source = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("source");
 			if (source.src !== (source_src_value = "images/cgod.mp3")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(source, "src", source_src_value);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(source, "type", "audio/mpeg");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(source, file, 43, 4, 1639);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(source, file, 43, 4, 1648);
 			audio.controls = true;
+			audio.autoplay = true;
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(audio, file, 42, 2, 1618);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div, "class", "audio svelte-sbu6kw");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div, file, 41, 0, 1596);
