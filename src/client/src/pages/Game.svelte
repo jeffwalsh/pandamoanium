@@ -535,6 +535,34 @@
   </div>
 </div>
 
+<!-- The button to open modal -->
+<label
+  for="my-modal"
+  class="btn modal-button"
+  on:click={() =>
+    document.getElementById("my-modal")?.classList.add("modal-open")}
+  >open modal</label
+>
+
+<div id="my-modal" class="modal">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">Congratulations random Interner user!</h3>
+    <p class="py-4">
+      You've been selected for a chance to get one year of subscription to use
+      Wikipedia for free!
+    </p>
+    <div class="modal-action">
+      <label
+        for="my-modal"
+        class="btn"
+        on:click={() =>
+          document.getElementById("my-modal")?.classList.remove("modal-open")}
+        >Close</label
+      >
+    </div>
+  </div>
+</div>
+
 <style>
   .green {
     color: green;
