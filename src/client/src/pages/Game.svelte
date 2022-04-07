@@ -10,9 +10,7 @@
   import { push } from "svelte-spa-router";
   import Nav from "../components/Nav.svelte";
   import { randomLawyerCrow } from "../utils/randomLawyerCrow";
-  import { posix } from "path";
-  import { xlink_attr } from "svelte/internal";
-  import { linkSync } from "fs";
+  import IconChat from "../components/IconChat.svelte";
 
   let messages: Message[] = [];
   let currentMessage: string = "";
@@ -422,11 +420,11 @@
 <div class="container">
   <div class="flex flex-col game-lobby-head">
     <h2 class="grey6">Game In Progress</h2>
-    <h3>
+    <!-- <h3>
       Room Code: <span class="text-animation"> {$currentGame?.roomCode} </span>
-    </h3>
+    </h3> -->
     {#if currentWord}
-      <h2>
+      <h3 class="currentword">
         Current Word:
         {#if shouldShowWord}
           {currentWord}
@@ -439,7 +437,7 @@
             {/if}
           {/each}
         {/if}
-      </h2>
+      </h3>
     {/if}
   </div>
 </div>
@@ -450,6 +448,16 @@
   <div class="grid grid-cols-3">
     <!-- Canvas Left Section -->
     <div class="game-canvas-left col-span-2">
+      <!-- The button to open chat modal -->
+      <label
+        for="my-modal"
+        class="btn modal-button chat-button"
+        on:click={() =>
+          document.getElementById("my-modal")?.classList.add("modal-open")}
+      >
+        <span> <IconChat /> </span> Chat</label
+      >
+
       <div class="choices">
         {#if active}
           Timer: {timer}
@@ -507,7 +515,8 @@
     </div>
 
     <!-- chat box RIght Setion -->
-    <div class="chat-right-section">
+
+    <div class="chat-right-section desktop-chat">
       <div id="chat-box">
         {#if messages}
           {#each messages as message}
@@ -562,30 +571,50 @@
   </div>
 </div>
 
-<!-- The button to open modal -->
-<label
-  for="my-modal"
-  class="btn modal-button"
-  on:click={() =>
-    document.getElementById("my-modal")?.classList.add("modal-open")}
-  >open modal</label
->
+<!-- Mobile Chat Content -->
+<div class="container">
+  <div id="my-modal" class="modal">
+    <div class="modal-box">
+      <div class="modal-action">
+        <label
+          for="my-modal"
+          class="btn"
+          on:click={() =>
+            document.getElementById("my-modal")?.classList.remove("modal-open")}
+          >Close</label
+        >
+      </div>
 
-<div id="my-modal" class="modal">
-  <div class="modal-box">
-    <h3 class="font-bold text-lg">Congratulations random Interner user!</h3>
-    <p class="py-4">
-      You've been selected for a chance to get one year of subscription to use
-      Wikipedia for free!
-    </p>
-    <div class="modal-action">
-      <label
-        for="my-modal"
-        class="btn"
-        on:click={() =>
-          document.getElementById("my-modal")?.classList.remove("modal-open")}
-        >Close</label
-      >
+      <div id="chat-box">
+        {#if messages}
+          {#each messages as message}
+            <p
+              class={message.isCorrect
+                ? "green"
+                : message.player.pandaName === "Lawyer Crow"
+                ? "red"
+                : ""}
+            >
+              {#if message.isCorrect}
+                {message.player.pandaName} got the answer!
+              {:else}
+                {message.player.pandaName}: {message.text}
+              {/if}
+            </p>
+          {/each}
+        {/if}
+      </div>
+
+      <input
+        placeholder="Type Here Noob"
+        class="chat-input"
+        type="text"
+        disabled={(activePlayer &&
+          activePlayer.pandaName === $currentPanda.name) ||
+          !active}
+        bind:value={currentMessage}
+        on:keyup|preventDefault={handleKeyup}
+      />
     </div>
   </div>
 </div>
@@ -736,6 +765,38 @@
     margin: 8px 0px 0px 0px;
   }
 
+  .modal-box {
+    background: #000;
+  }
+
+  .modal-box input {
+    border: 1px solid #343434;
+  }
+
+  .modal-action {
+    position: absolute;
+    right: 24px;
+    top: 0px;
+    z-index: 9999;
+    /* background: #000; */
+  }
+
+  label.btn {
+    background: #211e1ebf;
+  }
+
+  label.btn.modal-button span {
+    max-width: 20px;
+    margin: 0px 6px 0px 0px;
+  }
+
+  .chat-button {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    visibility: hidden;
+  }
+
   @media (max-width: 800px) {
     .grid.grid-cols-6 {
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -752,8 +813,26 @@
       grid-template-columns: repeat(1, minmax(0, 1fr));
     }
 
+    .desktop-chat {
+      display: none;
+    }
+
     .col-span-2 {
       grid-column: span 1 / span 1;
+    }
+
+    .container .modal-box {
+      text-align: left;
+    }
+    .game-canvas-left {
+      padding: 10px 19px;
+      position: relative;
+      overflow-x: scroll;
+    }
+
+    .chat-button {
+      visibility: visible;
+      z-index: 99999999;
     }
   }
 </style>
