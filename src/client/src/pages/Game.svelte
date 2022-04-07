@@ -252,7 +252,11 @@
     canvas.addEventListener(
       "touchend",
       function (e) {
-        var mouseEvent = new MouseEvent("mouseup", {});
+        var touch = e.touches[0];
+        var mouseEvent = new MouseEvent("mouseup", {
+          clientX: touch?.clientX,
+          clientY: touch?.clientY,
+        });
         canvas.dispatchEvent(mouseEvent);
       },
       false
@@ -324,7 +328,7 @@
         activePlayer.pandaName === $currentPanda.name &&
         active
       ) {
-        tool.mousemove(evt);
+        // tool.mousemove(evt);
         tool.started = false;
         const pos = getMousePos(canvas, evt);
         $socket.emit("sendDraw", {
