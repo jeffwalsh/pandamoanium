@@ -181,8 +181,9 @@ io.on("connection", (_socket) => {
   socket.on(
     "sendDraw",
     (info: {
-      x: string | number;
-      y: string | number;
+      startX: string | number;
+      startY: string | number;
+      lines: { x: number; y: number };
       color: string;
       roomCode: string;
     }) => {

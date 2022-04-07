@@ -11,6 +11,8 @@
   import Nav from "../components/Nav.svelte";
   import { randomLawyerCrow } from "../utils/randomLawyerCrow";
   import { posix } from "path";
+  import { xlink_attr } from "svelte/internal";
+  import { linkSync } from "fs";
 
   let messages: Message[] = [];
   let currentMessage: string = "";
@@ -22,6 +24,7 @@
   let timer: number = 69;
   let currentWord: string = "";
   let shouldShowWord: boolean = false;
+  let lastPoint: { x: string | number; y: string | number };
 
   onMount(async () => {
     if (!$currentPanda || !$currentPanda.name) {
@@ -275,6 +278,9 @@
   function tool_pencil() {
     var tool = this;
     this.started = false;
+    this.startX = null;
+    this.startY = null;
+    this.lines = [];
 
     // This is called when you start holding down the mouse button.
     // This starts the pencil drawing.
@@ -282,6 +288,8 @@
       if (activePlayer.pandaName === $currentPanda.name && active) {
         context.beginPath();
         const pos = getMousePos(canvas, evt);
+        tool.startX = pos.x;
+        tool.startY = pos.y;
         context.moveTo(pos.x, pos.y);
         tool.started = true;
       }
@@ -298,14 +306,8 @@
       ) {
         const pos = getMousePos(canvas, evt);
         context.lineTo(pos.x, pos.y);
+        tool.lines.push({ x: pos.x, y: pos.y });
         context.stroke();
-
-        $socket.emit("sendDraw", {
-          x: pos.x,
-          y: pos.y,
-          color: context.strokeStyle,
-          roomCode: $currentGame.roomCode,
-        });
       }
     };
 
@@ -318,14 +320,23 @@
     }
 
     // This is called when you release the mouse button.
-    this.mouseup = function (ev) {
+    this.mouseup = function (evt) {
       if (
         tool.started &&
         activePlayer.pandaName === $currentPanda.name &&
         active
       ) {
-        tool.mousemove(ev);
+        tool.mousemove(evt);
         tool.started = false;
+        const pos = getMousePos(canvas, evt);
+        $socket.emit("sendDraw", {
+          startX: tool.startX,
+          startY: tool.startY,
+          lines: tool.lines,
+          color: context.strokeStyle,
+          roomCode: $currentGame.roomCode,
+        });
+        tool.lines = [];
       }
     };
 
@@ -333,18 +344,33 @@
     $socket.on(
       "receiveDraw",
       (info: {
-        x: number | string;
-        y: number | string;
+        startX: number | string;
+        startY: number | string;
+        lines: { x: number; y: number }[];
         color: string;
         roomCode: string;
       }) => {
-        const ss = context.strokeStyle;
         if (info.roomCode !== $currentGame.roomCode) return;
         if (activePlayer.pandaName === $currentPanda.name) return;
+        // context.beginPath();
+        // context.moveTo(info.x, info.y);
+        // const ss = context.strokeStyle;
+        // context.strokeStyle = info.color;
+
+        // context.lineTo(info.x, info.y);
+        // context.stroke();
+        // context.strokeStyle = ss;
+        // lastPoint = { x: info.x, y: info.y };
+        // context.closePath();
+        context.beginPath();
+        console.log("recieve drew", info);
         context.strokeStyle = info.color;
-        context.lineTo(info.x, info.y);
+        context.moveTo(info.startX, info.startY);
+        info.lines.forEach((line) => {
+          console.log("yo", line);
+          context.lineTo(line.x, line.y);
+        });
         context.stroke();
-        context.strokeStyle = ss;
       }
     );
 
@@ -359,6 +385,7 @@
         const game = $currentGame;
         game.players = info.players;
         currentGame.set(game);
+        lastPoint = null;
       }
     );
   }
@@ -408,7 +435,7 @@
             {#if letter === " "}
               &nbsp;
             {:else}
-              _
+              <span style="padding-left:3px;">_</span>
             {/if}
           {/each}
         {/if}

@@ -32,7 +32,7 @@
 {/if}
 
 <div class="audio">
-  <audio controls autoplay>
+  <audio controls>
     <source src="images/cgod.mp3" type="audio/mpeg" />
   </audio>
 </div>
