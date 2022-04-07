@@ -239,7 +239,7 @@
     canvas.addEventListener(
       "touchstart",
       function (e) {
-        // const mousePos = getTouchPos(canvas, e);
+        //const mousePos = getTouchPos(canvas, e);
         var touch = e.touches[0];
         var mouseEvent = new MouseEvent("mousedown", {
           clientX: touch?.clientX,
@@ -249,14 +249,14 @@
       },
       false
     );
-    // canvas.addEventListener(
-    //   "touchend",
-    //   function (e) {
-    //     var mouseEvent = new MouseEvent("mouseup", {});
-    //     canvas.dispatchEvent(mouseEvent);
-    //   },
-    //   false
-    // );
+    canvas.addEventListener(
+      "touchend",
+      function (e) {
+        var mouseEvent = new MouseEvent("mouseup", {});
+        canvas.dispatchEvent(mouseEvent);
+      },
+      false
+    );
     canvas.addEventListener(
       "touchmove",
       function (e) {

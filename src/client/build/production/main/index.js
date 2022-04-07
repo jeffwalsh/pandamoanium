@@ -65110,7 +65110,7 @@ function get_each_context_4(ctx, list, i) {
 	return child_ctx;
 }
 
-// (355:4) {#if currentWord}
+// (351:4) {#if currentWord}
 function create_if_block_12(ctx) {
 	let h3;
 	let t;
@@ -65129,7 +65129,7 @@ function create_if_block_12(ctx) {
 			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Current Word:\n        ");
 			if_block.c();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(h3, "class", "currentword svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h3, file, 355, 6, 12078);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h3, file, 351, 6, 12027);
 		},
 		m: function mount(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, h3, anchor);
@@ -65159,14 +65159,14 @@ function create_if_block_12(ctx) {
 		block,
 		id: create_if_block_12.name,
 		type: "if",
-		source: "(355:4) {#if currentWord}",
+		source: "(351:4) {#if currentWord}",
 		ctx
 	});
 
 	return block;
 }
 
-// (360:8) {:else}
+// (356:8) {:else}
 function create_else_block_2(ctx) {
 	let each_1_anchor;
 	let each_value_4 = /*currentWord*/ ctx[8];
@@ -65227,14 +65227,14 @@ function create_else_block_2(ctx) {
 		block,
 		id: create_else_block_2.name,
 		type: "else",
-		source: "(360:8) {:else}",
+		source: "(356:8) {:else}",
 		ctx
 	});
 
 	return block;
 }
 
-// (358:8) {#if shouldShowWord}
+// (354:8) {#if shouldShowWord}
 function create_if_block_13(ctx) {
 	let t;
 
@@ -65257,14 +65257,14 @@ function create_if_block_13(ctx) {
 		block,
 		id: create_if_block_13.name,
 		type: "if",
-		source: "(358:8) {#if shouldShowWord}",
+		source: "(354:8) {#if shouldShowWord}",
 		ctx
 	});
 
 	return block;
 }
 
-// (364:12) {:else}
+// (360:12) {:else}
 function create_else_block_3(ctx) {
 	let span;
 
@@ -65273,7 +65273,7 @@ function create_else_block_3(ctx) {
 			span = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("span");
 			span.textContent = "_";
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(span, "padding-left", "3px");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(span, file, 364, 14, 12322);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(span, file, 360, 14, 12271);
 		},
 		m: function mount(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, span, anchor);
@@ -65287,14 +65287,14 @@ function create_else_block_3(ctx) {
 		block,
 		id: create_else_block_3.name,
 		type: "else",
-		source: "(364:12) {:else}",
+		source: "(360:12) {:else}",
 		ctx
 	});
 
 	return block;
 }
 
-// (362:12) {#if letter === " "}
+// (358:12) {#if letter === " "}
 function create_if_block_14(ctx) {
 	let t;
 
@@ -65314,14 +65314,14 @@ function create_if_block_14(ctx) {
 		block,
 		id: create_if_block_14.name,
 		type: "if",
-		source: "(362:12) {#if letter === \\\" \\\"}",
+		source: "(358:12) {#if letter === \\\" \\\"}",
 		ctx
 	});
 
 	return block;
 }
 
-// (361:10) {#each currentWord as letter}
+// (357:10) {#each currentWord as letter}
 function create_each_block_4(ctx) {
 	let if_block_anchor;
 
@@ -65363,14 +65363,14 @@ function create_each_block_4(ctx) {
 		block,
 		id: create_each_block_4.name,
 		type: "each",
-		source: "(361:10) {#each currentWord as letter}",
+		source: "(357:10) {#each currentWord as letter}",
 		ctx
 	});
 
 	return block;
 }
 
-// (391:8) {#if active}
+// (387:8) {#if active}
 function create_if_block_11(ctx) {
 	let t0;
 	let t1;
@@ -65397,14 +65397,14 @@ function create_if_block_11(ctx) {
 		block,
 		id: create_if_block_11.name,
 		type: "if",
-		source: "(391:8) {#if active}",
+		source: "(387:8) {#if active}",
 		ctx
 	});
 
 	return block;
 }
 
-// (394:8) {#if activePlayer && activePlayer.pandaName === $currentPanda.name && choices && choices.length && !active}
+// (390:8) {#if activePlayer && activePlayer.pandaName === $currentPanda.name && choices && choices.length && !active}
 function create_if_block_10(ctx) {
 	let h2;
 	let t1;
@@ -65434,9 +65434,9 @@ function create_if_block_10(ctx) {
 
 			each_1_anchor = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.empty)();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(h2, "class", "svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h2, file, 394, 10, 13139);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h2, file, 390, 10, 13088);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(p, "class", "marb-10  svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 395, 10, 13166);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 391, 10, 13115);
 		},
 		m: function mount(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, h2, anchor);
@@ -65489,14 +65489,14 @@ function create_if_block_10(ctx) {
 		block,
 		id: create_if_block_10.name,
 		type: "if",
-		source: "(394:8) {#if activePlayer && activePlayer.pandaName === $currentPanda.name && choices && choices.length && !active}",
+		source: "(390:8) {#if activePlayer && activePlayer.pandaName === $currentPanda.name && choices && choices.length && !active}",
 		ctx
 	});
 
 	return block;
 }
 
-// (399:10) {#each choices as choice}
+// (395:10) {#each choices as choice}
 function create_each_block_3(ctx) {
 	let p;
 	let t0_value = /*choice*/ ctx[45] + "";
@@ -65515,7 +65515,7 @@ function create_each_block_3(ctx) {
 			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t0_value);
 			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(p, "class", "cursor-pointer choice svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 399, 12, 13331);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 395, 12, 13280);
 		},
 		m: function mount(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, p, anchor);
@@ -65542,14 +65542,14 @@ function create_each_block_3(ctx) {
 		block,
 		id: create_each_block_3.name,
 		type: "each",
-		source: "(399:10) {#each choices as choice}",
+		source: "(395:10) {#each choices as choice}",
 		ctx
 	});
 
 	return block;
 }
 
-// (410:6) {#if $currentGame.finished}
+// (406:6) {#if $currentGame.finished}
 function create_if_block_8(ctx) {
 	let div;
 	let h2;
@@ -65564,9 +65564,9 @@ function create_if_block_8(ctx) {
 			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			if (if_block) if_block.c();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(h2, "class", "svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h2, file, 411, 10, 13622);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h2, file, 407, 10, 13571);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div, "class", "game-finished svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div, file, 410, 8, 13584);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div, file, 406, 8, 13533);
 		},
 		m: function mount(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, div, anchor);
@@ -65598,14 +65598,14 @@ function create_if_block_8(ctx) {
 		block,
 		id: create_if_block_8.name,
 		type: "if",
-		source: "(410:6) {#if $currentGame.finished}",
+		source: "(406:6) {#if $currentGame.finished}",
 		ctx
 	});
 
 	return block;
 }
 
-// (413:10) {#if isHost}
+// (409:10) {#if isHost}
 function create_if_block_9(ctx) {
 	let button;
 	let mounted;
@@ -65616,7 +65616,7 @@ function create_if_block_9(ctx) {
 			button = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("button");
 			button.textContent = "Play Again?";
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(button, "class", "btn btn-primary");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(button, file, 413, 12, 13684);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(button, file, 409, 12, 13633);
 		},
 		m: function mount(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, button, anchor);
@@ -65638,14 +65638,14 @@ function create_if_block_9(ctx) {
 		block,
 		id: create_if_block_9.name,
 		type: "if",
-		source: "(413:10) {#if isHost}",
+		source: "(409:10) {#if isHost}",
 		ctx
 	});
 
 	return block;
 }
 
-// (422:8) {#if timedOut}
+// (418:8) {#if timedOut}
 function create_if_block_7(ctx) {
 	let p;
 
@@ -65654,7 +65654,7 @@ function create_if_block_7(ctx) {
 			p = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			p.textContent = "Timed out!";
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(p, "class", "timed-out");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 422, 10, 13899);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 418, 10, 13848);
 		},
 		m: function mount(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, p, anchor);
@@ -65668,14 +65668,14 @@ function create_if_block_7(ctx) {
 		block,
 		id: create_if_block_7.name,
 		type: "if",
-		source: "(422:8) {#if timedOut}",
+		source: "(418:8) {#if timedOut}",
 		ctx
 	});
 
 	return block;
 }
 
-// (434:6) {#if activePlayer && activePlayer.pandaName === $currentPanda.name}
+// (430:6) {#if activePlayer && activePlayer.pandaName === $currentPanda.name}
 function create_if_block_6(ctx) {
 	let div4;
 	let div0;
@@ -65699,15 +65699,15 @@ function create_if_block_6(ctx) {
 			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			div3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div0, "class", "cwhite color svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div0, file, 437, 10, 14291);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div0, file, 433, 10, 14240);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div1, "class", "cred color svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div1, file, 438, 10, 14367);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div1, file, 434, 10, 14316);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div2, "class", "cyellow color svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div2, file, 439, 10, 14444);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div2, file, 435, 10, 14393);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div3, "class", "cteal color svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div3, file, 440, 10, 14524);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div3, file, 436, 10, 14473);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div4, "class", "colors grid grid-cols-6 auto-rows-max gap-x-5 gap-y-5 w-auto svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div4, file, 434, 8, 14187);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div4, file, 430, 8, 14136);
 		},
 		m: function mount(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, div4, anchor);
@@ -65742,14 +65742,14 @@ function create_if_block_6(ctx) {
 		block,
 		id: create_if_block_6.name,
 		type: "if",
-		source: "(434:6) {#if activePlayer && activePlayer.pandaName === $currentPanda.name}",
+		source: "(430:6) {#if activePlayer && activePlayer.pandaName === $currentPanda.name}",
 		ctx
 	});
 
 	return block;
 }
 
-// (450:8) {#if messages}
+// (446:8) {#if messages}
 function create_if_block_4(ctx) {
 	let each_1_anchor;
 	let each_value_2 = /*messages*/ ctx[0];
@@ -65810,14 +65810,14 @@ function create_if_block_4(ctx) {
 		block,
 		id: create_if_block_4.name,
 		type: "if",
-		source: "(450:8) {#if messages}",
+		source: "(446:8) {#if messages}",
 		ctx
 	});
 
 	return block;
 }
 
-// (461:14) {:else}
+// (457:14) {:else}
 function create_else_block_1(ctx) {
 	let t0_value = /*message*/ ctx[37].player.pandaName + "";
 	let t0;
@@ -65851,14 +65851,14 @@ function create_else_block_1(ctx) {
 		block,
 		id: create_else_block_1.name,
 		type: "else",
-		source: "(461:14) {:else}",
+		source: "(457:14) {:else}",
 		ctx
 	});
 
 	return block;
 }
 
-// (459:14) {#if message.isCorrect}
+// (455:14) {#if message.isCorrect}
 function create_if_block_5(ctx) {
 	let t0_value = /*message*/ ctx[37].player.pandaName + "";
 	let t0;
@@ -65886,14 +65886,14 @@ function create_if_block_5(ctx) {
 		block,
 		id: create_if_block_5.name,
 		type: "if",
-		source: "(459:14) {#if message.isCorrect}",
+		source: "(455:14) {#if message.isCorrect}",
 		ctx
 	});
 
 	return block;
 }
 
-// (451:10) {#each messages as message}
+// (447:10) {#each messages as message}
 function create_each_block_2(ctx) {
 	let p;
 	let t;
@@ -65919,7 +65919,7 @@ function create_each_block_2(ctx) {
 				? "red"
 				: "") + " svelte-1hb2a1b"));
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 451, 12, 14817);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 447, 12, 14766);
 		},
 		m: function mount(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, p, anchor);
@@ -65957,14 +65957,14 @@ function create_each_block_2(ctx) {
 		block,
 		id: create_each_block_2.name,
 		type: "each",
-		source: "(451:10) {#each messages as message}",
+		source: "(447:10) {#each messages as message}",
 		ctx
 	});
 
 	return block;
 }
 
-// (489:4) {#if $currentGame.players}
+// (485:4) {#if $currentGame.players}
 function create_if_block_2(ctx) {
 	let each_1_anchor;
 	let each_value_1 = /*$currentGame*/ ctx[11].players;
@@ -66025,14 +66025,14 @@ function create_if_block_2(ctx) {
 		block,
 		id: create_if_block_2.name,
 		type: "if",
-		source: "(489:4) {#if $currentGame.players}",
+		source: "(485:4) {#if $currentGame.players}",
 		ctx
 	});
 
 	return block;
 }
 
-// (495:10) {#if $currentGame.correctPlayersThisRound.find((p) => p.pandaName === player.pandaName)}
+// (491:10) {#if $currentGame.correctPlayersThisRound.find((p) => p.pandaName === player.pandaName)}
 function create_if_block_3(ctx) {
 	let p;
 
@@ -66040,7 +66040,7 @@ function create_if_block_3(ctx) {
 		c: function create() {
 			p = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			p.textContent = "Correct!";
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 495, 12, 16154);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 491, 12, 16103);
 		},
 		m: function mount(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, p, anchor);
@@ -66054,14 +66054,14 @@ function create_if_block_3(ctx) {
 		block,
 		id: create_if_block_3.name,
 		type: "if",
-		source: "(495:10) {#if $currentGame.correctPlayersThisRound.find((p) => p.pandaName === player.pandaName)}",
+		source: "(491:10) {#if $currentGame.correctPlayersThisRound.find((p) => p.pandaName === player.pandaName)}",
 		ctx
 	});
 
 	return block;
 }
 
-// (490:6) {#each $currentGame.players as player}
+// (486:6) {#each $currentGame.players as player}
 function create_each_block_1(ctx) {
 	let div;
 	let img;
@@ -66103,14 +66103,14 @@ function create_each_block_1(ctx) {
 			t6 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			if (img.src !== (img_src_value = /*player*/ ctx[40].thumbnail)) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(img, "src", img_src_value);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(img, "class", "panda");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(img, file, 491, 10, 15871);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(img, file, 487, 10, 15820);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(p0, "class", "grey5 panda-title svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p0, file, 492, 10, 15926);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(span, file, 493, 33, 16011);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p0, file, 488, 10, 15875);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(span, file, 489, 33, 15960);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(p1, "class", "score svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p1, file, 493, 10, 15988);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p1, file, 489, 10, 15937);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div, "class", "panda-pp rounded-md");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div, file, 490, 8, 15827);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div, file, 486, 8, 15776);
 		},
 		m: function mount(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, div, anchor);
@@ -66161,14 +66161,14 @@ function create_each_block_1(ctx) {
 		block,
 		id: create_each_block_1.name,
 		type: "each",
-		source: "(490:6) {#each $currentGame.players as player}",
+		source: "(486:6) {#each $currentGame.players as player}",
 		ctx
 	});
 
 	return block;
 }
 
-// (518:8) {#if messages}
+// (514:8) {#if messages}
 function create_if_block(ctx) {
 	let each_1_anchor;
 	let each_value = /*messages*/ ctx[0];
@@ -66229,14 +66229,14 @@ function create_if_block(ctx) {
 		block,
 		id: create_if_block.name,
 		type: "if",
-		source: "(518:8) {#if messages}",
+		source: "(514:8) {#if messages}",
 		ctx
 	});
 
 	return block;
 }
 
-// (529:14) {:else}
+// (525:14) {:else}
 function create_else_block(ctx) {
 	let t0_value = /*message*/ ctx[37].player.pandaName + "";
 	let t0;
@@ -66270,14 +66270,14 @@ function create_else_block(ctx) {
 		block,
 		id: create_else_block.name,
 		type: "else",
-		source: "(529:14) {:else}",
+		source: "(525:14) {:else}",
 		ctx
 	});
 
 	return block;
 }
 
-// (527:14) {#if message.isCorrect}
+// (523:14) {#if message.isCorrect}
 function create_if_block_1(ctx) {
 	let t0_value = /*message*/ ctx[37].player.pandaName + "";
 	let t0;
@@ -66305,14 +66305,14 @@ function create_if_block_1(ctx) {
 		block,
 		id: create_if_block_1.name,
 		type: "if",
-		source: "(527:14) {#if message.isCorrect}",
+		source: "(523:14) {#if message.isCorrect}",
 		ctx
 	});
 
 	return block;
 }
 
-// (519:10) {#each messages as message}
+// (515:10) {#each messages as message}
 function create_each_block(ctx) {
 	let p;
 	let t;
@@ -66338,7 +66338,7 @@ function create_each_block(ctx) {
 				? "red"
 				: "") + " svelte-1hb2a1b"));
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 519, 12, 16697);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(p, file, 515, 12, 16646);
 		},
 		m: function mount(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert_dev)(target, p, anchor);
@@ -66376,7 +66376,7 @@ function create_each_block(ctx) {
 		block,
 		id: create_each_block.name,
 		type: "each",
-		source: "(519:10) {#each messages as message}",
+		source: "(515:10) {#each messages as message}",
 		ctx
 	});
 
@@ -66497,66 +66497,66 @@ function create_fragment(ctx) {
 			t17 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			input1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("input");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(h2, "class", "grey6");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h2, file, 350, 4, 11902);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(h2, file, 346, 4, 11851);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div0, "class", "flex flex-col game-lobby-head");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div0, file, 349, 2, 11854);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div0, file, 345, 2, 11803);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div1, "class", "container");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div1, file, 348, 0, 11828);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div1, file, 344, 0, 11777);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(span, "class", "svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(span, file, 386, 8, 12876);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(span, file, 382, 8, 12825);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(label0, "for", "my-modal");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(label0, "class", "btn modal-button chat-button svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(label0, file, 380, 6, 12685);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(label0, file, 376, 6, 12634);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div2, "class", "choices svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div2, file, 389, 6, 12931);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div2, file, 385, 6, 12880);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div3, "class", "game-finished svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div3, file, 420, 6, 13838);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div3, file, 416, 6, 13787);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(canvas_1, "background", "#333333");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(canvas_1, "touch-action", "none");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(canvas_1, "id", "imageView");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(canvas_1, "width", "600");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(canvas_1, "height", "400");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(canvas_1, file, 426, 6, 13969);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(canvas_1, file, 422, 6, 13918);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div4, "class", "game-canvas-left col-span-2 svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div4, file, 378, 4, 12592);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div4, file, 374, 4, 12541);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div5, "id", "chat-box");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div5, "class", "svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div5, file, 448, 6, 14724);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div5, file, 444, 6, 14673);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(input0, "placeholder", "Type Here Noob");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(input0, "class", "chat-input svelte-1hb2a1b");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(input0, "type", "text");
 			input0.disabled = input0_disabled_value = /*activePlayer*/ ctx[2] && /*activePlayer*/ ctx[2].pandaName === /*$currentPanda*/ ctx[10].name || !/*active*/ ctx[4];
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(input0, file, 468, 6, 15273);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(input0, file, 464, 6, 15222);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div6, "class", "chat-right-section desktop-chat svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div6, file, 447, 4, 14672);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div6, file, 443, 4, 14621);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div7, "class", "grid grid-cols-3 svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div7, file, 376, 2, 12524);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div7, file, 372, 2, 12473);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div8, "class", "container game-container svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div8, file, 375, 0, 12483);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div8, file, 371, 0, 12432);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div9, "class", "grid grid-cols-6 auto-rows-max gap-x-5 gap-y-5 w-auto panda-container svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div9, file, 485, 2, 15652);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div9, file, 481, 2, 15601);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div10, "class", "container");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div10, file, 484, 0, 15626);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div10, file, 480, 0, 15575);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(label1, "for", "my-modal");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(label1, "class", "btn svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(label1, file, 507, 8, 16389);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(label1, file, 503, 8, 16338);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div11, "class", "modal-action svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div11, file, 506, 6, 16354);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div11, file, 502, 6, 16303);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div12, "id", "chat-box");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div12, "class", "svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div12, file, 516, 6, 16604);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div12, file, 512, 6, 16553);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(input1, "placeholder", "Type Here Noob");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(input1, "class", "chat-input svelte-1hb2a1b");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(input1, "type", "text");
 			input1.disabled = input1_disabled_value = /*activePlayer*/ ctx[2] && /*activePlayer*/ ctx[2].pandaName === /*$currentPanda*/ ctx[10].name || !/*active*/ ctx[4];
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(input1, file, 536, 6, 17153);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(input1, file, 532, 6, 17102);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div13, "class", "modal-box svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div13, file, 505, 4, 16324);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div13, file, 501, 4, 16273);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div14, "id", "my-modal");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div14, "class", "modal");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div14, file, 504, 2, 16286);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div14, file, 500, 2, 16235);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr_dev)(div15, "class", "container svelte-1hb2a1b");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div15, file, 503, 0, 16260);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_location)(div15, file, 499, 0, 16209);
 		},
 		l: function claim(nodes) {
 			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -67095,7 +67095,7 @@ function instance($$self, $$props, $$invalidate) {
 		canvas.addEventListener(
 			"touchstart",
 			function (e) {
-				// const mousePos = getTouchPos(canvas, e);
+				//const mousePos = getTouchPos(canvas, e);
 				var touch = e.touches[0];
 
 				var mouseEvent = new MouseEvent("mousedown",
@@ -67113,14 +67113,15 @@ function instance($$self, $$props, $$invalidate) {
 			false
 		);
 
-		// canvas.addEventListener(
-		//   "touchend",
-		//   function (e) {
-		//     var mouseEvent = new MouseEvent("mouseup", {});
-		//     canvas.dispatchEvent(mouseEvent);
-		//   },
-		//   false
-		// );
+		canvas.addEventListener(
+			"touchend",
+			function (e) {
+				var mouseEvent = new MouseEvent("mouseup", {});
+				canvas.dispatchEvent(mouseEvent);
+			},
+			false
+		);
+
 		canvas.addEventListener(
 			"touchmove",
 			function (e) {
