@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { push } from "svelte-spa-router";
-import Nav from "../components/Nav.svelte";
+  import Nav from "../components/Nav.svelte";
   import type { Player } from "../domain/game";
   import { currentAddress } from "../stores/currentAddress";
   import { currentGame } from "../stores/currentGame";
@@ -33,6 +33,16 @@ import Nav from "../components/Nav.svelte";
       }
     );
 
+    $socket.on("removePlayer", (info: { player: Player; roomCode: string }) => {
+      if (info.roomCode !== $currentGame.roomCode) return;
+      const game = $currentGame;
+      const players = game.players.filter(
+        (p) => p.pandaName !== info.player.pandaName
+      );
+      game.players = players;
+      currentGame.set(game);
+    });
+
     $socket.on(
       "startedGame",
       (info: { roomCode: string; playerOrder: Player[] }) => {
@@ -51,7 +61,7 @@ import Nav from "../components/Nav.svelte";
   }
 </script>
 
-<Nav/>
+<Nav />
 
 <div class="container">
   <div class="flex flex-col game-lobby-head">

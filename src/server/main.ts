@@ -14,6 +14,7 @@ import {
   getDocs,
   getDoc,
 } from "firebase/firestore";
+import type { Socket } from "dgram";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBLqrdtCQlUGVi7H714_W_RCS2VXNYa1lE",
@@ -127,7 +128,6 @@ io.on("connection", (_socket) => {
   _socket.on("disconnect", () => {
     console.log("a user disconnected");
   });
-
   const socket = _socket;
 
   socket.on("createGame", (game: Game) => {

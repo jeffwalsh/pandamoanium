@@ -50,6 +50,27 @@
       }
     });
 
+    $socket.on("removePlayer", (info: { player: Player; roomCode: string }) => {
+      if (info.roomCode !== $currentGame.roomCode) return;
+      const game = $currentGame;
+      const players = game.players.filter(
+        (p) => p.pandaName !== info.player.pandaName
+      );
+      game.players = players;
+      currentGame.set(game);
+    });
+
+    $socket.on(
+      "updatePlayers",
+      (info: { player: Player; roomCode: string }) => {
+        if (info.roomCode !== $currentGame.roomCode) return;
+        const game = $currentGame;
+
+        game.players.push(info.player);
+        currentGame.set(game);
+      }
+    );
+
     $socket.on(
       "wordSelected",
       (info: { roomCode: string; currentWord: string }) => {
@@ -568,7 +589,7 @@
     class="grid grid-cols-6 auto-rows-max gap-x-5 gap-y-5 w-auto panda-container"
   >
     {#if $currentGame.players}
-      {#each $currentGame.players as player}
+      {#each $currentGame.players.sort((a, b) => b.score - a.score) as player}
         <div class="panda-pp rounded-md">
           <img src={player.thumbnail} class="panda" />
           <p class="grey5 panda-title">{player.pandaName}</p>
@@ -630,6 +651,15 @@
 </div>
 
 <style>
+  .cgreen {
+    color: #00ff00;
+  }
+  .cblue {
+    color: #000fff;
+  }
+  .cblack {
+    color: #000;
+  }
   .green {
     color: green;
   }
