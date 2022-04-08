@@ -31,11 +31,11 @@
   </div>
 {/if}
 
-<div class="audio">
+<!-- <div class="audio">
   <audio controls autoplay>
     <source src="images/cgod.mp3" type="audio/mpeg" />
   </audio>
-</div>
+</div> -->
 
 <style>
   h1 {

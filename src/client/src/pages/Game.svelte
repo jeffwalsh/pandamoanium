@@ -468,17 +468,20 @@
         {/if}
         {#if activePlayer && activePlayer.pandaName === $currentPanda.name && choices && choices.length && !active}
           <h2>Choices</h2>
-          <p class="marb-10 ">
+          <p class="marb-10 choice-desc">
             Choose an option that you want to draw. Others will try to guess it.
           </p>
-          {#each choices as choice}
-            <p
-              class="cursor-pointer choice"
-              on:click={async () => await selectChoice(choice)}
-            >
-              {choice}
-            </p>
-          {/each}
+
+          <div class="choice-group"> 
+            {#each choices as choice}
+              <p
+                class="cursor-pointer choice"
+                on:click={async () => await selectChoice(choice)}
+              >
+                {choice}
+              </p>
+            {/each}
+        </div>
         {/if}
       </div>
 
@@ -513,7 +516,10 @@
           <div class="cwhite color" on:click={() => changeColor("#fff")} />
           <div class="cred color" on:click={() => changeColor("#ff0000")} />
           <div class="cyellow color" on:click={() => changeColor("#f8f83b")} />
-          <div class="cteal color" on:click={() => changeColor(" #00ffff")} />
+          <div class="cteal color" on:click={() => changeColor("#00ffff")} />
+          <div class="cblue color" on:click={() => changeColor("#0047FF")} />
+          <div class="cgreen color" on:click={() => changeColor("#00FF29")} />
+          <div class="cpink color" on:click={() => changeColor("#FA00FF")} />
         </div>
       {/if}
     </div>
@@ -734,6 +740,18 @@
     background-color: #00ffff;
   }
 
+  .cblue {
+    background-color: #0047FF;
+  }
+
+  .cgreen {
+    background-color: #00FF29;
+  }
+
+  .cpink {
+    background-color: #FA00FF;
+  }
+
   .color.active {
     border: 4px solid #000;
   }
@@ -803,8 +821,13 @@
 
   @media (max-width: 800px) {
     .grid.grid-cols-6 {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(6, minmax(0, 1fr));
     }
+    .gap-x-5 {
+    -moz-column-gap: 4rem;
+    column-gap: 4rem;
+}
+
   }
 
   @media (max-width: 600px) {
@@ -838,5 +861,39 @@
       visibility: visible;
       z-index: 99999999;
     }
+
+    .choices {
+      left: 0px;
+    }
+
+    .choice-group {
+    margin: 30px 0px 0px 0px;
+    }
+
+    .choice {
+    margin: 0px 0px 12px 0px;
+    background: #000;
+    padding: 13px 0px;
+    border-radius: 5px;
+}
+
+  .choice-desc {
+      max-width: 89%;
+      margin: 0 auto;
+      margin-top: 8px;
+  }
+  
+  h2 {
+    width: 100%;
+    margin-bottom: 4px;
+    line-height: 2.3rem;
+    margin: 0px 0px 20px 0px;
+  }
+
+  #chat-box {
+    max-height: 74vh;
+    height: 74vh;
+  }
+
   }
 </style>

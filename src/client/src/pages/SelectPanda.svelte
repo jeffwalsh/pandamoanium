@@ -48,7 +48,7 @@ import Nav from "../components/Nav.svelte";
             class="panda cursor-pointer"
             on:click={async () => await selectPanda(panda)}
           />
-          <p class="grey5">{panda.name}</p>
+          <p class="grey5 panda-title">{panda.name}</p>
         </div>
       {/each}
     {:else}
@@ -58,4 +58,11 @@ import Nav from "../components/Nav.svelte";
 </div>
 
 <style>
+    @media (max-width: 600px) {
+    p.panda-title {
+    font-size: 1.2rem;
+    padding: 10px 0px 0px 0px;
+
+}
+  }
 </style>

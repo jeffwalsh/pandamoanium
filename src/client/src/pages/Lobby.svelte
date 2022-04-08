@@ -73,7 +73,7 @@ import Nav from "../components/Nav.svelte";
     {#each $currentGame.players as player}
       <div class="panda-pp rounded-md">
         <img alt="Panda Profile" src={player.thumbnail} class="panda" />
-        <p class="grey5">{player.pandaName}</p>
+        <p class="grey5 panda-title">{player.pandaName}</p>
       </div>
     {/each}
   </div>
@@ -94,5 +94,10 @@ import Nav from "../components/Nav.svelte";
       color: #9da2ad;
       margin: 0px;
     }
+    p.panda-title {
+  font-size: 1.2rem;
+  padding: 10px 0px 0px 0px;
+
+}
   }
 </style>

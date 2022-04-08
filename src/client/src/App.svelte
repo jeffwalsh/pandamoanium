@@ -91,6 +91,7 @@
     align-items: center;
     text-align: center;
     min-height: 100vh;
+    padding: 0px 20px;
   }
 
   .flex-col {
@@ -284,7 +285,7 @@
     .grid-cols-4.panda-container {
       grid-template-columns: repeat(1, minmax(0, 1fr));
       margin: 0 auto;
-      padding: 40px;
+      padding: 20px;
     }
 
     .leaderboard.cursor-pointer {
@@ -302,6 +303,7 @@
     .container h2 {
       width: 100%;
       margin-bottom: 4px;
+      line-height: 2.3rem;
     }
 
     .panda-pp {

@@ -73,7 +73,7 @@
         on:click={async () => await createLobby()}
       />
 
-      <p>{$currentPanda.name}</p>
+      <p class="panda-title">{$currentPanda.name}</p>
     </div>
   </div>
 
@@ -152,5 +152,13 @@
     span.or {
       max-width: 470px;
     }
+    .my-10 {
+    margin-top: 15px;
+    }
+    p.panda-title {
+    font-size: 1.2rem;
+    padding: 10px 0px 0px 0px;
+
+}
   }
 </style>
